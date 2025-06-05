@@ -6,9 +6,6 @@ import {
   FaStar,
   FaUsers,
   FaCheckCircle,
-  FaRegHandshake,
-  FaRegMoneyBillAlt,
-  FaRegSmile,
   FaRocket,
 } from "react-icons/fa";
 import HeroCalculator from "./HeroCalculator";

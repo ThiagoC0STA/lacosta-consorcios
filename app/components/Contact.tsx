@@ -31,7 +31,8 @@ export default function Contact() {
       toast.success("Mensagem enviada com sucesso!");
       reset();
     } catch (error) {
-      toast.error("Erro ao enviar mensagem. Tente novamente.");
+      toast.error("Erro ao enviar mensagem. Tente novamente. Caso o problema persista, entre em contato pelo WhatsApp.");
+      console.error(error);
     }
   };
 
