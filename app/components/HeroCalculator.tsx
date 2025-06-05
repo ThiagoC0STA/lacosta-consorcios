@@ -149,12 +149,12 @@ export default function HeroCalculator() {
         </button>
       </div>
 
-      <Modal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title="Preencha seus dados para receber a simulação"
-      >
-        <div className="mb-4 text-center text-sm text-gray-700">
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <div className="text-3xl font-extrabold text-[color:var(--primary-1)] mb-1 text-left">
+          Receba sua simulação
+        </div>
+
+        <div className="mb-4 mt-4 text-left text-sm text-gray-700">
           <div>
             <b>Conquista:</b>{" "}
             {conquistas.find((c) => c.value === conquista)?.label}
@@ -168,28 +168,58 @@ export default function HeroCalculator() {
             {r.sufix}
           </div>
         </div>
-        <form className="flex flex-col gap-3">
-          <input
-            type="text"
-            placeholder="Nome"
-            value={form.nome}
-            onChange={(e) => setForm({ ...form, nome: e.target.value })}
-            className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm"
-          />
-          <input
-            type="tel"
-            placeholder="Telefone"
-            value={form.telefone}
-            onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-            className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm"
-          />
-          <input
-            type="email"
-            placeholder="E-mail"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm"
-          />
+        <form className="flex flex-col gap-4 mt-2">
+          <div className="flex flex-col gap-1 text-left">
+            <label
+              htmlFor="nome"
+              className="text-xs font-semibold text-gray-700 mb-1"
+            >
+              Nome completo
+            </label>
+            <input
+              id="nome"
+              type="text"
+              placeholder="Digite seu nome"
+              value={form.nome}
+              onChange={(e) => setForm({ ...form, nome: e.target.value })}
+              className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm placeholder-gray-300"
+              autoComplete="name"
+            />
+          </div>
+          <div className="flex flex-col gap-1 text-left">
+            <label
+              htmlFor="telefone"
+              className="text-xs font-semibold text-gray-700 mb-1"
+            >
+              Telefone
+            </label>
+            <input
+              id="telefone"
+              type="tel"
+              placeholder="(00) 00000-0000"
+              value={form.telefone}
+              onChange={(e) => setForm({ ...form, telefone: e.target.value })}
+              className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm placeholder-gray-300"
+              autoComplete="tel"
+            />
+          </div>
+          <div className="flex flex-col gap-1 text-left">
+            <label
+              htmlFor="email"
+              className="text-xs font-semibold text-gray-700 mb-1"
+            >
+              E-mail
+            </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="seu@email.com"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm placeholder-gray-300"
+              autoComplete="email"
+            />
+          </div>
           <button
             type="submit"
             className="rounded-full px-8 py-3 font-bold text-lg shadow-lg transition-all mt-2 w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white"
@@ -203,7 +233,7 @@ export default function HeroCalculator() {
           rel="noopener noreferrer"
           className="w-full text-center mt-6 underline font-semibold transition-all block text-[color:var(--primary-1)] hover:text-[color:var(--primary-5)]"
         >
-          Simular pelo WhatsApp
+          Converse pelo WhatsApp
         </a>
       </Modal>
     </>
