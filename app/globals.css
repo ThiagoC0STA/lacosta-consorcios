@@ -2,7 +2,7 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --background-rgb: #fff;
   /* Paleta azul genérica */
   --primary-1: #023373;
   --primary-2: #022859;
@@ -25,7 +25,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  background: #fff;
 }
 
 /* Custom styles */

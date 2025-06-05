@@ -43,23 +43,23 @@ export default function HeroCalculator() {
 
   return (
     <>
-      <div className="rounded-xl shadow-xl p-8 px-10 flex flex-col gap-7 max-w-lg w-full border bg-white/90 backdrop-blur-md">
+      <div className="rounded-xl shadow-xl p-5 sm:p-8 px-4 sm:px-10 flex flex-col gap-5 sm:gap-7 max-w-lg w-full border bg-white/90 backdrop-blur-md">
         <h3
-          className="text-3xl font-extrabold text-left"
+          className="text-[28px] sm:text-3xl font-extrabold md:text-left text-center"
           style={{ color: "var(--primary-2)" }}
         >
           Simule seu consórcio
         </h3>
         {/* Seleção de conquista - agora um selectbox estilizado */}
         <div className="mb-2">
-          <label className="block text-sm text-gray-700 font-semibold mb-2">
+          <label className="block text-xs sm:text-sm text-gray-700 font-semibold mb-2">
             O que você deseja conquistar?
           </label>
           <div className="relative">
             <select
               value={conquista}
               onChange={(e) => setConquista(e.target.value)}
-              className="appearance-none w-full px-4 py-3 pr-10 rounded-xl border border-[color:var(--primary-1)] bg-white text-[color:var(--primary-1)] font-bold text-base shadow focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-1)] transition-all"
+              className="appearance-none w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-10 rounded-xl border border-[color:var(--primary-1)] bg-white text-[color:var(--primary-1)] font-bold text-sm sm:text-base shadow focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-1)] transition-all"
             >
               {conquistas.map((c) => (
                 <option key={c.value} value={c.value}>
@@ -71,13 +71,13 @@ export default function HeroCalculator() {
           </div>
         </div>
         {/* Escolha entre parcela ou crédito */}
-        <div className="flex gap-2 justify-center mb-2">
+        <div className="flex gap-1 sm:gap-2 justify-center mb-2">
           <button
             onClick={() => {
               setTipo("parcela");
               setValor(ranges.parcela.min);
             }}
-            className={`flex-1 px-4 py-2 rounded-xl font-bold text-sm transition-all border shadow-sm ${
+            className={`flex-1 px-2 sm:px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all border shadow-sm ${
               tipo === "parcela"
                 ? "bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] text-white scale-105"
                 : "bg-white text-[color:var(--primary-5)] border-[color:var(--primary-5)]"
@@ -90,7 +90,7 @@ export default function HeroCalculator() {
               setTipo("credito");
               setValor(ranges.credito.min);
             }}
-            className={`flex-1 px-4 py-2 rounded-xl font-bold text-sm transition-all border shadow-sm ${
+            className={`flex-1 px-2 sm:px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all border shadow-sm ${
               tipo === "credito"
                 ? "bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] text-white scale-105"
                 : "bg-white text-[color:var(--primary-5)] border-[color:var(--primary-5)]"
@@ -101,13 +101,13 @@ export default function HeroCalculator() {
         </div>
         {/* Slider único */}
         <div className="mt-2">
-          <label className="block text-sm text-gray-700 mb-3 font-semibold">
+          <label className="block text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3 font-semibold">
             Escolha o valor da{" "}
             {tipo === "parcela" ? "parcela" : "carta de crédito"}:
           </label>
           <div className="flex flex-col items-center gap-2 relative">
             <div className="w-full flex flex-col gap-1">
-              <div className="flex justify-between text-xs text-gray-400 px-1 mb-2">
+              <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 px-1 mb-2">
                 <span>
                   {r.prefix}
                   {r.min.toLocaleString()}
@@ -131,7 +131,7 @@ export default function HeroCalculator() {
               />
             </div>
             <span
-              className="text-4xl font-extrabold mt-4"
+              className="text-3xl sm:text-4xl font-extrabold mt-3 sm:mt-4"
               style={{ color: "var(--primary-1)" }}
             >
               {r.prefix}
@@ -142,13 +142,13 @@ export default function HeroCalculator() {
         </div>
         <button
           onClick={() => setModalOpen(true)}
-          className=" rounded-full px-8 py-3 font-bold text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl"
+          className="rounded-full px-6 sm:px-8 py-3 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl"
           style={{ color: "white" }}
         >
           Simular agora
         </button>
       </div>
-      
+
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}

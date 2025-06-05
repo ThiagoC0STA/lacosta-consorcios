@@ -2,13 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import {
-  FaStar,
-  FaUsers,
-  FaCheckCircle,
-  FaRocket,
-} from "react-icons/fa";
+import { FaStar, FaUsers, FaCheckCircle, FaRocket } from "react-icons/fa";
 import HeroCalculator from "./HeroCalculator";
+import Image from "next/image";
 
 const destaqueCards = [
   {
@@ -47,10 +43,12 @@ export default function Hero() {
   });
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden pt-20 md:pt-0">
+    <section className="relative md:min-h-screen flex items-center justify-center bg-white pt-24 md:pt-0 pb-24 md:pb-0 mb-[320px] md:mb-0">
       {/* Imagem de fundo inspiradora */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
+          fill
+          priority
           src="/hero-6.jpg"
           alt="Família feliz conquistando o sonho"
           className="w-full h-full object-cover opacity-95"
@@ -61,9 +59,9 @@ export default function Hero() {
         {/* Coluna esquerda: texto, destaques, benefícios */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -60 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
           className="flex flex-col justify-start h-full gap-8 md:gap-12 text-center lg:text-left md:pt-5"
         >
           <div>
@@ -119,7 +117,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <div className="flex justify-center items-center w-full relative mt-4 md:mt-0">
+        <div className="flex justify-center items-center w-full md:relative mt-4 md:mt-0 absolute bottom-0 top-[680px] z-50 md:px-0 px-4">
           <HeroCalculator />
         </div>
       </div>
