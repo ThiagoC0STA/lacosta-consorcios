@@ -53,6 +53,7 @@ export default function Hero() {
           alt="Família feliz conquistando o sonho"
           className="w-full h-full object-cover opacity-95"
         />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
       {/* Conteúdo */}
       <div className="relative z-20 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 items-center px-4 md:pl-24 py-8 md:pt-20">
@@ -117,7 +118,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <div className="flex justify-center items-center w-full md:relative mt-4 md:mt-0 absolute bottom-0 top-[680px] z-50 md:px-0 px-4">
+        <div className="flex justify-center items-center w-full  mt-4 md:mt-0 absolute md:relative bottom-0 top-[680px] md:top-[0] z-50 md:px-0 px-4">
           <HeroCalculator />
         </div>
       </div>

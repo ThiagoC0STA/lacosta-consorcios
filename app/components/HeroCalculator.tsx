@@ -71,7 +71,7 @@ export default function HeroCalculator() {
           </div>
         </div>
         {/* Escolha entre parcela ou crédito */}
-        <div className="flex gap-1 sm:gap-2 justify-center mb-2">
+        <div className="flex gap-4 justify-center mb-2">
           <button
             onClick={() => {
               setTipo("parcela");
