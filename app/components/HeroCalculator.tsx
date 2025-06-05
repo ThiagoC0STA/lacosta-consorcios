@@ -43,9 +43,9 @@ export default function HeroCalculator() {
 
   return (
     <>
-      <div className="rounded-2xl shadow-2xl p-8 flex flex-col gap-7 max-w-lg w-full border bg-white/90 backdrop-blur-md">
+      <div className="rounded-xl shadow-xl p-8 px-10 flex flex-col gap-7 max-w-lg w-full border bg-white/90 backdrop-blur-md">
         <h3
-          className="text-3xl font-extrabold text-left mt-4"
+          className="text-3xl font-extrabold text-left"
           style={{ color: "var(--primary-2)" }}
         >
           Simule seu consórcio
