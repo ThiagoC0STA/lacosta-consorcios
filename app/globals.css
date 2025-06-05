@@ -3,6 +3,17 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
+  /* Paleta azul genérica */
+  --primary-1: #023373;
+  --primary-2: #022859;
+  --primary-3: #021D40;
+  --primary-4: #035AA6;
+  --primary-5: #0487D9;
+  --primary-6: #1c4b7553;
+  --primary-7: #BF0A0A;
+  --primary-8: #F2F2F2;
+  --primary-9: #FFFFFF;
+  --primary-10: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,4 +55,56 @@ html {
 
 .animate-fadeIn {
   animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes float-y {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
+@keyframes float-y-reverse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes float-x {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes float-x-reverse {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.animate-float-y {
+  animation: float-y 3s ease-in-out infinite;
+}
+
+.animate-float-y-reverse {
+  animation: float-y-reverse 3s ease-in-out infinite;
+}
+
+.animate-float-x {
+  animation: float-x 3s ease-in-out infinite;
+}
+
+.animate-float-x-reverse {
+  animation: float-x-reverse 3s ease-in-out infinite;
 }
