@@ -13,7 +13,6 @@ export default function HeroCalculator() {
   const [conquista, setConquista] = useState("veiculos");
   const [tipo, setTipo] = useState<"parcela" | "credito">("parcela");
   const [valor, setValor] = useState(1000);
-  const [modalOpen, setModalOpen] = useState(false);
 
   const ranges = {
     parcela: { min: 200, max: 10000, step: 50, prefix: "R$ ", sufix: ",00" },
