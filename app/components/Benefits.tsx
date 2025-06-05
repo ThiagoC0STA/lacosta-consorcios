@@ -82,31 +82,34 @@ export default function Benefits() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
-          className="absolute top-20 left-10 text-[var(--primary-1)]/10"
+          className="absolute top-20 left-10 text-[var(--primary-1)]/10 hidden md:block"
         >
           <FaHandshake size={120} />
         </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.4 }}
-          className="absolute bottom-20 right-10 text-[var(--primary-4)]/10"
+          className="absolute bottom-20 right-10 text-[var(--primary-4)]/10 hidden md:block"
         >
           <FaTrophy size={100} />
         </motion.div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, delay: 0.6 }}
-          className="absolute top-1/2 left-24 text-[var(--primary-1)]/10"
+          className="absolute top-1/2 left-24 text-[var(--primary-1)]/10 hidden md:block"
         >
           <FaShieldAlt size={80} />
         </motion.div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, delay: 0.8 }}
-          className="absolute top-1/3 right-24 text-[var(--primary-4)]/10"
+          className="absolute top-1/3 right-24 text-[var(--primary-4)]/10 hidden md:block"
         >
           <FaRegLightbulb size={90} />
         </motion.div>
@@ -118,7 +121,7 @@ export default function Benefits() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
@@ -167,11 +170,11 @@ export default function Benefits() {
               <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-[var(--primary-6)]/20 hover:border-[var(--primary-4)]/30">
                 <div className="flex flex-col items-start">
                   <motion.div
-                    className={`p-3 rounded-xl bg-gradient-to-r ${benefit.color} mb-6 relative`}
+                    className={`p-3 rounded-xl bg-gradient-to-r ${benefit.color} mb-6 relative md:p-3 p-2`}
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <benefit.icon className="h-6 w-6 text-white relative z-10" />
+                    <benefit.icon className="md:h-6 md:w-6 h-5 w-5 text-white relative z-10" />
                     <div className="absolute inset-0 bg-white/20 rounded-xl blur-sm" />
                   </motion.div>
                   <h3 className="text-xl font-bold text-[var(--primary-1)] mb-3 group-hover:text-[var(--primary-4)] transition-colors">
