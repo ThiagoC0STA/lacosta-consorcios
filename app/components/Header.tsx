@@ -22,7 +22,7 @@ export default function Header() {
             style={{ letterSpacing: "-1px" }}
           >
             LACOSTA{" "}
-            <span className="text-sm -mt-1 text-[var(--primary-4)]">
+            <span className="text-sm -mt-1 text-[var(--primary-1)]">
               Corretora & Consórcios
             </span>
           </span>
