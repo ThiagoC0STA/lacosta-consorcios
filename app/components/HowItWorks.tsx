@@ -1,35 +1,38 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { 
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import {
   ClipboardDocumentCheckIcon,
   DocumentTextIcon,
   ClockIcon,
-  SparklesIcon
-} from '@heroicons/react/24/outline';
+  SparklesIcon,
+} from "@heroicons/react/24/outline";
 
 const steps = [
   {
     icon: ClipboardDocumentCheckIcon,
-    title: 'Escolha seu plano',
-    description: 'Selecione o tipo de consórcio e o valor que melhor se adequa ao seu perfil.'
+    title: "Escolha seu plano",
+    description:
+      "Selecione o tipo de consórcio e o valor que melhor se adequa ao seu perfil.",
   },
   {
     icon: DocumentTextIcon,
-    title: 'Faça sua proposta',
-    description: 'Preencha o formulário com seus dados e escolha o prazo de pagamento.'
+    title: "Faça sua proposta",
+    description:
+      "Preencha o formulário com seus dados e escolha o prazo de pagamento.",
   },
   {
     icon: ClockIcon,
-    title: 'Aguarde a contemplação',
-    description: 'Acompanhe seu processo através do nosso sistema online.'
+    title: "Aguarde a contemplação",
+    description: "Acompanhe seu processo através do nosso sistema online.",
   },
   {
     icon: SparklesIcon,
-    title: 'Realize seu sonho',
-    description: 'Após contemplado, receba seu bem e comece a usufruir imediatamente.'
-  }
+    title: "Realize seu sonho",
+    description:
+      "Após contemplado, receba seu bem e comece a usufruir imediatamente.",
+  },
 ];
 
 export default function HowItWorks() {
@@ -39,7 +42,7 @@ export default function HowItWorks() {
   });
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white" id="como-funciona">
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -72,11 +75,9 @@ export default function HowItWorks() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   {step.title}
                 </h3>
-                <p className="text-gray-600">
-                  {step.description}
-                </p>
+                <p className="text-gray-600">{step.description}</p>
               </div>
-              
+
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-blue-600" />
               )}
@@ -86,4 +87,4 @@ export default function HowItWorks() {
       </div>
     </section>
   );
-} 
+}

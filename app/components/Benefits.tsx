@@ -34,7 +34,7 @@ export default function Benefits() {
   });
 
   return (
-    <section className="py-20 bg-gray-50 md:mt-0 relative z-0">
+    <section className="py-20 bg-gray-50 md:mt-0 relative z-0" id="vantagens">
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}

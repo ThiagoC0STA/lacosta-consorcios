@@ -43,7 +43,7 @@ export default function Hero() {
   });
 
   return (
-    <section className="relative md:min-h-screen flex items-center justify-center bg-white pt-24 md:pt-0 pb-24 md:pb-0 mb-[320px] md:mb-0">
+    <section id="#simulacao" className="relative md:min-h-screen flex items-center justify-center bg-white pt-24 md:pt-0 pb-24 md:pb-0 mb-[320px] md:mb-0">
       {/* Imagem de fundo inspiradora */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -56,7 +56,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/20" />
       </div>
       {/* Conteúdo */}
-      <div className="relative z-20 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 items-center px-4 md:pl-24 py-8 md:pt-20">
+      <div className="relative z-20 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 items-center px-4 md:pl-24 py-8 md:pt-32">
         {/* Coluna esquerda: texto, destaques, benefícios */}
         <motion.div
           ref={ref}
