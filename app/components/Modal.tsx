@@ -6,7 +6,6 @@ import { ReactNode } from "react";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title?: string;
   children: ReactNode;
   className?: string;
 }
@@ -14,7 +13,6 @@ interface ModalProps {
 export default function Modal({
   isOpen,
   onClose,
-  title,
   children,
   className = "",
 }: ModalProps) {
@@ -32,14 +30,6 @@ export default function Modal({
         >
           ×
         </button>
-        {title && (
-          <h4
-            className="text-xl font-bold mb-4 text-center"
-            style={{ color: "var(--primary-2)" }}
-          >
-            {title}
-          </h4>
-        )}
         {children}
       </div>
     </div>,

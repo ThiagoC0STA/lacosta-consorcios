@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import Modal from "./Modal";
 
 const conquistas = [
   { label: "Um imóvel", value: "imoveis" },
@@ -15,13 +14,12 @@ export default function HeroCalculator() {
   const [tipo, setTipo] = useState<"parcela" | "credito">("parcela");
   const [valor, setValor] = useState(1000);
   const [modalOpen, setModalOpen] = useState(false);
-  const [form, setForm] = useState({ nome: "", telefone: "", email: "" });
 
   const ranges = {
     parcela: { min: 200, max: 10000, step: 50, prefix: "R$ ", sufix: ",00" },
     credito: {
       min: 20000,
-      max: 500000,
+      max: 5000000,
       step: 1000,
       prefix: "R$ ",
       sufix: ",00",
@@ -30,14 +28,12 @@ export default function HeroCalculator() {
   const r = ranges[tipo];
 
   // Mensagem WhatsApp
-  const whatsappMsg = `Olá! Gostaria de simular um consórcio de ${
+  const whatsappMsg = `Olá! Vim pelo seu site e gostaria de simular um consórcio de ${
     conquistas.find((c) => c.value === conquista)?.label
   }. Quero simular por ${
     tipo === "parcela" ? "parcela" : "crédito"
-  } no valor de ${r.prefix}${valor.toLocaleString()}${r.sufix}. Meu nome é ${
-    form.nome
-  }.`;
-  const whatsappLink = `https://wa.me/SEUNUMERO?text=${encodeURIComponent(
+  } no valor de ${r.prefix}${valor.toLocaleString()}${r.sufix}.`;
+  const whatsappLink = `https://wa.me/5541991751000?text=${encodeURIComponent(
     whatsappMsg
   )}`;
 
@@ -140,102 +136,15 @@ export default function HeroCalculator() {
             </span>
           </div>
         </div>
-        <button
-          onClick={() => setModalOpen(true)}
-          className="rounded-full px-6 sm:px-8 py-3 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl"
-          style={{ color: "white" }}
-        >
-          Simular agora
-        </button>
-      </div>
-
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <div className="text-3xl font-extrabold text-[color:var(--primary-1)] mb-1 text-left">
-          Receba sua simulação
-        </div>
-
-        <div className="mb-4 mt-4 text-left text-sm text-gray-700">
-          <div>
-            <b>Conquista:</b>{" "}
-            {conquistas.find((c) => c.value === conquista)?.label}
-          </div>
-          <div>
-            <b>Simulação por:</b> {tipo === "parcela" ? "Parcela" : "Crédito"}
-          </div>
-          <div>
-            <b>Valor:</b> {r.prefix}
-            {valor.toLocaleString()}
-            {r.sufix}
-          </div>
-        </div>
-        <form className="flex flex-col gap-4 mt-2">
-          <div className="flex flex-col gap-1 text-left">
-            <label
-              htmlFor="nome"
-              className="text-xs font-semibold text-gray-700 mb-1"
-            >
-              Nome completo
-            </label>
-            <input
-              id="nome"
-              type="text"
-              placeholder="Digite seu nome"
-              value={form.nome}
-              onChange={(e) => setForm({ ...form, nome: e.target.value })}
-              className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm placeholder-gray-300"
-              autoComplete="name"
-            />
-          </div>
-          <div className="flex flex-col gap-1 text-left">
-            <label
-              htmlFor="telefone"
-              className="text-xs font-semibold text-gray-700 mb-1"
-            >
-              Telefone
-            </label>
-            <input
-              id="telefone"
-              type="tel"
-              placeholder="(00) 00000-0000"
-              value={form.telefone}
-              onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-              className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm placeholder-gray-300"
-              autoComplete="tel"
-            />
-          </div>
-          <div className="flex flex-col gap-1 text-left">
-            <label
-              htmlFor="email"
-              className="text-xs font-semibold text-gray-700 mb-1"
-            >
-              E-mail
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="seu@email.com"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="rounded-xl border px-4 py-3 text-base bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary-5)] border-[color:var(--primary-5)] shadow-sm placeholder-gray-300"
-              autoComplete="email"
-            />
-          </div>
-          <button
-            type="submit"
-            className="rounded-full px-8 py-3 font-bold text-lg shadow-lg transition-all mt-2 w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white"
-          >
-            Enviar simulação
-          </button>
-        </form>
         <a
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full text-center mt-6 underline font-semibold transition-all block text-[color:var(--primary-1)] hover:text-[color:var(--primary-5)]"
+          className="rounded-full px-6 sm:px-8 py-3 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white text-center block"
         >
-          Converse pelo WhatsApp
+          Simular agora
         </a>
-      </Modal>
+      </div>
     </>
   );
 }
