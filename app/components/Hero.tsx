@@ -84,7 +84,7 @@ export default function Hero() {
               </span>
             </motion.div>
             <h1
-              className="text-center md:text-left text-4xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-xl max-w-3xl mt-4"
+              className="text-center md:text-left text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-xl max-w-3xl mt-4"
               style={{ color: "white" }}
             >
               Conquiste seu imóvel, carro ou invista no seu futuro
@@ -100,7 +100,7 @@ export default function Hero() {
             </p>
           </div>
           {/* Destaques rápidos em cards responsivos e sempre em linha */}
-          <div className="flex gap-2 md:gap-4 w-full mt-2 justify-center md:justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-red-200 scrollbar-track-transparent pb-2">
+          <div className="flex gap-2 md:gap-4 w-full mt-0 justify-center md:justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-red-200 scrollbar-track-transparent pb-2">
             {destaqueCards.map((card, idx) => (
               <div
                 key={idx}

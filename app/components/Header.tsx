@@ -17,15 +17,7 @@ export default function Header() {
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-lg backdrop-blur-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-3 py-4">
         <Link href="/" className="flex items-center gap-3 group select-none">
-          <span
-            className="text-3xl font-bold tracking-tight text-[var(--primary-1)] transition-all duration-500 flex flex-col items-start"
-            style={{ letterSpacing: "-1px" }}
-          >
-            LACOSTA{" "}
-            <span className="text-sm -mt-1 text-[var(--primary-1)]">
-              Corretora & Consórcios
-            </span>
-          </span>
+          <img src="/logo-3.png" alt="Lacosta Consórcios" className="h-16" />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-base font-medium">
           <Link

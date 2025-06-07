@@ -65,7 +65,7 @@ export default function HowItWorksMobile() {
           {/* Linha animada */}
           <motion.div
             className="absolute left-0 top-[60%] -translate-y-[60%] h-1 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] rounded-full z-10 mx-4"
-            style={{ width: `calc(${progress * 100}% - 80px)` }}
+            style={{ width: `calc(${progress * 100}% - 40px)` }}
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
           />
           {/* Cards em scroll horizontal, com ícones acima de cada card */}

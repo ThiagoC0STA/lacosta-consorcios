@@ -26,6 +26,30 @@ const faqs = [
     answer:
       "Após a contemplação, você tem um prazo para escolher o bem que deseja adquirir. Nossa equipe te auxilia em todo o processo, desde a escolha até a entrega.",
   },
+  {
+    question: "Quem pode participar de um consórcio?",
+    answer: "Qualquer pessoa física ou jurídica pode participar, desde que atenda aos requisitos mínimos de idade e documentação exigidos pela administradora.",
+  },
+  {
+    question: "Posso usar meu FGTS para ofertar lance ou quitar o consórcio?",
+    answer: "Sim, em consórcios de imóveis é possível utilizar o FGTS para ofertar lances ou quitar o saldo devedor, conforme as regras da Caixa Econômica Federal.",
+  },
+  {
+    question: "O que é lance e como funciona?",
+    answer: "Lance é um valor extra que o consorciado pode oferecer para tentar antecipar a contemplação. Quem oferece o maior lance tem mais chances de ser contemplado.",
+  },
+  {
+    question: "Após ser contemplado, em quanto tempo recebo o crédito?",
+    answer: "Após a contemplação e entrega da documentação, o crédito é liberado em poucos dias, conforme análise e aprovação da administradora.",
+  },
+  {
+    question: "Posso transferir minha cota de consórcio para outra pessoa?",
+    answer: "Sim, é possível transferir a cota para terceiros, desde que aprovado pela administradora e mediante análise de crédito do novo titular.",
+  },
+  {
+    question: "Quais bens posso adquirir com o consórcio?",
+    answer: "Você pode adquirir imóveis, veículos, serviços ou outros bens permitidos pelo grupo de consórcio escolhido.",
+  },
 ];
 
 export default function FAQ() {

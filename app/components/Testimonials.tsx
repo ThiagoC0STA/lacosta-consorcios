@@ -110,7 +110,7 @@ export default function Testimonials() {
   const swiperRef = useRef<any>(null);
 
   return (
-    <section className="py-20 bg-gray-50 relative overflow-hidden">
+    <section className="py-8 pt-14 md:py-20 bg-gray-50 relative overflow-hidden">
       {/* Elementos visuais decorativos */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[var(--primary-1)]/10 rounded-full blur-3xl" />
@@ -153,7 +153,6 @@ export default function Testimonials() {
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="!pb-16"
           >
             {testimonials.map((testimonial, index) => (
               <SwiperSlide key={testimonial.name}>
