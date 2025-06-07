@@ -10,16 +10,16 @@ const conquistas = [
 ];
 
 export default function HeroCalculator() {
-  const [conquista, setConquista] = useState("veiculos");
-  const [tipo, setTipo] = useState<"parcela" | "credito">("parcela");
-  const [valor, setValor] = useState(1000);
+  const [conquista, setConquista] = useState("imoveis");
+  const [tipo, setTipo] = useState<"parcela" | "credito">("credito");
+  const [valor, setValor] = useState(100000);
 
   const ranges = {
     parcela: { min: 200, max: 10000, step: 50, prefix: "R$ ", sufix: ",00" },
     credito: {
       min: 20000,
       max: 5000000,
-      step: 1000,
+      step: 20000,
       prefix: "R$ ",
       sufix: ",00",
     },
