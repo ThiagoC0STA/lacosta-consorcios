@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.lacostaconsorcios.com.br
+
+# Sitemaps
+Sitemap: https://www.lacostaconsorcios.com.br/sitemap.xml
