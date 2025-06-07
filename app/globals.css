@@ -120,3 +120,8 @@ html {
 .animate-float-x-reverse {
   animation: float-x-reverse 3s ease-in-out infinite;
 }
+
+
+.swiper-pagination {
+  margin-top: 40px;
+}
