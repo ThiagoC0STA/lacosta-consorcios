@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-lg backdrop-blur-lg">
-      <div className="mx-18 flex items-center justify-between px-4 md:px-3 py-4">
+      <div className="md:mx-18 flex items-center justify-between px-4 md:px-3 py-4">
         <Link href="/" className="flex items-center gap-3 group select-none">
           <img src="/logo-5.png" alt="Lacosta Consórcios" className="h-16" />
         </Link>
