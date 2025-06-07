@@ -40,12 +40,12 @@ export default function HeroCalculator() {
   return (
     <>
       <div className="rounded-xl shadow-xl p-5 sm:p-8 px-4 sm:px-10 flex flex-col gap-5 sm:gap-7 max-w-lg w-full border bg-white/90 backdrop-blur-md">
-        <h3
+        <p
           className="text-[28px] sm:text-3xl font-extrabold md:text-left text-center"
           style={{ color: "var(--primary-2)" }}
         >
           Simule seu consórcio
-        </h3>
+        </p>
         {/* Seleção de conquista - agora um selectbox estilizado */}
         <div className="mb-2">
           <label className="block text-xs sm:text-sm text-gray-700 font-semibold mb-2">
@@ -97,9 +97,8 @@ export default function HeroCalculator() {
         </div>
         {/* Slider único */}
         <div className="mt-2">
-          <label className="block text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3 font-semibold">
-            Escolha o valor da{" "}
-            {tipo === "parcela" ? "parcela" : "carta de crédito"}:
+          <label htmlFor="valor" className="block text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3 font-semibold">
+            Escolha o valor da {tipo === "parcela" ? "parcela" : "carta de crédito"}:
           </label>
           <div className="flex flex-col items-center gap-2 relative">
             <div className="w-full flex flex-col gap-1">
@@ -116,6 +115,7 @@ export default function HeroCalculator() {
                 </span>
               </div>
               <input
+                id="valor"
                 type="range"
                 min={r.min}
                 max={r.max}
