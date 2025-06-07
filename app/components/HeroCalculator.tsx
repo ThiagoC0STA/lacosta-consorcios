@@ -7,6 +7,7 @@ const conquistas = [
   { label: "Um imóvel", value: "imoveis" },
   { label: "Um veículo", value: "veiculos" },
   { label: "Quero fazer um investimento", value: "investimento" },
+  { label: "Serviços", value: "servicos" },
 ];
 
 export default function HeroCalculator() {
@@ -23,7 +24,7 @@ export default function HeroCalculator() {
       prefix: "R$ ",
       sufix: ",00",
     },
-  };
+  };  
   const r = ranges[tipo];
 
   // Mensagem WhatsApp
@@ -32,7 +33,7 @@ export default function HeroCalculator() {
   }. Quero simular por ${
     tipo === "parcela" ? "parcela" : "crédito"
   } no valor de ${r.prefix}${valor.toLocaleString()}${r.sufix}.`;
-  const whatsappLink = `https://wa.me/5541991751000?text=${encodeURIComponent(
+  const whatsappLink = `https://wa.me/554130761050?text=${encodeURIComponent(
     whatsappMsg
   )}`;
 
@@ -66,7 +67,7 @@ export default function HeroCalculator() {
           </div>
         </div>
         {/* Escolha entre parcela ou crédito */}
-        <div className="flex gap-4 justify-center mb-2">
+        <div className="flex gap-2 justify-center mb-2">
           <button
             onClick={() => {
               setTipo("parcela");
@@ -75,11 +76,11 @@ export default function HeroCalculator() {
             className={`flex-1 px-2 sm:px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all border shadow-sm ${
               tipo === "parcela"
                 ? "bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] text-white scale-105"
-                : "bg-white text-[color:var(--primary-5)] border-[color:var(--primary-5)]"
+                : "bg-white text-[color:var(--primary-1)] border-[color:var(--primary-1)]"
             }`}
           >
             Parcela
-          </button>
+          </button>x
           <button
             onClick={() => {
               setTipo("credito");
@@ -88,7 +89,7 @@ export default function HeroCalculator() {
             className={`flex-1 px-2 sm:px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all border shadow-sm ${
               tipo === "credito"
                 ? "bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] text-white scale-105"
-                : "bg-white text-[color:var(--primary-5)] border-[color:var(--primary-5)]"
+                : "bg-white text-[color:var(--primary-1)] border-[color:var(--primary-1)]"
             }`}
           >
             Crédito

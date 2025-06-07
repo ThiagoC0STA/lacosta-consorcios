@@ -16,7 +16,7 @@ const socialLinks = [
   {
     name: "WhatsApp",
     icon: FaWhatsapp,
-    href: "https://wa.me/5541991751000",
+    href: "https://wa.me/554130761050",
   },
 ];
 
@@ -92,7 +92,7 @@ export default function Footer() {
               <li>Rua da Capitania, 127</li>
               <li>Guabirotuba - Curitiba</li>
               <li>luciano@lacostacorretora.com.br</li>
-              <li>(41) 99175-1000</li>
+              <li>(41) 3076-1050</li>
             </ul>
           </div>
         </motion.div>

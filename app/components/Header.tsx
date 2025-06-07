@@ -8,16 +8,16 @@ import { FaWhatsapp } from "react-icons/fa";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const whatsappLink =
-    "https://wa.me/5541991751000?text=" +
+    "https://wa.me/554130761050?text=" +
     encodeURIComponent(
       "Olá! Vim pelo site e gostaria de simular um consórcio."
     );
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-lg backdrop-blur-lg">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-3 py-4">
+      <div className="mx-18 flex items-center justify-between px-4 md:px-3 py-4">
         <Link href="/" className="flex items-center gap-3 group select-none">
-          <img src="/logo-3.png" alt="Lacosta Consórcios" className="h-16" />
+          <img src="/logo-5.png" alt="Lacosta Consórcios" className="h-16" />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-base font-medium">
           <Link

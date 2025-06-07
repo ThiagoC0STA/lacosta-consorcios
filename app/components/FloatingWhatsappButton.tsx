@@ -1,7 +1,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 
 const whatsappLink =
-  "https://wa.me/5541991751000?text=" +
+  "https://wa.me/554130761050?text=" +
   encodeURIComponent("Olá! Vim pelo site e gostaria de simular um consórcio.");
 
 export default function FloatingWhatsappButton() {

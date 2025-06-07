@@ -26,7 +26,7 @@ export default function SimulacaoModal({
   }${simulacao ? ` por ${simulacao}` : ""}${
     valor ? ` no valor de ${valor}` : ""
   }. Meu nome é ${form.nome}.`;
-  const whatsappLink = `https://wa.me/5541991751000?text=${encodeURIComponent(
+  const whatsappLink = `https://wa.me/554130761050?text=${encodeURIComponent(
     whatsappMsg
   )}`;
 
