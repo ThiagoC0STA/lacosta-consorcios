@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import Drawer from "@mui/material/Drawer";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Header() {
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-lg backdrop-blur-lg">
-      <div className="mx-18 flex items-center justify-between px-4 md:px-3 py-4">
+      <div className="md:mx-18 flex items-center justify-between px-4 md:px-3 py-4">
         <Link href="/" className="flex items-center gap-3 group select-none">
           <img src="/logo-5.png" alt="Lacosta Consórcios" className="h-16" />
         </Link>
@@ -50,7 +51,7 @@ export default function Header() {
         </a>
         <button
           className="md:hidden ml-2 p-2 rounded-lg transition-colors duration-300 hover:bg-[var(--primary-8)]"
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpen(true)}
           aria-label="Abrir menu"
         >
           {open ? (
@@ -61,54 +62,55 @@ export default function Header() {
         </button>
       </div>
 
-      {open && (
-        <>
-          <div
-            className="fixed top-0 right-0 left-0 bottom-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
+      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+        <div className="w-72 flex flex-col items-center gap-4 py-8 px-4">
+          <button
+            className="self-end mb-4"
             onClick={() => setOpen(false)}
-          />
-          <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-2xl flex flex-col items-center gap-4 py-8 animate-fade-in z-50">
-            <Link
-              href="#simulacao"
-              className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
-              onClick={() => setOpen(false)}
-            >
-              Simulação
-            </Link>
-            <Link
-              href="#como-funciona"
-              className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
-              onClick={() => setOpen(false)}
-            >
-              Como funciona
-            </Link>
-            <Link
-              href="#vantagens"
-              className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
-              onClick={() => setOpen(false)}
-            >
-              Vantagens
-            </Link>
-            <Link
-              href="#contato"
-              className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
-              onClick={() => setOpen(false)}
-            >
-              Contato
-            </Link>
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] hover:from-[var(--primary-2)] hover:to-[var(--primary-5)] text-white px-6 py-2.5 rounded-lg font-bold shadow-lg transition-all duration-300 text-base mt-2"
-              onClick={() => setOpen(false)}
-            >
-              <FaWhatsapp className="text-2xl" />
-              WhatsApp
-            </a>
-          </div>
-        </>
-      )}
+            aria-label="Fechar menu"
+          >
+            <FiX size={28} className="text-[var(--primary-1)]" />
+          </button>
+          <Link
+            href="#simulacao"
+            className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
+            onClick={() => setOpen(false)}
+          >
+            Simulação
+          </Link>
+          <Link
+            href="#como-funciona"
+            className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
+            onClick={() => setOpen(false)}
+          >
+            Como funciona
+          </Link>
+          <Link
+            href="#vantagens"
+            className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
+            onClick={() => setOpen(false)}
+          >
+            Vantagens
+          </Link>
+          <Link
+            href="#contato"
+            className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
+            onClick={() => setOpen(false)}
+          >
+            Contato
+          </Link>
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] hover:from-[var(--primary-2)] hover:to-[var(--primary-5)] text-white px-6 py-2.5 rounded-lg font-bold shadow-lg transition-all duration-300 text-base mt-2"
+            onClick={() => setOpen(false)}
+          >
+            <FaWhatsapp className="text-2xl" />
+            WhatsApp
+          </a>
+        </div>
+      </Drawer>
     </header>
   );
 }
