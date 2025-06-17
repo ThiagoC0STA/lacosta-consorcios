@@ -88,7 +88,9 @@ export default function RootLayout({
               };
               gtag('event', 'conversion', {
                   'send_to': 'AW-17204502524/iL3iCNbW69waEPy_34tA',
-                  'event_callback': callback
+                  'event_callback': callback,
+                  'value': 1.0,
+                  'currency': 'BRL'
               });
               return false;
             }
@@ -97,11 +99,11 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <noscript>
-          <iframe 
+          <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-KXKHCFR9"
-            height="0" 
-            width="0" 
-            style={{ display: 'none', visibility: 'hidden' }}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
         <Header />
