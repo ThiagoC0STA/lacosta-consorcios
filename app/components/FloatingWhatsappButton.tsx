@@ -7,10 +7,10 @@ const whatsappLink =
   encodeURIComponent("Olá! Vim pelo site e gostaria de simular um consórcio.");
 
 export default function FloatingWhatsappButton() {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // @ts-ignore - gtag_report_conversion is defined globally
-    if (typeof window.gtag_report_conversion === 'function') {
-      // @ts-ignore
+  const handleClick = () => {
+    // @ts-expect-error - gtag_report_conversion is defined globally
+    if (typeof window.gtag_report_conversion === "function") {
+      // @ts-expect-error - gtag_report_conversion is defined globally
       window.gtag_report_conversion(whatsappLink);
     }
   };
@@ -30,4 +30,4 @@ export default function FloatingWhatsappButton() {
       <FaWhatsapp className="text-3xl md:text-4xl group-hover:scale-110 transition-transform duration-200" />
     </a>
   );
-} 
+}

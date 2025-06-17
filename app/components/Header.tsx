@@ -14,10 +14,10 @@ export default function Header() {
       "Olá! Vim pelo site e gostaria de simular um consórcio."
     );
 
-  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // @ts-ignore - gtag_report_conversion is defined globally
+  const handleWhatsAppClick = () => {
+    // @ts-expect-error - gtag_report_conversion is defined globally
     if (typeof window.gtag_report_conversion === 'function') {
-      // @ts-ignore
+      // @ts-expect-error - gtag_report_conversion is defined globally
       window.gtag_report_conversion(whatsappLink);
     }
   };
@@ -112,8 +112,8 @@ export default function Header() {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => {
-              handleWhatsAppClick(e);
+            onClick={() => {
+              handleWhatsAppClick();
               setOpen(false);
             }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] hover:from-[var(--primary-2)] hover:to-[var(--primary-5)] text-white px-6 py-2.5 rounded-lg font-bold shadow-lg transition-all duration-300 text-base mt-2"

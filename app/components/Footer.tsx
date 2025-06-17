@@ -28,11 +28,11 @@ const navLinks = [
 ];
 
 function SocialLink({ href, icon: Icon, name }: { href: string; icon: any; name: string }) {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = () => {
     if (name === "WhatsApp") {
-      // @ts-ignore - gtag_report_conversion is defined globally
+      // @ts-expect-error - gtag_report_conversion is defined globally
       if (typeof window.gtag_report_conversion === "function") {
-        // @ts-ignore
+        // @ts-expect-error - gtag_report_conversion is defined globally
         window.gtag_report_conversion(href);
       }
     }

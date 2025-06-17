@@ -24,7 +24,7 @@ export default function HeroCalculator() {
       prefix: "R$ ",
       sufix: ",00",
     },
-  };  
+  };
   const r = ranges[tipo];
 
   // Mensagem WhatsApp
@@ -37,10 +37,10 @@ export default function HeroCalculator() {
     whatsappMsg
   )}`;
 
-  const handleSimulationClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // @ts-ignore - gtag_report_conversion is defined globally
-    if (typeof window.gtag_report_conversion === 'function') {
-      // @ts-ignore
+  const handleSimulationClick = () => {
+    // @ts-expect-error - gtag_report_conversion is defined globally
+    if (typeof window.gtag_report_conversion === "function") {
+      // @ts-expect-error - gtag_report_conversion is defined globally
       window.gtag_report_conversion(whatsappLink);
     }
   };
@@ -105,8 +105,12 @@ export default function HeroCalculator() {
         </div>
         {/* Slider único */}
         <div className="mt-2">
-          <label htmlFor="valor" className="block text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3 font-semibold">
-            Escolha o valor da {tipo === "parcela" ? "parcela" : "carta de crédito"}:
+          <label
+            htmlFor="valor"
+            className="block text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3 font-semibold"
+          >
+            Escolha o valor da{" "}
+            {tipo === "parcela" ? "parcela" : "carta de crédito"}:
           </label>
           <div className="flex flex-col items-center gap-2 relative">
             <div className="w-full flex flex-col gap-1">
