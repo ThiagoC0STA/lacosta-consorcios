@@ -14,6 +14,14 @@ export default function Header() {
       "Olá! Vim pelo site e gostaria de simular um consórcio."
     );
 
+  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // @ts-ignore - gtag_report_conversion is defined globally
+    if (typeof window.gtag_report_conversion === 'function') {
+      // @ts-ignore
+      window.gtag_report_conversion(whatsappLink);
+    }
+  };
+
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-lg backdrop-blur-lg">
       <div className="md:mx-18 flex items-center justify-between px-4 md:px-3 py-4">
@@ -44,6 +52,7 @@ export default function Header() {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleWhatsAppClick}
           className="hidden md:inline-flex items-center gap-2 ml-6 bg-white hover:bg-[var(--primary-8)] text-[var(--primary-1)] px-6 py-2.5 rounded-lg font-bold shadow-lg transition-all duration-300 text-base tracking-tight border-2 border-[var(--primary-6)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-5)]/40"
         >
           <FaWhatsapp className="text-2xl text-[var(--primary-4)]" />
@@ -103,8 +112,11 @@ export default function Header() {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              handleWhatsAppClick(e);
+              setOpen(false);
+            }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] hover:from-[var(--primary-2)] hover:to-[var(--primary-5)] text-white px-6 py-2.5 rounded-lg font-bold shadow-lg transition-all duration-300 text-base mt-2"
-            onClick={() => setOpen(false)}
           >
             <FaWhatsapp className="text-2xl" />
             WhatsApp

@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import {
-  FaInstagram,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+
+const whatsappLink =
+  "https://wa.me/554130761050?text=" +
+  encodeURIComponent("Olá! Vim pelo site e gostaria de simular um consórcio.");
 
 const socialLinks = [
   {
@@ -16,7 +17,7 @@ const socialLinks = [
   {
     name: "WhatsApp",
     icon: FaWhatsapp,
-    href: "https://wa.me/554130761050",
+    href: whatsappLink,
   },
 ];
 
@@ -25,6 +26,33 @@ const navLinks = [
   { label: "Vantagens", href: "#vantagens" },
   { label: "Como funciona", href: "#simulação" },
 ];
+
+function SocialLink({ href, icon: Icon, name }: { href: string; icon: any; name: string }) {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (name === "WhatsApp") {
+      // @ts-ignore - gtag_report_conversion is defined globally
+      if (typeof window.gtag_report_conversion === "function") {
+        // @ts-ignore
+        window.gtag_report_conversion(href);
+      }
+    }
+  };
+
+  return (
+    <a
+      href={href}
+      className="group text-gray-400 hover:text-white transition-colors"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={name}
+      onClick={handleClick}
+    >
+      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 group-hover:bg-[var(--primary-1)]/20 transition-all shadow-md">
+        <Icon className="h-6 w-6" />
+      </span>
+    </a>
+  );
+}
 
 export default function Footer() {
   const [ref, inView] = useInView({
@@ -48,30 +76,29 @@ export default function Footer() {
           className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 items-start"
         >
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-extrabold mb-4 tracking-tight text-white">Lacosta Consórcios</h3>
+            <h3 className="text-2xl font-extrabold mb-4 tracking-tight text-white">
+              Lacosta Consórcios
+            </h3>
             <p className="text-gray-400 mb-6 max-w-md">
-              Transformando sonhos em realidade através de consórcios seguros e confiáveis.
+              Transformando sonhos em realidade através de consórcios seguros e
+              confiáveis.
             </p>
             <div className="flex space-x-4 mt-4">
               {socialLinks.map((social) => (
-                <a
+                <SocialLink
                   key={social.name}
                   href={social.href}
-                  className="group text-gray-400 hover:text-white transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                >
-                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 group-hover:bg-[var(--primary-1)]/20 transition-all shadow-md">
-                    <social.icon className="h-6 w-6" />
-                  </span>
-                </a>
+                  icon={social.icon}
+                  name={social.name}
+                />
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">Links Rápidos</h4>
+            <h4 className="text-lg font-semibold mb-4 text-white">
+              Links Rápidos
+            </h4>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -99,7 +126,9 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm">
           <p>
-            © {new Date().getFullYear()} <span className="font-bold text-white">Lacosta Consórcios</span>. Todos os direitos reservados.
+            © {new Date().getFullYear()}{" "}
+            <span className="font-bold text-white">Lacosta Consórcios</span>.
+            Todos os direitos reservados.
           </p>
         </div>
       </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import { FaWhatsapp } from "react-icons/fa";
 
 const whatsappLink =
@@ -5,11 +7,20 @@ const whatsappLink =
   encodeURIComponent("Olá! Vim pelo site e gostaria de simular um consórcio.");
 
 export default function FloatingWhatsappButton() {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // @ts-ignore - gtag_report_conversion is defined globally
+    if (typeof window.gtag_report_conversion === 'function') {
+      // @ts-ignore
+      window.gtag_report_conversion(whatsappLink);
+    }
+  };
+
   return (
     <a
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       className="fixed right-4 bottom-0 -translate-y-1/2 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-16 h-16 transition-all duration-300 group
       md:right-4 md:bottom-0 md:-translate-y-1/2
       sm:right-2 sm:top-auto sm:bottom-4 sm:translate-y-0"

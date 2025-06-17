@@ -78,6 +78,22 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-KXKHCFR9');
           `}
         </Script>
+        <Script id="whatsapp-conversion" strategy="afterInteractive">
+          {`
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-17204502524/iL3iCNbW69waEPy_34tA',
+                  'event_callback': callback
+              });
+              return false;
+            }
+          `}
+        </Script>
       </head>
       <body className={inter.className}>
         <noscript>

@@ -37,6 +37,14 @@ export default function HeroCalculator() {
     whatsappMsg
   )}`;
 
+  const handleSimulationClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // @ts-ignore - gtag_report_conversion is defined globally
+    if (typeof window.gtag_report_conversion === 'function') {
+      // @ts-ignore
+      window.gtag_report_conversion(whatsappLink);
+    }
+  };
+
   return (
     <>
       <div className="rounded-xl shadow-xl p-5 sm:p-8 px-4 sm:px-10 flex flex-col gap-5 sm:gap-7 max-w-lg w-full border bg-white/90 backdrop-blur-md">
@@ -80,7 +88,7 @@ export default function HeroCalculator() {
             }`}
           >
             Parcela
-          </button>x
+          </button>
           <button
             onClick={() => {
               setTipo("credito");
@@ -140,6 +148,7 @@ export default function HeroCalculator() {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleSimulationClick}
           className="rounded-full px-6 sm:px-8 py-3 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white text-center block"
         >
           Simular agora
