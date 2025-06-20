@@ -3,10 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
-
-const whatsappLink =
-  "https://wa.me/554130761050?text=" +
-  encodeURIComponent("Olá! Vim pelo site e gostaria de simular um consórcio.");
+import { WHATSAPP_LINK } from "../lib/constants";
 
 const socialLinks = [
   {
@@ -17,7 +14,7 @@ const socialLinks = [
   {
     name: "WhatsApp",
     icon: FaWhatsapp,
-    href: whatsappLink,
+    href: WHATSAPP_LINK,
   },
 ];
 

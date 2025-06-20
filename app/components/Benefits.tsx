@@ -9,7 +9,11 @@ import {
   FaHandshake,
   FaShieldAlt,
   FaRegLightbulb,
+  FaClock,
+  FaMoneyBillWave,
+  FaCheckDouble,
 } from "react-icons/fa";
+import { WHATSAPP_LINK } from "../lib/constants";
 
 const benefits = [
   {
@@ -17,18 +21,42 @@ const benefits = [
     title: "Taxas reduzidas",
     description: "Sem juros abusivos e com condições especiais para você.",
     color: "from-[var(--primary-1)] to-[var(--primary-4)]",
+    highlight: "Até 70% menos que financiamento",
   },
   {
     icon: FaUserTie,
     title: "Acompanhamento personalizado",
     description: "Um consultor dedicado para cuidar do seu processo.",
     color: "from-[var(--primary-1)] to-[var(--primary-4)]",
+    highlight: "Consultor exclusivo 24/7",
   },
   {
     icon: FaTrophy,
     title: "Maior chance de contemplação",
     description: "Sistema inteligente que aumenta suas chances.",
     color: "from-[var(--primary-1)] to-[var(--primary-4)]",
+    highlight: "+40% de chances",
+  },
+  {
+    icon: FaMoneyBillWave,
+    title: "Economia garantida",
+    description: "Economize milhares de reais comparado ao financiamento tradicional.",
+    color: "from-[var(--primary-1)] to-[var(--primary-4)]",
+    highlight: "Economia média de R$ 50.000",
+  },
+  {
+    icon: FaClock,
+    title: "Processo simplificado",
+    description: "Documentação reduzida e aprovação em até 48 horas.",
+    color: "from-[var(--primary-1)] to-[var(--primary-4)]",
+    highlight: "Aprovação em 48h",
+  },
+  {
+    icon: FaCheckDouble,
+    title: "Segurança total",
+    description: "Consórcios regulamentados pelo Banco Central do Brasil.",
+    color: "from-[var(--primary-1)] to-[var(--primary-4)]",
+    highlight: "100% regulamentado",
   },
 ];
 
@@ -180,14 +208,44 @@ export default function Benefits() {
                   <h3 className="text-xl font-bold text-[var(--primary-1)] mb-3 group-hover:text-[var(--primary-4)] transition-colors">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed mb-3">
                     {benefit.description}
                   </p>
+                  <div className="bg-gradient-to-r from-green-100 to-blue-100 px-3 py-2 rounded-lg border border-green-200">
+                    <p className="text-sm font-bold text-green-800">
+                      {benefit.highlight}
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
+        
+        {/* CTA adicional */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-16 text-center"
+        >
+          <div className="bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-5)] p-8 rounded-2xl text-white">
+            <h3 className="text-2xl font-bold mb-4">
+              🎯 Quer saber quanto você pode economizar?
+            </h3>
+            <p className="text-lg mb-6 opacity-90">
+              Simule agora e descubra sua economia personalizada em menos de 30 segundos
+            </p>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-[var(--primary-1)] px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg"
+            >
+              SIMULAR AGORA - É GRÁTIS! 🚀
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

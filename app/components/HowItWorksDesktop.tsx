@@ -9,31 +9,57 @@ import {
 import Image from "next/image";
 import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
+import { FaCheckCircle } from "react-icons/fa";
+import { WHATSAPP_LINK } from "../lib/constants";
 
 const steps = [
   {
     icon: ClipboardDocumentCheckIcon,
-    title: "Escolha seu plano",
+    title: "Simule e Escolha",
     description:
-      "Selecione o tipo de consórcio e o valor que melhor se adequa ao seu perfil.",
+      "Use nosso simulador para encontrar o plano perfeito para seu sonho, com parcelas que cabem no seu bolso.",
+    details: [
+      "Simulação online em 1 minuto",
+      "Planos para imóveis, carros e serviços",
+      "Flexibilidade total de crédito e prazo",
+    ],
+    image: "/plan.jpg",
   },
   {
     icon: DocumentTextIcon,
-    title: "Faça sua proposta",
+    title: "Análise e Contrato",
     description:
-      "Preencha o formulário com seus dados e escolha o prazo de pagamento.",
+      "Nossos especialistas analisam seu perfil e enviam o contrato digital para sua assinatura, sem burocracia.",
+    details: [
+      "Análise de crédito simplificada",
+      "Contrato 100% digital e seguro",
+      "Consultor dedicado para te auxiliar",
+    ],
+    image: "/papelada.jpg",
   },
   {
     icon: ClockIcon,
-    title: "Aguarde a contemplação",
+    title: "Participe e Contemple",
     description:
-      "Acompanhe seu processo através do seu email ou com nossos corretores",
+      "Participe das assembleias mensais e aumente suas chances de ser contemplado com lances estratégicos.",
+    details: [
+      "Contemplação por sorteio ou lance",
+      "Orientação para os melhores lances",
+      "Acompanhamento online do seu grupo",
+    ],
+    image: "/time-is-money.jpg",
   },
   {
     icon: SparklesIcon,
-    title: "Realize seu sonho",
+    title: "Realize Seu Sonho",
     description:
-      "Após contemplado, receba seu bem e comece a usufruir imediatamente.",
+      "Com a carta de crédito em mãos, você tem poder de compra à vista para negociar e adquirir seu bem.",
+    details: [
+      "Liberação rápida do crédito",
+      "Poder de negociação à vista",
+      "Suporte total na aquisição do bem",
+    ],
+    image: "/couple.jpg",
   },
 ];
 
@@ -111,9 +137,17 @@ export default function HowItWorksDesktop() {
                     {steps[0].title}
                     <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] rounded-full"></span>
                   </h3>
-                  <p className="text-xl text-gray-600 leading-relaxed text-center md:text-left">
+                  <p className="text-lg text-gray-600 leading-relaxed text-center md:text-left mb-6">
                     {steps[0].description}
                   </p>
+                  <ul className="space-y-3 text-left">
+                    {steps[0].details.map((detail, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -144,9 +178,17 @@ export default function HowItWorksDesktop() {
                     {steps[1].title}
                     <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] rounded-full"></span>
                   </h3>
-                  <p className="text-xl text-gray-600 leading-relaxed text-center md:text-left">
+                  <p className="text-lg text-gray-600 leading-relaxed text-center md:text-left mb-6">
                     {steps[1].description}
                   </p>
+                  <ul className="space-y-3 text-left">
+                    {steps[1].details.map((detail, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -177,9 +219,17 @@ export default function HowItWorksDesktop() {
                     {steps[2].title}
                     <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] rounded-full"></span>
                   </h3>
-                  <p className="text-xl text-gray-600 leading-relaxed text-center md:text-left">
+                  <p className="text-lg text-gray-600 leading-relaxed text-center md:text-left mb-6">
                     {steps[2].description}
                   </p>
+                  <ul className="space-y-3 text-left">
+                    {steps[2].details.map((detail, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -210,9 +260,17 @@ export default function HowItWorksDesktop() {
                     {steps[3].title}
                     <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] rounded-full"></span>
                   </h3>
-                  <p className="text-xl text-gray-600 leading-relaxed text-center md:text-left">
+                  <p className="text-lg text-gray-600 leading-relaxed text-center md:text-left mb-6">
                     {steps[3].description}
                   </p>
+                  <ul className="space-y-3 text-left">
+                    {steps[3].details.map((detail, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -240,7 +298,31 @@ export default function HowItWorksDesktop() {
             ))}
           </div>
         </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-20 text-center"
+        >
+          <div className="bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-5)] p-8 md:p-12 rounded-2xl text-white max-w-8xl mx-auto shadow-2xl">
+            <h3 className="text-3xl font-bold mb-4">
+              Pronto para dar o primeiro passo?
+            </h3>
+            <p className="text-lg mb-8 opacity-90">
+              O caminho para o seu sonho é mais simples do que você imagina.{" "}
+              <br /> Fale com um especialista agora e comece seu planejamento.
+            </p>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-[var(--primary-1)] px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg"
+            >
+              COMEÇAR AGORA 🚀
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
-} 
+}

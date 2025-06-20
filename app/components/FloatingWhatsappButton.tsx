@@ -1,27 +1,24 @@
 "use client";
 
 import { FaWhatsapp } from "react-icons/fa";
-
-const whatsappLink =
-  "https://wa.me/554130761050?text=" +
-  encodeURIComponent("Olá! Vim pelo site e gostaria de simular um consórcio.");
+import { WHATSAPP_LINK } from "../lib/constants";
 
 export default function FloatingWhatsappButton() {
   const handleClick = () => {
     // @ts-expect-error - gtag_report_conversion is defined globally
     if (typeof window.gtag_report_conversion === "function") {
       // @ts-expect-error - gtag_report_conversion is defined globally
-      window.gtag_report_conversion(whatsappLink);
+      window.gtag_report_conversion(WHATSAPP_LINK);
     }
   };
 
   return (
     <a
-      href={whatsappLink}
+      href={WHATSAPP_LINK}
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className="fixed right-4 bottom-0 -translate-y-1/2 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-16 h-16 transition-all duration-300 group
+      className="fixed right-1 bottom-0 -translate-y-1/2 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center w-16 h-16 transition-all duration-300 group
       md:right-4 md:bottom-0 md:-translate-y-1/2
       sm:right-2 sm:top-auto sm:bottom-4 sm:translate-y-0"
       aria-label="Fale pelo WhatsApp"

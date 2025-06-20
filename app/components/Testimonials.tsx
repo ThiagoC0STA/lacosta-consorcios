@@ -9,70 +9,89 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useRef } from "react";
-import { FaRegLightbulb, FaTrophy, FaHandshake, FaShieldAlt } from "react-icons/fa";
+import { FaRegLightbulb, FaTrophy, FaHandshake, FaShieldAlt, FaCheckCircle, FaMoneyBillWave } from "react-icons/fa";
+import { WHATSAPP_LINK } from "../lib/constants";
 
 const testimonials = [
   {
     name: "Maria Silva",
     role: "Proprietária de Apartamento",
     content:
-      "Comprei meu primeiro apartamento através do consórcio. O processo foi muito tranquilo e a equipe me ajudou em cada etapa.",
+      "Comprei meu primeiro apartamento através do consórcio. O processo foi muito tranquilo e a equipe me ajudou em cada etapa. Economizei R$ 45.000 comparado ao financiamento!",
     rating: 5,
+    savings: "R$ 45.000",
+    time: "8 meses",
   },
   {
     name: "João Santos",
     role: "Proprietário de Carro",
     content:
-      "Realizei o sonho de ter meu carro zero. As taxas são justas e o atendimento é excelente.",
+      "Realizei o sonho de ter meu carro zero. As taxas são justas e o atendimento é excelente. Fui contemplado em apenas 6 meses!",
     rating: 5,
+    savings: "R$ 28.000",
+    time: "6 meses",
   },
   {
     name: "Ana Oliveira",
     role: "Empresária",
     content:
-      "Investi em meu negócio com tranquilidade. O consórcio me deu a segurança que eu precisava para crescer.",
+      "Investi em meu negócio com tranquilidade. O consórcio me deu a segurança que eu precisava para crescer. Economia de R$ 60.000!",
     rating: 5,
+    savings: "R$ 60.000",
+    time: "12 meses",
   },
   {
     name: "Carlos Pereira",
     role: "Investidor",
     content:
-      "A flexibilidade do consórcio me surpreendeu. Recomendo para quem quer investir com segurança.",
+      "A flexibilidade do consórcio me surpreendeu. Recomendo para quem quer investir com segurança. Economia significativa!",
     rating: 5,
+    savings: "R$ 35.000",
+    time: "10 meses",
   },
   {
     name: "Fernanda Souza",
     role: "Médica",
     content:
-      "Fui muito bem atendida e consegui comprar meu consultório sem burocracia.",
+      "Fui muito bem atendida e consegui comprar meu consultório sem burocracia. Processo muito mais simples que no banco!",
     rating: 5,
+    savings: "R$ 75.000",
+    time: "15 meses",
   },
   {
     name: "Ricardo Lima",
     role: "Empreendedor",
     content:
-      "O consórcio foi essencial para expandir minha empresa. Atendimento nota 10!",
+      "O consórcio foi essencial para expandir minha empresa. Atendimento nota 10! Economia de R$ 50.000 no processo.",
     rating: 5,
+    savings: "R$ 50.000",
+    time: "9 meses",
   },
   {
     name: "Patrícia Gomes",
     role: "Arquiteta",
     content:
-      "Consegui financiar meu escritório com taxas muito melhores que no banco.",
+      "Consegui financiar meu escritório com taxas muito melhores que no banco. Economia de R$ 40.000 e processo muito mais rápido!",
     rating: 5,
+    savings: "R$ 40.000",
+    time: "7 meses",
   },
   {
     name: "Eduardo Alves",
     role: "Professor",
     content:
-      "A equipe foi muito transparente e me ajudou a entender todo o processo.",
+      "A equipe foi muito transparente e me ajudou a entender todo o processo. Comprei minha casa com economia de R$ 55.000!",
     rating: 5,
+    savings: "R$ 55.000",
+    time: "11 meses",
   },
   {
     name: "Juliana Costa",
     role: "Designer",
-    content: "O consórcio me permitiu conquistar meu carro novo sem apertos.",
+    content: "O consórcio me permitiu conquistar meu carro novo sem apertos. Economia de R$ 25.000 e contemplação rápida!",
     rating: 5,
+    savings: "R$ 25.000",
+    time: "5 meses",
   },
 ];
 
@@ -134,10 +153,36 @@ export default function Testimonials() {
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             Histórias de sucesso
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 mb-6">
             Veja o que nossos clientes têm a dizer
           </p>
+          
+          {/* Estatísticas de prova social */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+            <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <FaMoneyBillWave className="text-green-600 text-xl" />
+                <span className="text-2xl font-bold text-green-600">R$ 2.5M+</span>
+              </div>
+              <p className="text-sm text-gray-600">Economia total dos clientes</p>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <FaCheckCircle className="text-blue-600 text-xl" />
+                <span className="text-2xl font-bold text-blue-600">5.000+</span>
+              </div>
+              <p className="text-sm text-gray-600">Clientes satisfeitos</p>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <FaTrophy className="text-orange-600 text-xl" />
+                <span className="text-2xl font-bold text-orange-600">8.2</span>
+              </div>
+              <p className="text-sm text-gray-600">Meses média contemplação</p>
+            </div>
+          </div>
         </motion.div>
+        
         <div className="relative">
           {/* Setas customizadas */}
           <SwiperNavButton dir="prev" onClick={() => swiperRef.current?.slidePrev()} />
@@ -161,22 +206,38 @@ export default function Testimonials() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white p-8 rounded-3xl shadow flex flex-col h-full min-h-[370px] border border-gray-100 hover:border-[var(--primary-1)]/40 transition-all group relative"
+                  className="bg-white p-8 rounded-3xl shadow flex flex-col h-full min-h-[420px] border border-gray-100 hover:border-[var(--primary-1)]/40 transition-all group relative"
                 >
                   {/* Aspas estilizadas */}
-                  <span className="absolute left-6 top-6 text-5xl text-[var(--primary-1)]/10 select-none pointer-events-none">“</span>
+                  <span className="absolute left-6 top-6 text-5xl text-[var(--primary-1)]/10 select-none pointer-events-none">&quot;</span>
+                  
                   {/* Avatar com iniciais */}
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary-1)] to-[var(--primary-4)] flex items-center justify-center text-white font-bold text-2xl mb-4 shadow-lg border-4 border-white -mt-6 mx-auto">
                     {getInitials(testimonial.name)}
                   </div>
+                  
                   <div className="flex mb-6 justify-center">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <StarIcon key={i} className="h-6 w-6 text-yellow-400 drop-shadow" />
                     ))}
                   </div>
+                  
                   <p className="text-gray-700 mb-6 italic flex-1 text-lg text-center">
                     {testimonial.content}
                   </p>
+                  
+                  {/* Destaques de economia e tempo */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="bg-green-50 p-3 rounded-lg border border-green-200 text-center">
+                      <p className="text-sm text-green-600 font-semibold">Economia</p>
+                      <p className="text-lg font-bold text-green-800">{testimonial.savings}</p>
+                    </div>
+                    <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 text-center">
+                      <p className="text-sm text-blue-600 font-semibold">Contemplação</p>
+                      <p className="text-lg font-bold text-blue-800">{testimonial.time}</p>
+                    </div>
+                  </div>
+                  
                   <div className="text-center mt-4">
                     <h4 className="font-semibold text-[var(--primary-1)] text-lg">
                       {testimonial.name}
@@ -192,25 +253,48 @@ export default function Testimonials() {
             <div className="swiper-pagination" />
           </div>
         </div>
-        <style jsx global>{`
-          .swiper-pagination {
-            position: static !important;
-          }
-          .swiper-pagination-bullet {
-            width: 14px;
-            height: 14px;
-            background: #e0e7ef;
-            opacity: 1;
-            border-radius: 9999px;
-            margin: 0 4px !important;
-            transition: background 0.2s;
-          }
-          .swiper-pagination-bullet-active {
-            background: linear-gradient(90deg, var(--primary-1), var(--primary-4));
-            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-          }
-        `}</style>
+        
+        {/* CTA adicional */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-16 text-center"
+        >
+          <div className="bg-gradient-to-r from-green-600 to-blue-600 p-8 rounded-2xl text-white">
+            <h3 className="text-2xl font-bold mb-4">
+              🎉 Junte-se aos +5.000 clientes satisfeitos!
+            </h3>
+            <p className="text-lg mb-6 opacity-90">
+              Economia média de R$ 45.000 por cliente. Seja o próximo a conquistar seus sonhos!
+            </p>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-green-600 px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg"
+            >
+              QUERO ECONOMIZAR TAMBÉM! 💰
+            </a>
+          </div>
+        </motion.div>
       </div>
+      <style jsx global>{`
+        .swiper-pagination {
+          position: static !important;
+        }
+        .swiper-pagination-bullet {
+          width: 14px;
+          height: 14px;
+          background: #d1d5db;
+          opacity: 1;
+          margin: 0 4px;
+        }
+        .swiper-pagination-bullet-active {
+          background: var(--primary-1);
+          transform: scale(1.2);
+        }
+      `}</style>
     </section>
   );
 }

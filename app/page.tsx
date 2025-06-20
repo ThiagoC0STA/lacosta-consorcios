@@ -9,6 +9,9 @@ import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import UrgencySection from "./components/UrgencySection";
+import UrgencyPopup from "./components/UrgencyPopup";
+import PartnerLogos from "./components/PartnerLogos";
 
 export default function Home() {
   return (
@@ -17,11 +20,14 @@ export default function Home() {
       <Hero />
 
       <Benefits />
+      <UrgencySection />
       <HowItWorks />
       <Testimonials />
       <FAQ />
       <Contact />
       <Footer />
+      <UrgencyPopup />
+      <PartnerLogos />
     </main>
   );
 }

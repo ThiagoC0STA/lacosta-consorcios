@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import {
+  FaChevronDown,
+  FaClock,
+  FaCheckCircle,
+  FaStar,
+} from "react-icons/fa";
+import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
 
 const conquistas = [
   { label: "Um imóvel", value: "imoveis" },
@@ -33,7 +39,7 @@ export default function HeroCalculator() {
   }. Quero simular por ${
     tipo === "parcela" ? "parcela" : "crédito"
   } no valor de ${r.prefix}${valor.toLocaleString()}${r.sufix}.`;
-  const whatsappLink = `https://wa.me/554130761050?text=${encodeURIComponent(
+  const whatsappLink = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(
     whatsappMsg
   )}`;
 
@@ -47,15 +53,28 @@ export default function HeroCalculator() {
 
   return (
     <>
-      <div className="rounded-xl shadow-xl p-5 sm:p-8 px-4 sm:px-10 flex flex-col gap-5 sm:gap-7 max-w-lg w-full border bg-white/90 backdrop-blur-md">
-        <p
-          className="text-[28px] sm:text-3xl font-extrabold md:text-left text-center"
-          style={{ color: "var(--primary-2)" }}
-        >
-          Simule seu consórcio
-        </p>
+      <div className="rounded-xl shadow-xl p-5 sm:p-8 px-4 sm:px-10 flex flex-col gap-5 sm:gap-7 max-w-lg w-full bg-white/90 backdrop-blur-md relative overflow-hidden">
+        {/* Banner de urgência no topo */}
+        <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 px-4 text-center font-bold text-sm">
+          <div className="flex items-center justify-center gap-2">
+            <span>
+              <span className="animate-bounce">🎁</span> BÔNUS ESPECIAL:
+              Consultoria gratuita + análise personalizada
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <p
+            className="text-[28px] sm:text-3xl font-extrabold md:text-left text-center"
+            style={{ color: "var(--primary-2)" }}
+          >
+            Simule seu consórcio
+          </p>
+        </div>
+
         {/* Seleção de conquista - agora um selectbox estilizado */}
-        <div className="mb-2">
+        <div className="mb-2 -mt-3">
           <label className="block text-xs sm:text-sm text-gray-700 font-semibold mb-2">
             O que você deseja conquistar?
           </label>
@@ -74,6 +93,7 @@ export default function HeroCalculator() {
             <FaChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-[color:var(--primary-1)] pointer-events-none" />
           </div>
         </div>
+
         {/* Escolha entre parcela ou crédito */}
         <div className="flex gap-2 justify-center mb-2">
           <button
@@ -103,6 +123,7 @@ export default function HeroCalculator() {
             Crédito
           </button>
         </div>
+
         {/* Slider único */}
         <div className="mt-2">
           <label
@@ -148,15 +169,55 @@ export default function HeroCalculator() {
             </span>
           </div>
         </div>
+
+        {/* Benefícios rápidos */}
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-xl border border-green-200">
+          <div className="flex items-center gap-2 mb-2">
+            <FaCheckCircle className="text-green-600" />
+            <span className="font-semibold text-green-800 text-sm">
+              O que você ganha:
+            </span>
+          </div>
+          <ul className="text-xs text-gray-700 space-y-1">
+            <li>• ✅ Simulação personalizada em 30 segundos</li>
+            <li>• 💰 Análise de economia vs financiamento</li>
+            <li>• 📊 Comparativo com outras opções</li>
+            <li>• 🎯 Recomendações exclusivas</li>
+          </ul>
+        </div>
+
+        {/* Elemento de urgência */}
+        <div className="bg-red-50 border border-red-200 p-3 rounded-xl">
+          <div className="flex items-center gap-2 text-red-700">
+            <FaClock className="animate-pulse" />
+            <span className="text-sm font-semibold">
+              ⏰ OFERTA LIMITADA: Consultoria gratuita para primeiros 50
+              simulações!
+            </span>
+          </div>
+        </div>
+
         <a
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleSimulationClick}
-          className="rounded-full px-6 sm:px-8 py-3 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white text-center block"
+          className="rounded-full px-6 sm:px-8 py-4 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white text-center block relative overflow-hidden group border-none"
         >
-          Simular agora
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            <FaStar className="animate-pulse" />
+            SIMULAR AGORA - É GRÁTIS!
+            <FaStar className="animate-pulse" />
+          </span>
         </a>
+
+        {/* Garantia */}
+        <div className="text-center">
+          <p className="text-xs text-gray-500">
+            🔒 100% seguro • 📱 Atendimento via WhatsApp • ⚡ Resposta em até 2
+            minutos
+          </p>
+        </div>
       </div>
     </>
   );

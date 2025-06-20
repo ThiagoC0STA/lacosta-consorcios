@@ -7,34 +7,55 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { FaCheckCircle } from "react-icons/fa";
 
 const steps = [
   {
     icon: ClipboardDocumentCheckIcon,
-    title: "Escolha seu plano",
+    title: "Simule e Escolha",
     description:
-      "Selecione o tipo de consórcio e o valor que melhor se adequa ao seu perfil.",
+      "Use nosso simulador para encontrar o plano perfeito para seu sonho.",
+    details: [
+      "Simulação online em 1 minuto",
+      "Planos para imóveis e carros",
+      "Flexibilidade total de crédito",
+    ],
     img: "/plan.jpg",
   },
   {
     icon: DocumentTextIcon,
-    title: "Faça sua proposta",
+    title: "Análise e Contrato",
     description:
-      "Preencha o formulário com seus dados e escolha o prazo de pagamento.",
+      "Nossos especialistas analisam seu perfil e enviam o contrato digital.",
+    details: [
+      "Análise de crédito simplificada",
+      "Contrato 100% digital e seguro",
+      "Consultor dedicado para te auxiliar",
+    ],
     img: "/papelada.jpg",
   },
   {
     icon: ClockIcon,
-    title: "Aguarde a contemplação",
+    title: "Participe e Contemple",
     description:
-      "Acompanhe seu processo através do seu email ou com nossos corretores",
+      "Aumente suas chances de ser contemplado com lances estratégicos.",
+    details: [
+      "Contemplação por sorteio ou lance",
+      "Orientação para os melhores lances",
+      "Acompanhe online seu grupo",
+    ],
     img: "/time-is-money.jpg",
   },
   {
     icon: SparklesIcon,
-    title: "Realize seu sonho",
+    title: "Realize Seu Sonho",
     description:
-      "Após contemplado, receba seu bem e comece a usufruir imediatamente.",
+      "Com a carta de crédito em mãos, você tem poder de compra à vista.",
+    details: [
+      "Liberação rápida do crédito",
+      "Poder de negociação à vista",
+      "Suporte total na aquisição do bem",
+    ],
     img: "/couple.jpg",
   },
 ];
@@ -107,9 +128,19 @@ export default function HowItWorksMobile() {
                         {step.title}
                         <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] rounded-full"></span>
                       </h3>
-                      <p className="text-md text-gray-600 leading-relaxed">
+                      <p className="text-md text-gray-600 leading-relaxed mb-4">
                         {step.description}
                       </p>
+                      <ul className="space-y-2 text-left">
+                        {step.details.map((detail, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+                            <span className="text-sm text-gray-700">
+                              {detail}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>

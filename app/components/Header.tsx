@@ -16,7 +16,7 @@ export default function Header() {
 
   const handleWhatsAppClick = () => {
     // @ts-expect-error - gtag_report_conversion is defined globally
-    if (typeof window.gtag_report_conversion === 'function') {
+    if (typeof window.gtag_report_conversion === "function") {
       // @ts-expect-error - gtag_report_conversion is defined globally
       window.gtag_report_conversion(whatsappLink);
     }
@@ -25,9 +25,19 @@ export default function Header() {
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-lg backdrop-blur-lg">
       <div className="md:mx-18 flex items-center justify-between px-4 md:px-3 py-4">
-        <Link href="/" className="flex items-center gap-3 group select-none">
-          <img src="/logo-5.png" alt="Lacosta Consórcios" className="h-16" />
-        </Link>
+        <div className="flex items-center gap-10">
+          <Link href="/" className="flex items-center gap-3 group select-none">
+            <img src="/logo-5.png" alt="Lacosta Consórcios" className="h-16" />
+          </Link>
+          {/* <Link href="/" className="flex items-center gap-4 group select-none">
+            <img
+              src="/consorcio-servopa0.webp"
+              alt="Consórcio Servopa"
+              className="h-14"
+            />
+          </Link> */}
+        </div>
+
         <nav className="hidden md:flex items-center gap-8 text-base font-medium">
           <Link
             href="#simulacao"

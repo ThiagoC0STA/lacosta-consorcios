@@ -2,9 +2,18 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaStar, FaUsers, FaCheckCircle, FaRocket } from "react-icons/fa";
+import {
+  FaStar,
+  FaUsers,
+  FaCheckCircle,
+  FaRocket,
+  FaClock,
+  FaFire,
+  FaExclamationTriangle,
+} from "react-icons/fa";
 import HeroCalculator from "./HeroCalculator";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const destaqueCards = [
   {
@@ -42,8 +51,36 @@ export default function Hero() {
     threshold: 0.1,
   });
 
+  const [simulationCount, setSimulationCount] = useState(0);
+  const [targetCount, setTargetCount] = useState(0);
+
+  useEffect(() => {
+    // Gera um número aleatório entre 34 e 48
+    const randomTarget = Math.floor(Math.random() * 15) + 34; // (48 - 34 + 1) = 15
+    setTargetCount(randomTarget);
+  }, []);
+
+  useEffect(() => {
+    if (inView && targetCount > 0) {
+      const interval = setInterval(() => {
+        setSimulationCount((prev) => {
+          if (prev < targetCount) {
+            return prev + 1;
+          }
+          clearInterval(interval);
+          return targetCount;
+        });
+      }, 40); // Velocidade da animação
+
+      return () => clearInterval(interval);
+    }
+  }, [inView, targetCount]);
+
   return (
-    <section id="#simulacao" className="relative md:min-h-screen flex items-center justify-center bg-white pt-24 md:pt-0 pb-24 md:pb-0 mb-[320px] md:mb-0">
+    <section
+      id="#simulacao"
+      className="relative md:min-h-screen flex items-center justify-center bg-white pt-24 md:pt-0 pb-24 md:pb-0 mb-[320px] md:mb-0"
+    >
       {/* Imagem de fundo inspiradora */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -55,6 +92,24 @@ export default function Hero() {
         />
         <div className="absolute inset-0 bg-black/20" />
       </div>
+
+      {/* Banner de urgência no topo */}
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="absolute top-0 left-0 right-0 z-30 bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 px-4 text-center font-semibold text-sm md:text-base"
+      >
+        <div className="flex items-center justify-center gap-2">
+          <FaFire className="animate-pulse" />
+          <span>
+            🔥 OFERTA ESPECIAL: Consultoria gratuita + análise personalizada!
+            Vagas limitadas
+          </span>
+          <FaExclamationTriangle className="animate-bounce" />
+        </div>
+      </motion.div>
+
       {/* Conteúdo */}
       <div className="relative z-20 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 items-center px-4 md:pl-24 py-8 md:pt-32">
         {/* Coluna esquerda: texto, destaques, benefícios */}
@@ -98,7 +153,26 @@ export default function Hero() {
               <span style={{ fontWeight: 700 }}>segurança e </span>{" "}
               <span style={{ fontWeight: 700 }}> sem juros abusivos</span>
             </p>
+
+            {/* Elemento de urgência */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="mt-6 p-4 bg-red-600/90 backdrop-blur-sm rounded-xl border-2 border-red-400/50 max-w-md mx-auto lg:mx-0"
+            >
+              <div className="flex items-center gap-3 text-white">
+                <FaClock className="text-2xl animate-pulse" />
+                <div>
+                  <p className="font-bold text-lg">⏰ OFERTA LIMITADA!</p>
+                  <p className="text-sm opacity-90">
+                    Consultoria gratuita para primeiros 50 simulações
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
+
           {/* Destaques rápidos em cards responsivos e sempre em linha */}
           <div className="flex gap-2 md:gap-4 w-full mt-0 justify-center md:justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-red-200 scrollbar-track-transparent pb-2">
             {destaqueCards.map((card, idx) => (
@@ -116,9 +190,43 @@ export default function Hero() {
               </div>
             ))}
           </div>
+
+          {/* Prova social adicional */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className="bg-white/90 backdrop-blur-sm rounded-xl p-4 max-w-md mx-auto lg:mx-0"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold">
+                  M
+                </div>
+                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-blue-600 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold">
+                  J
+                </div>
+                <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-pink-600 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold">
+                  A
+                </div>
+              </div>
+              <div className="text-gray-800">
+                <p className="font-semibold text-sm">
+                  +
+                  <span className="text-green-600 font-bold">
+                    {simulationCount}
+                  </span>{" "}
+                  pessoas simularam hoje
+                </p>
+                <p className="text-xs text-gray-600">
+                  Seja o próximo a conquistar!
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
-        <div className="flex justify-center items-center w-full  mt-4 md:mt-0 absolute md:relative bottom-0 top-[680px] md:top-[0] z-50 md:px-0 px-4">
+        <div className="flex justify-center items-center w-full mt-10 md:mt-0 absolute md:relative bottom-0 top-[680px] md:top-[0] z-50 md:px-0 px-4">
           <HeroCalculator />
         </div>
       </div>
