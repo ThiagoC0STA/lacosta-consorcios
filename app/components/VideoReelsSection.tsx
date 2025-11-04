@@ -33,6 +33,16 @@ const videoShorts = [
     url: "https://www.youtube.com/shorts/gfOn6u1I4xs",
     embedUrl: "https://www.youtube.com/embed/gfOn6u1I4xs",
   },
+  {
+    id: "vyZxbxuUZ5g",
+    url: "https://www.youtube.com/shorts/vyZxbxuUZ5g",
+    embedUrl: "https://www.youtube.com/embed/vyZxbxuUZ5g",
+  },
+  {
+    id: "1UMiK9nZxfI",
+    url: "https://www.youtube.com/shorts/1UMiK9nZxfI",
+    embedUrl: "https://www.youtube.com/embed/1UMiK9nZxfI",
+  },
 ];
 
 const benefits = [
@@ -94,7 +104,7 @@ export default function VideoReelsSection() {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden mt-[480px] md:mt-0">
+    <section className="relative py-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
