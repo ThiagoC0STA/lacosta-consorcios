@@ -10,6 +10,8 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { WHATSAPP_LINK } from "../lib/constants";
+import Container from "./Container";
+import { useState, useEffect } from "react";
 
 export default function UrgencySection() {
   const [ref, inView] = useInView({
@@ -17,8 +19,42 @@ export default function UrgencySection() {
     threshold: 0.1,
   });
 
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 23,
+    minutes: 45,
+    seconds: 12,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        let { hours, minutes, seconds } = prev;
+
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          minutes--;
+          seconds = 59;
+        } else if (hours > 0) {
+          hours--;
+          minutes = 59;
+          seconds = 59;
+        } else {
+          // Reset quando chega a zero
+          hours = 23;
+          minutes = 59;
+          seconds = 59;
+        }
+
+        return { hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="py-16 bg-gradient-to-r from-red-600 via-orange-600 to-red-700 relative overflow-hidden">
+    <section className="py-16 bg-gradient-to-r from-red-900 via-red-800 to-red-900 relative overflow-hidden">
       {/* Elementos decorativos */}
       <div className="absolute inset-0">
         <motion.div
@@ -47,7 +83,7 @@ export default function UrgencySection() {
         />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <Container className="relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -85,29 +121,29 @@ export default function UrgencySection() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mb-12"
           >
-            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-3xl max-w-md mx-auto">
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-3xl max-w-md mx-auto border border-white/10">
               <p className="text-lg font-semibold mb-4">⏰ Oferta por tempo limitado:</p>
               <div className="grid grid-cols-4 gap-4">
                 <div className="text-center">
-                  <div className="bg-white/30 rounded-lg p-3">
-                    <div className="text-2xl font-bold">23</div>
+                  <div className="bg-white/30 rounded-lg p-3 border border-white/20">
+                    <div className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</div>
                     <div className="text-sm">Horas</div>
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="bg-white/30 rounded-lg p-3">
-                    <div className="text-2xl font-bold">45</div>
+                  <div className="bg-white/30 rounded-lg p-3 border border-white/20">
+                    <div className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</div>
                     <div className="text-sm">Minutos</div>
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="bg-white/30 rounded-lg p-3">
-                    <div className="text-2xl font-bold">12</div>
+                  <div className="bg-white/30 rounded-lg p-3 border border-white/20">
+                    <div className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</div>
                     <div className="text-sm">Segundos</div>
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="bg-white/30 rounded-lg p-3">
+                  <div className="bg-white/30 rounded-lg p-3 border border-white/20">
                     <div className="text-2xl font-bold">Hoje</div>
                     <div className="text-sm text-nowrap">Último dia</div>
                   </div>
@@ -123,9 +159,9 @@ export default function UrgencySection() {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto"
           >
-            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl">
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all">
               <div className="flex items-center gap-2 mb-3">
-                <FaGift className="text-3xl text-yellow-300" />
+                <FaGift className="text-3xl text-yellow-400" />
                 <h3 className="text-xl font-bold">Consultoria Gratuita</h3>
               </div>
               <p className="text-white/90">
@@ -133,9 +169,9 @@ export default function UrgencySection() {
               </p>
             </div>
 
-            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl">
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all">
               <div className="flex items-center gap-2 mb-3">
-                <FaUsers className="text-3xl text-yellow-300" />
+                <FaUsers className="text-3xl text-yellow-400" />
                 <h3 className="text-xl font-bold">Especialistas Dedicados</h3>
               </div>
               <p className="text-white/90">
@@ -143,9 +179,9 @@ export default function UrgencySection() {
               </p>
             </div>
 
-            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl">
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all">
               <div className="flex items-center gap-2 mb-3">
-                <FaCheckCircle className="text-3xl text-yellow-300" />
+                <FaCheckCircle className="text-3xl text-yellow-400" />
                 <h3 className="text-xl font-bold">Garantia Total</h3>
               </div>
               <p className="text-white/90">
@@ -161,7 +197,7 @@ export default function UrgencySection() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="space-y-6"
           >
-            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl max-w-5xl mx-auto">
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl max-w-5xl mx-auto border border-white/10 hover:border-white/20 transition-all">
               <h3 className="text-2xl font-bold mb-4">
                 🚀 QUERO MINHA CONSULTORIA GRATUITA!
               </h3>
@@ -170,7 +206,7 @@ export default function UrgencySection() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-yellow-400 text-red-700 px-8 py-4 rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-lg hover:bg-yellow-300"
+                className="inline-block bg-white text-red-900 px-8 py-4 rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-lg hover:bg-gray-50 hover:shadow-xl"
               >
                 SIMULAR AGORA - É GRÁTIS! 🎯
               </a>
@@ -181,7 +217,7 @@ export default function UrgencySection() {
             </p>
           </motion.div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

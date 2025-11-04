@@ -6,6 +6,7 @@ import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import { FaCheckCircle, FaClock, FaMoneyBillWave } from "react-icons/fa";
 import { WHATSAPP_LINK } from "../lib/constants";
+import Container from "./Container";
 
 const faqs = [
   {
@@ -88,7 +89,7 @@ export default function FAQ() {
 
   return (
     <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+      <Container>
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -188,7 +189,7 @@ export default function FAQ() {
             </a>
           </div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

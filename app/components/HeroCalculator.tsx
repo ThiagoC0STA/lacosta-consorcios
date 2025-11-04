@@ -1,13 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import {
-  FaChevronDown,
-  FaClock,
-  FaCheckCircle,
-  FaStar,
-} from "react-icons/fa";
+import { FaChevronDown, FaStar } from "react-icons/fa";
 import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
+import Image from "next/image";
 
 const conquistas = [
   { label: "Um imóvel", value: "imoveis" },
@@ -170,33 +166,6 @@ export default function HeroCalculator() {
           </div>
         </div>
 
-        {/* Benefícios rápidos */}
-        <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-xl border border-green-200">
-          <div className="flex items-center gap-2 mb-2">
-            <FaCheckCircle className="text-green-600" />
-            <span className="font-semibold text-green-800 text-sm">
-              O que você ganha:
-            </span>
-          </div>
-          <ul className="text-xs text-gray-700 space-y-1">
-            <li>• ✅ Simulação personalizada em 30 segundos</li>
-            <li>• 💰 Análise de economia vs financiamento</li>
-            <li>• 📊 Comparativo com outras opções</li>
-            <li>• 🎯 Recomendações exclusivas</li>
-          </ul>
-        </div>
-
-        {/* Elemento de urgência */}
-        <div className="bg-red-50 border border-red-200 p-3 rounded-xl">
-          <div className="flex items-center gap-2 text-red-700">
-            <FaClock className="animate-pulse" />
-            <span className="text-sm font-semibold">
-              ⏰ OFERTA LIMITADA: Consultoria gratuita para primeiros 50
-              simulações!
-            </span>
-          </div>
-        </div>
-
         <a
           href={whatsappLink}
           target="_blank"
@@ -211,11 +180,37 @@ export default function HeroCalculator() {
           </span>
         </a>
 
+        {/* Logos Parceiros */}
+        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 shadow-sm">
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex-1 flex justify-center">
+              <Image
+                src="/consorcio-servopa0.png"
+                alt="Servopa Consórcios"
+                width={100}
+                height={40}
+                quality={100}
+                className="h-8 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </div>
+            <div className="w-px h-6 bg-gray-300" />
+            <div className="flex-1 flex justify-center">
+              <Image
+                src="/rodobens.jpg"
+                alt="Rodobens"
+                width={110}
+                height={45}
+                quality={100}
+                className="h-8 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Garantia */}
         <div className="text-center">
           <p className="text-xs text-gray-500">
-            🔒 100% seguro • 📱 Atendimento via WhatsApp • ⚡ Resposta em até 2
-            minutos
+            🔒 100% seguro • 📱 Atendimento via WhatsApp
           </p>
         </div>
       </div>

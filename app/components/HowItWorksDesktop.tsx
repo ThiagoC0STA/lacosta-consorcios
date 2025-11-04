@@ -11,6 +11,7 @@ import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 import { WHATSAPP_LINK } from "../lib/constants";
+import Container from "./Container";
 
 const steps = [
   {
@@ -86,7 +87,7 @@ export default function HowItWorksDesktop() {
       id="como-funciona"
       ref={sectionRef}
     >
-      <div className="container mx-auto px-4">
+      <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
@@ -322,7 +323,7 @@ export default function HowItWorksDesktop() {
             </a>
           </div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -14,6 +14,7 @@ import {
 import HeroCalculator from "./HeroCalculator";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import Container from "./Container";
 
 const destaqueCards = [
   {
@@ -111,14 +112,15 @@ export default function Hero() {
       </motion.div>
 
       {/* Conteúdo */}
-      <div className="relative z-20 w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 items-center px-4 md:pl-24 py-8 md:pt-32">
+      <Container className="relative z-20 w-full" padding={false}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center px-4 py-8 md:pt-32">
         {/* Coluna esquerda: texto, destaques, benefícios */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, x: -60 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
-          className="flex flex-col justify-start h-full gap-8 md:gap-12 text-center lg:text-left md:pt-5"
+          className="flex flex-col justify-start h-full gap-8 text-center lg:text-left md:pt-5"
         >
           <div>
             <motion.div
@@ -226,10 +228,11 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        <div className="flex justify-center items-center w-full mt-10 md:mt-0 absolute md:relative bottom-0 top-[680px] md:top-[0] z-50 md:px-0 px-4">
+        <div className="flex justify-center md:justify-end items-center w-full md:mt-0 absolute md:relative bottom-0 top-[900px] md:top-[0] z-50 md:px-0 px-4">
           <HeroCalculator />
         </div>
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }

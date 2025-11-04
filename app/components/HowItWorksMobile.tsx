@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { FaCheckCircle } from "react-icons/fa";
+import Container from "./Container";
 
 const steps = [
   {
@@ -78,7 +79,8 @@ export default function HowItWorksMobile() {
       className="py-4 bg-white relative overflow-hidden min-h-[650px]"
       id="como-funciona-mobile"
     >
-      <div className="container mx-auto px-2">
+      <Container padding={false}>
+        <div className="px-2">
         {/* Linha de progresso por trás dos cards+ícones */}
         <div className="relative mb-4" style={{ height: 110 }}>
           {/* Linha de fundo */}
@@ -148,7 +150,8 @@ export default function HowItWorksMobile() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }

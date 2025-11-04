@@ -11,13 +11,16 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import UrgencySection from "./components/UrgencySection";
 import UrgencyPopup from "./components/UrgencyPopup";
-import PartnerLogos from "./components/PartnerLogos";
+import PartnersSection from "./components/PartnersSection";
+import VideoReelsSection from "./components/VideoReelsSection";
 
 export default function Home() {
   return (
     <main className="relative">
       <Toaster position="top-right" />
       <Hero />
+      <VideoReelsSection />
+      <PartnersSection />
 
       <Benefits />
       <UrgencySection />
@@ -27,7 +30,6 @@ export default function Home() {
       <Contact />
       <Footer />
       <UrgencyPopup />
-      <PartnerLogos />
     </main>
   );
 }

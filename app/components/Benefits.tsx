@@ -14,6 +14,7 @@ import {
   FaCheckDouble,
 } from "react-icons/fa";
 import { WHATSAPP_LINK } from "../lib/constants";
+import Container from "./Container";
 
 const benefits = [
   {
@@ -143,7 +144,7 @@ export default function Benefits() {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative">
+      <Container className="relative">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -246,7 +247,7 @@ export default function Benefits() {
             </a>
           </div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

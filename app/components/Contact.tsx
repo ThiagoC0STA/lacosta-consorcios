@@ -10,6 +10,7 @@ import {
   FaStar,
   FaUsers,
 } from "react-icons/fa";
+import Container from "./Container";
 
 export default function Contact() {
   const [ref, inView] = useInView({
@@ -33,7 +34,7 @@ export default function Contact() {
         <div className="absolute inset-0 bg-black/30" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <Container className="relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -135,7 +136,7 @@ export default function Contact() {
             </div>
           </div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

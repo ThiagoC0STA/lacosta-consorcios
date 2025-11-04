@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { WHATSAPP_LINK } from "../lib/constants";
+import Container from "./Container";
 
 const socialLinks = [
   {
@@ -64,7 +65,7 @@ export default function Footer() {
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[var(--primary-1)]/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[var(--primary-4)]/10 rounded-full blur-3xl" />
       </div>
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <Container className="py-16 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -128,7 +129,7 @@ export default function Footer() {
             Todos os direitos reservados.
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 import { useRef } from "react";
 import { FaRegLightbulb, FaTrophy, FaHandshake, FaShieldAlt, FaCheckCircle, FaMoneyBillWave } from "react-icons/fa";
 import { WHATSAPP_LINK } from "../lib/constants";
+import Container from "./Container";
 
 const testimonials = [
   {
@@ -142,7 +143,7 @@ export default function Testimonials() {
         <FaRegLightbulb className="absolute top-1/3 right-24 text-[var(--primary-4)]/10" size={80} />
         <StarIcon className="absolute bottom-1/4 left-1/4 text-[var(--primary-1)]/10" style={{width: 60, height: 60}} />
       </div>
-      <div className="container mx-auto px-4 relative z-10">
+      <Container className="relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -278,7 +279,7 @@ export default function Testimonials() {
             </a>
           </div>
         </motion.div>
-      </div>
+      </Container>
       <style jsx global>{`
         .swiper-pagination {
           position: static !important;
