@@ -10,7 +10,7 @@ import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import UrgencySection from "./components/UrgencySection";
-import UrgencyPopup from "./components/UrgencyPopup";
+// import UrgencyPopup from "./components/UrgencyPopup";
 import PartnersSection from "./components/PartnersSection";
 import VideoReelsSection from "./components/VideoReelsSection";
 
@@ -29,7 +29,7 @@ export default function Home() {
       <FAQ />
       <Contact />
       <Footer />
-      <UrgencyPopup />
+      {/* <UrgencyPopup /> */}
     </main>
   );
 }
