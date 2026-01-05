@@ -39,11 +39,16 @@ export default function HeroCalculator() {
     whatsappMsg
   )}`;
 
-  const handleSimulationClick = () => {
+  const handleSimulationClick = (e?: React.MouseEvent<HTMLAnchorElement>) => {
+    if (e) {
+      e.preventDefault();
+    }
     // @ts-expect-error - gtag_report_conversion is defined globally
-    if (typeof window.gtag_report_conversion === "function") {
+    if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
       // @ts-expect-error - gtag_report_conversion is defined globally
       window.gtag_report_conversion(whatsappLink);
+    } else {
+      window.open(whatsappLink, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -170,7 +175,7 @@ export default function HeroCalculator() {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={handleSimulationClick}
+          onClick={(e) => handleSimulationClick(e)}
           className="rounded-full px-6 sm:px-8 py-4 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white text-center block relative overflow-hidden group border-none"
         >
           <span className="relative z-10 flex items-center justify-center gap-2">

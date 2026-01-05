@@ -9,7 +9,7 @@ import {
   FaUsers,
   FaCheckCircle,
 } from "react-icons/fa";
-import { WHATSAPP_LINK } from "../lib/constants";
+import { WHATSAPP_LINK, handleWhatsAppClick } from "../lib/constants";
 import Container from "./Container";
 import { useState, useEffect } from "react";
 
@@ -206,6 +206,7 @@ export default function UrgencySection() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => handleWhatsAppClick(WHATSAPP_LINK, e)}
                 className="inline-block bg-white text-red-900 px-8 py-4 rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-lg hover:bg-gray-50 hover:shadow-xl"
               >
                 SIMULAR AGORA - É GRÁTIS! 🎯

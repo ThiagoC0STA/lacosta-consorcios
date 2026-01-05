@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { WHATSAPP_LINK } from "../lib/constants";
+import { WHATSAPP_LINK, handleWhatsAppClick } from "../lib/constants";
 import Container from "./Container";
 
 const socialLinks = [
@@ -26,13 +26,9 @@ const navLinks = [
 ];
 
 function SocialLink({ href, icon: Icon, name }: { href: string; icon: any; name: string }) {
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (name === "WhatsApp") {
-      // @ts-expect-error - gtag_report_conversion is defined globally
-      if (typeof window.gtag_report_conversion === "function") {
-        // @ts-expect-error - gtag_report_conversion is defined globally
-        window.gtag_report_conversion(href);
-      }
+      handleWhatsAppClick(href, e);
     }
   };
 

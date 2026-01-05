@@ -14,11 +14,16 @@ export default function Header() {
       "Olá! Vim pelo site e gostaria de simular um consórcio."
     );
 
-  const handleWhatsAppClick = () => {
+  const handleWhatsAppClick = (e?: React.MouseEvent<HTMLAnchorElement>) => {
+    if (e) {
+      e.preventDefault();
+    }
     // @ts-expect-error - gtag_report_conversion is defined globally
-    if (typeof window.gtag_report_conversion === "function") {
+    if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
       // @ts-expect-error - gtag_report_conversion is defined globally
       window.gtag_report_conversion(whatsappLink);
+    } else {
+      window.open(whatsappLink, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -62,7 +67,7 @@ export default function Header() {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={handleWhatsAppClick}
+          onClick={(e) => handleWhatsAppClick(e)}
           className="hidden md:inline-flex items-center gap-2 ml-6 bg-white hover:bg-[var(--primary-8)] text-[var(--primary-1)] px-6 py-2.5 rounded-lg font-bold shadow-lg transition-all duration-300 text-base tracking-tight border-2 border-[var(--primary-6)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-5)]/40"
         >
           <FaWhatsapp className="text-2xl text-[var(--primary-4)]" />
@@ -122,8 +127,8 @@ export default function Header() {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => {
-              handleWhatsAppClick();
+            onClick={(e) => {
+              handleWhatsAppClick(e);
               setOpen(false);
             }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-1)] to-[var(--primary-4)] hover:from-[var(--primary-2)] hover:to-[var(--primary-5)] text-white px-6 py-2.5 rounded-lg font-bold shadow-lg transition-all duration-300 text-base mt-2"

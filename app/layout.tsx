@@ -90,10 +90,8 @@ export default function RootLayout({
                 }
               };
               gtag('event', 'conversion', {
-                  'send_to': 'AW-17204502524/iL3iCNbW69waEPy_34tA',
-                  'event_callback': callback,
-                  'value': 1.0,
-                  'currency': 'BRL'
+                  'send_to': 'AW-17657821079/faPyCKumsd0bEJfv8-NB',
+                  'event_callback': callback
               });
               return false;
             }

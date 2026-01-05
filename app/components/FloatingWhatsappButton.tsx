@@ -1,15 +1,11 @@
 "use client";
 
 import { FaWhatsapp } from "react-icons/fa";
-import { WHATSAPP_LINK } from "../lib/constants";
+import { WHATSAPP_LINK, handleWhatsAppClick } from "../lib/constants";
 
 export default function FloatingWhatsappButton() {
-  const handleClick = () => {
-    // @ts-expect-error - gtag_report_conversion is defined globally
-    if (typeof window.gtag_report_conversion === "function") {
-      // @ts-expect-error - gtag_report_conversion is defined globally
-      window.gtag_report_conversion(WHATSAPP_LINK);
-    }
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    handleWhatsAppClick(WHATSAPP_LINK, e);
   };
 
   return (

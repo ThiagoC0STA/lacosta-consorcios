@@ -2,6 +2,7 @@
 
 import Modal from "./Modal";
 import { useState } from "react";
+import { handleWhatsAppClick } from "../lib/constants";
 
 interface SimulacaoModalProps {
   isOpen: boolean;
@@ -118,6 +119,7 @@ export default function SimulacaoModal({
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={(e) => handleWhatsAppClick(whatsappLink, e)}
         className="w-full text-center mt-6 underline font-semibold transition-all block text-[color:var(--primary-1)] hover:text-[color:var(--primary-5)]"
       >
         Converse pelo WhatsApp

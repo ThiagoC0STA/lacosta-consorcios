@@ -10,7 +10,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
-import { WHATSAPP_LINK } from "../lib/constants";
+import { WHATSAPP_LINK, handleWhatsAppClick } from "../lib/constants";
 import Container from "./Container";
 
 const steps = [
@@ -317,6 +317,7 @@ export default function HowItWorksDesktop() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => handleWhatsAppClick(WHATSAPP_LINK, e)}
               className="inline-block bg-white text-[var(--primary-1)] px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg"
             >
               COMEÇAR AGORA 🚀

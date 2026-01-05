@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
+import { WHATSAPP_PHONE_NUMBER, handleWhatsAppClick } from "../lib/constants";
 
 export default function PartnerLogos() {
   const partnerWhatsappMsg =
@@ -16,6 +16,7 @@ export default function PartnerLogos() {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={(e) => handleWhatsAppClick(whatsappLink, e)}
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: 1.2 }}

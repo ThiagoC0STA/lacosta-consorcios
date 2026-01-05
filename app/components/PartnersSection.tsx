@@ -12,7 +12,7 @@ import {
   FaCertificate,
   FaStar,
 } from "react-icons/fa";
-import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
+import { WHATSAPP_PHONE_NUMBER, handleWhatsAppClick } from "../lib/constants";
 import Container from "./Container";
 
 export default function PartnersSection() {
@@ -92,6 +92,12 @@ export default function PartnersSection() {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              const url = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(
+                "Olá! Vim pelo site e tenho interesse em consórcios da Servopa."
+              )}`;
+              handleWhatsAppClick(url, e);
+            }}
             whileHover={{ scale: 1.03, y: -8 }}
             transition={{ duration: 0.3 }}
             className="bg-white rounded-3xl shadow-2xl p-10 border-4 border-primary-100 hover:border-primary-400 transition-all duration-300 relative overflow-hidden cursor-pointer block"
@@ -137,6 +143,12 @@ export default function PartnersSection() {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              const url = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(
+                "Olá! Vim pelo site e tenho interesse em consórcios da Rodobens."
+              )}`;
+              handleWhatsAppClick(url, e);
+            }}
             whileHover={{ scale: 1.03, y: -8 }}
             transition={{ duration: 0.3 }}
             className="rodobens-card bg-white rounded-3xl shadow-2xl p-10 border-4 transition-all duration-300 relative overflow-hidden cursor-pointer block"
