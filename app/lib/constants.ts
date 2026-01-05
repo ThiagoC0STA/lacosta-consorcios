@@ -11,15 +11,26 @@ export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${enco
  * Handles WhatsApp link click with Google Ads conversion tracking
  * @param url - The WhatsApp URL to open
  * @param e - Optional event object to prevent default behavior
+ * @param source - Source of the click for tracking purposes
  */
 export const handleWhatsAppClick = (
   url: string,
-  e?: React.MouseEvent<HTMLAnchorElement>
+  e?: React.MouseEvent<HTMLAnchorElement>,
+  source?: string
 ) => {
   if (e) {
     e.preventDefault();
   }
 
+  // Track WhatsApp click in GA4
+  if (source && typeof window !== "undefined") {
+    // Dynamic import to avoid SSR issues
+    import("./analytics").then(({ trackWhatsAppClick }) => {
+      trackWhatsAppClick(source);
+    });
+  }
+
+  // Track conversion in Google Ads
   // @ts-expect-error - gtag_report_conversion is defined globally
   if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
     // @ts-expect-error - gtag_report_conversion is defined globally

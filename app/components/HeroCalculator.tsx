@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FaChevronDown, FaStar } from "react-icons/fa";
 import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
+import { trackCalculatorInteraction } from "../lib/analytics";
 import Image from "next/image";
 
 const conquistas = [
@@ -16,6 +17,7 @@ export default function HeroCalculator() {
   const [conquista, setConquista] = useState("imoveis");
   const [tipo, setTipo] = useState<"parcela" | "credito">("credito");
   const [valor, setValor] = useState(100000);
+  const [clicked, setClicked] = useState(false);
 
   const ranges = {
     parcela: { min: 200, max: 10000, step: 50, prefix: "R$ ", sufix: ",00" },
@@ -39,17 +41,43 @@ export default function HeroCalculator() {
     whatsappMsg
   )}`;
 
-  const handleSimulationClick = (e?: React.MouseEvent<HTMLAnchorElement>) => {
-    if (e) {
-      e.preventDefault();
+  const handleSimulationClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Prevent multiple clicks
+    if (clicked) {
+      return;
     }
+    setClicked(true);
+    
+    // Track calculator submission
+    try {
+      trackCalculatorInteraction("submit", {
+        conquista,
+        tipo,
+        valor,
+      });
+    } catch (error) {
+      console.log("Analytics tracking error:", error);
+    }
+    
+    // Track conversion in Google Ads
     // @ts-expect-error - gtag_report_conversion is defined globally
     if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
-      // @ts-expect-error - gtag_report_conversion is defined globally
-      window.gtag_report_conversion(whatsappLink);
-    } else {
-      window.open(whatsappLink, "_blank", "noopener,noreferrer");
+      try {
+        // @ts-expect-error - gtag_report_conversion is defined globally
+        window.gtag_report_conversion(whatsappLink);
+      } catch (error) {
+        console.log("Conversion tracking error:", error);
+      }
     }
+    
+    // Open WhatsApp directly (only once)
+    window.open(whatsappLink, "_blank", "noopener,noreferrer");
+    
+    // Reset after 1 second
+    setTimeout(() => setClicked(false), 1000);
   };
 
   return (
@@ -176,7 +204,7 @@ export default function HeroCalculator() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => handleSimulationClick(e)}
-          className="rounded-full px-6 sm:px-8 py-4 font-bold text-base sm:text-lg shadow-lg transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-2xl text-white text-center block relative overflow-hidden group border-none"
+          className="rounded-full px-6 sm:px-8 py-4 font-extrabold text-base sm:text-lg shadow-2xl transition-all w-full bg-gradient-to-r from-[color:var(--primary-1)] via-[color:var(--primary-4)] to-[color:var(--primary-5)] hover:scale-105 hover:shadow-glow text-white text-center block relative overflow-hidden group border-none"
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             <FaStar className="animate-pulse" />

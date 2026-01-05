@@ -4,11 +4,16 @@ import "./globals.css";
 import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/next";
 import FloatingWhatsappButton from "./components/FloatingWhatsappButton";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import ScrollTracker from "./components/ScrollTracker";
 import Script from "next/script";
+import { Suspense } from "react";
+import { GA4_MEASUREMENT_ID } from "./lib/analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://lacostaconsorcios.com.br"),
   title: "Lacosta Consórcios - Realize seus sonhos com segurança e confiança",
   description:
     "Consórcios seguros e confiáveis para realizar seus sonhos. Imóveis, veículos e muito mais com as melhores condições do mercado. Simule agora e transforme seus planos em realidade!",
@@ -69,11 +74,12 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         <link rel="icon" href="/lacosta-logo.png" />
+        {/* Google Ads */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-17657821079"
           strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-ads" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -81,17 +87,26 @@ export default function RootLayout({
             gtag('config', 'AW-17657821079');
           `}
         </Script>
+        {/* Google Analytics 4 */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA4_MEASUREMENT_ID}');
+          `}
+        </Script>
         <Script id="whatsapp-conversion" strategy="afterInteractive">
           {`
             function gtag_report_conversion(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
-                }
-              };
+              // Only track conversion, don't open anything here
+              // The component will handle opening WhatsApp
               gtag('event', 'conversion', {
-                  'send_to': 'AW-17657821079/faPyCKumsd0bEJfv8-NB',
-                  'event_callback': callback
+                  'send_to': 'AW-17657821079/faPyCKumsd0bEJfv8-NB'
               });
               return false;
             }
@@ -102,6 +117,10 @@ export default function RootLayout({
         <Header />
         {children}
         <FloatingWhatsappButton />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
+        <ScrollTracker />
       </body>
       <Analytics />
     </html>

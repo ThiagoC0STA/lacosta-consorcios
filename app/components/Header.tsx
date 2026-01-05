@@ -8,23 +8,35 @@ import Drawer from "@mui/material/Drawer";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const whatsappLink =
     "https://wa.me/554130761050?text=" +
     encodeURIComponent(
       "Olá! Vim pelo site e gostaria de simular um consórcio."
     );
 
-  const handleWhatsAppClick = (e?: React.MouseEvent<HTMLAnchorElement>) => {
-    if (e) {
-      e.preventDefault();
+  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Prevent multiple clicks
+    if (clicked) {
+      return;
     }
+    setClicked(true);
+    
+    // Track conversion in Google Ads
     // @ts-expect-error - gtag_report_conversion is defined globally
     if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
       // @ts-expect-error - gtag_report_conversion is defined globally
       window.gtag_report_conversion(whatsappLink);
-    } else {
-      window.open(whatsappLink, "_blank", "noopener,noreferrer");
     }
+    
+    // Open WhatsApp directly (only once)
+    window.open(whatsappLink, "_blank", "noopener,noreferrer");
+    
+    // Reset after 1 second
+    setTimeout(() => setClicked(false), 1000);
   };
 
   return (

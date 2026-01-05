@@ -14,6 +14,7 @@ import {
   FaCheckDouble,
 } from "react-icons/fa";
 import { WHATSAPP_LINK, handleWhatsAppClick } from "../lib/constants";
+import { trackButtonClick } from "../lib/analytics";
 import Container from "./Container";
 
 const benefits = [
@@ -241,7 +242,10 @@ export default function Benefits() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => handleWhatsAppClick(WHATSAPP_LINK, e)}
+              onClick={(e) => {
+                trackButtonClick("simular_agora", "benefits_section");
+                handleWhatsAppClick(WHATSAPP_LINK, e, "benefits_section");
+              }}
               className="inline-block bg-white text-[var(--primary-1)] px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg"
             >
               SIMULAR AGORA - É GRÁTIS! 🚀
