@@ -81,7 +81,7 @@ export default function Header() {
                 alt="Rodobens Consórcios"
                 width={140}
                 height={50}
-                className="h-8 md:h-10 w-auto object-contain"
+                className="h-8 md:h-14 w-auto object-contain"
                 quality={100}
               />
             </Link>
@@ -132,7 +132,7 @@ export default function Header() {
       </div>
 
       {/* Second Row - Partner Logos Mobile */}
-      <div className="md:hidden flex items-center justify-center gap-4 px-4 py-2 pb-3 border-t border-gray-200">
+      <div className="md:hidden flex items-center justify-center gap-4 px-4 py-3 pb-3 border-t border-gray-200">
         <Image
           src="/consorcio-servopa0.png"
           alt="Consórcio Servopa"
@@ -147,7 +147,7 @@ export default function Header() {
           alt="Rodobens Consórcios"
           width={110}
           height={45}
-          className="h-10 w-auto object-contain opacity-90"
+          className="h-12 w-auto object-contain opacity-90"
           quality={100}
         />
       </div>
