@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import Drawer from "@mui/material/Drawer";
+import Image from "next/image";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -41,18 +42,50 @@ export default function Header() {
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-lg backdrop-blur-lg">
-      <div className="md:mx-18 flex items-center justify-between px-4 md:px-3 py-4">
-        <div className="flex items-center gap-10">
-          <Link href="/" className="flex items-center gap-3 group select-none">
-            <img src="/logo-5.png" alt="Lacosta Consórcios" className="h-16" />
+      {/* First Row - Logo and Menu */}
+      <div className="md:mx-18 flex items-center justify-between px-4 md:px-3 py-3 md:py-4">
+        <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
+          <Link href="/" className="flex items-center gap-3 group select-none transition-transform hover:scale-105">
+            <img src="/logo-5.png" alt="Lacosta Consórcios" className="h-12 md:h-16" />
           </Link>
-          {/* <Link href="/" className="flex items-center gap-4 group select-none">
-            <img
-              src="/consorcio-servopa0.webp"
-              alt="Consórcio Servopa"
-              className="h-14"
-            />
-          </Link> */}
+          
+          {/* Divider */}
+          <div className="hidden md:block w-px h-10 bg-gray-300" />
+          
+          {/* Partner Logos Desktop */}
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
+            <Link 
+              href="/" 
+              className="flex items-center group select-none transition-opacity hover:opacity-80"
+              title="Consórcio Servopa"
+            >
+              <Image
+                src="/consorcio-servopa0.png"
+                alt="Consórcio Servopa"
+                width={120}
+                height={50}
+                className="h-8 md:h-10 w-auto object-contain"
+                quality={100}
+              />
+            </Link>
+            
+            <div className="w-px h-8 bg-gray-300" />
+            
+            <Link 
+              href="/" 
+              className="flex items-center group select-none transition-opacity hover:opacity-80"
+              title="Rodobens Consórcios"
+            >
+              <Image
+                src="/rodobens.jpg"
+                alt="Rodobens Consórcios"
+                width={140}
+                height={50}
+                className="h-8 md:h-10 w-auto object-contain"
+                quality={100}
+              />
+            </Link>
+          </div>
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -98,6 +131,27 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Second Row - Partner Logos Mobile */}
+      <div className="md:hidden flex items-center justify-center gap-4 px-4 py-2 pb-3 border-t border-gray-200">
+        <Image
+          src="/consorcio-servopa0.png"
+          alt="Consórcio Servopa"
+          width={100}
+          height={40}
+          className="h-10 w-auto object-contain opacity-90"
+          quality={100}
+        />
+        <div className="w-px h-6 bg-gray-300" />
+        <Image
+          src="/rodobens.jpg"
+          alt="Rodobens Consórcios"
+          width={110}
+          height={45}
+          className="h-10 w-auto object-contain opacity-90"
+          quality={100}
+        />
+      </div>
+
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <div className="w-72 flex flex-col items-center gap-4 py-8 px-4">
           <button
@@ -107,6 +161,28 @@ export default function Header() {
           >
             <FiX size={28} className="text-[var(--primary-1)]" />
           </button>
+          
+          {/* Partner Logos Mobile */}
+          <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-200 w-full justify-center">
+            <Image
+              src="/consorcio-servopa0.png"
+              alt="Consórcio Servopa"
+              width={100}
+              height={40}
+              className="h-8 w-auto object-contain"
+              quality={100}
+            />
+            <div className="w-px h-6 bg-gray-300" />
+            <Image
+              src="/rodobens.jpg"
+              alt="Rodobens Consórcios"
+              width={110}
+              height={45}
+              className="h-8 w-auto object-contain"
+              quality={100}
+            />
+          </div>
+          
           <Link
             href="#simulacao"
             className="text-[var(--primary-1)] hover:text-[var(--primary-4)] text-lg font-semibold"
