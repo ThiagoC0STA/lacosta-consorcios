@@ -213,32 +213,7 @@ export default function HeroCalculator() {
           </span>
         </a>
 
-        {/* Logos Parceiros */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 shadow-sm">
-          <div className="flex items-center justify-center gap-3">
-            <div className="flex-1 flex justify-center">
-              <Image
-                src="/consorcio-servopa0.png"
-                alt="Servopa Consórcios"
-                width={100}
-                height={40}
-                quality={100}
-                className="h-8 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-              />
-            </div>
-            <div className="w-px h-6 bg-gray-300" />
-            <div className="flex-1 flex justify-center">
-              <Image
-                src="/rodobens.jpg"
-                alt="Rodobens"
-                width={110}
-                height={45}
-                quality={100}
-                className="h-8 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-              />
-            </div>
-          </div>
-        </div>
+    
 
         {/* Garantia */}
         <div className="text-center">
