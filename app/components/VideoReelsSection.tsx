@@ -104,7 +104,7 @@ export default function VideoReelsSection() {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+    <section className="relative py-12 sm:py-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden scroll-mt-20 md:scroll-mt-0">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />

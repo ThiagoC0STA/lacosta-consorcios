@@ -88,7 +88,7 @@ export default function FAQ() {
   });
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 sm:py-20 bg-white scroll-mt-24 md:scroll-mt-0">
       <Container>
         <motion.div
           ref={ref}

@@ -70,7 +70,7 @@ export default function Benefits() {
 
   return (
     <section
-      className="py-24 bg-gradient-to-b from-white to-[var(--primary-8)] relative z-0 overflow-hidden"
+      className="py-16 sm:py-24 bg-gradient-to-b from-white to-[var(--primary-8)] relative z-0 overflow-hidden scroll-mt-24 md:scroll-mt-0"
       id="vantagens"
     >
       {/* Background decoration */}

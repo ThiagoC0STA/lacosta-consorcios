@@ -82,8 +82,8 @@ export default function Hero() {
 
   return (
     <section
-      id="#simulacao"
-      className="relative min-h-screen flex items-center justify-center bg-white pt-24 md:pt-0 pb-0 "
+      id="simulacao"
+      className="relative min-h-screen flex items-center justify-center bg-white pt-28 sm:pt-32 md:pt-0 pb-0 scroll-mt-24 md:scroll-mt-0"
     >
       {/* Imagem de fundo inspiradora */}
       <div className="absolute inset-0 z-0">
@@ -116,7 +116,7 @@ export default function Hero() {
 
       {/* Conteúdo */}
       <Container className="relative z-20 w-full" padding={false}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-26 items-center px-4 sm:px-6 py-10 md:py-8 md:pt-32 lg:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-26 items-center px-4 sm:px-6 py-6 sm:py-10 md:py-8 md:pt-32 lg:pb-16">
           {/* Coluna esquerda: texto, destaques, benefícios */}
           <motion.div
             ref={ref}
@@ -128,13 +128,13 @@ export default function Hero() {
             <div className="space-y-5">
               <motion.div
                 initial={{ y: 0 }}
-                animate={{ y: [0, -8, 0] }}
+                animate={{ y: [0, 8, 0] }}
                 transition={{
                   duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="inline-block rounded-full bg-white/60 p-0.5 mb-2 shadow-lg ring-2 ring-primary-5/40 backdrop-blur-md"
+                className="inline-block rounded-full bg-white/60 p-0.5 mb-2 shadow-lg ring-2 ring-primary-5/40 backdrop-blur-md mt-4 md:mt-0"
               >
                 <span
                   style={{ color: "var(--primary-4)" }}

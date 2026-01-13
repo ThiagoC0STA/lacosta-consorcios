@@ -54,7 +54,7 @@ export default function UrgencySection() {
   }, []);
 
   return (
-    <section className="py-16 bg-gradient-to-r from-red-900 via-red-800 to-red-900 relative overflow-hidden">
+    <section className="py-12 sm:py-16 bg-gradient-to-r from-red-900 via-red-800 to-red-900 relative overflow-hidden scroll-mt-20 md:scroll-mt-0">
       {/* Elementos decorativos */}
       <div className="absolute inset-0">
         <motion.div

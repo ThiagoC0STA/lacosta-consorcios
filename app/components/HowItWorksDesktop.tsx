@@ -83,7 +83,7 @@ export default function HowItWorksDesktop() {
 
   return (
     <section
-      className="py-24 bg-white relative overflow-hidden"
+      className="py-16 sm:py-24 bg-white relative overflow-hidden scroll-mt-24 md:scroll-mt-0"
       id="como-funciona"
       ref={sectionRef}
     >
