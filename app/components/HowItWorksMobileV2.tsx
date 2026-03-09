@@ -103,7 +103,7 @@ export default function HowItWorksMobileV2() {
             </p>
           </motion.div>
 
-          {/* Progress line - shows current step */}
+          {/* Progress line - uses scaleX (GPU) instead of width to avoid layout thrashing */}
           <div className="flex items-center gap-1 mb-6 px-1">
             {STEPS.map((_, idx) => {
               const threshold = idx / (STEPS.length - 1) - 0.08;
@@ -114,13 +114,13 @@ export default function HowItWorksMobileV2() {
                   className="h-1 flex-1 rounded-full bg-neutral-200 overflow-hidden"
                 >
                   <motion.div
-                    className="h-full rounded-full"
+                    className="h-full w-full rounded-full origin-left"
                     style={{
                       background: "linear-gradient(90deg, #0487D9 0%, #035AA6 100%)",
                     }}
-                    initial={{ width: "0%" }}
-                    animate={{ width: isActive ? "100%" : "0%" }}
-                    transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: isActive ? 1 : 0 }}
+                    transition={{ type: "tween", duration: 0.35, ease: "easeOut" }}
                   />
                 </div>
               );

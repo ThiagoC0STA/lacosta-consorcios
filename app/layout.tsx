@@ -12,7 +12,7 @@ import { Suspense } from "react";
 import { GA4_MEASUREMENT_ID } from "./lib/analytics";
 import { SITE_URL } from "./lib/seo";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

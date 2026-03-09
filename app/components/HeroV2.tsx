@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useReducedMotion } from "../lib/useReducedMotion";
 import { useState, useEffect } from "react";
 import {
   FaAward,
@@ -21,6 +22,7 @@ const TRUST_ITEMS = [
 
 export default function HeroV2() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const reducedMotion = useReducedMotion();
   const [simulationCount, setSimulationCount] = useState(0);
   const [targetCount, setTargetCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,6 +53,7 @@ export default function HeroV2() {
         <Image
           fill
           priority
+          fetchPriority="high"
           src="/hero-6.jpg"
           alt="Professional consorcio advisory"
           className="object-cover opacity-40"
@@ -84,9 +87,9 @@ export default function HeroV2() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center w-full px-4 sm:px-6 pt-5 pb-12 md:pt-10 md:pb-16">
           <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : reducedMotion ? { opacity: 1, y: 0 } : {}}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex flex-col gap-4 text-center lg:text-left"
           >
             {/* Headline */}
@@ -105,9 +108,9 @@ export default function HeroV2() {
 
             {/* Benefit pills - compact */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.1 }}
+              initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
+              animate={inView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : {}}
+              transition={reducedMotion ? { duration: 0 } : { delay: 0.1 }}
               className="flex flex-wrap justify-center lg:justify-start gap-1.5"
             >
               {[
@@ -131,9 +134,9 @@ export default function HeroV2() {
 
             {/* Stats cards + social proof - compact grid */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.15 }}
+              initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+              animate={inView ? { opacity: 1, y: 0 } : reducedMotion ? { opacity: 1, y: 0 } : {}}
+              transition={reducedMotion ? { duration: 0 } : { delay: 0.15 }}
               className="grid grid-cols-3 gap-2 sm:gap-3"
             >
               {TRUST_ITEMS.map((item, idx) => (
@@ -153,9 +156,9 @@ export default function HeroV2() {
 
             {/* Social proof */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.2 }}
+              initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
+              animate={inView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : {}}
+              transition={reducedMotion ? { duration: 0 } : { delay: 0.2 }}
               className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 flex items-center gap-3"
             >
               <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20">
@@ -175,9 +178,9 @@ export default function HeroV2() {
 
             {/* CTA Mobile */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.25 }}
+              initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
+              animate={inView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : {}}
+              transition={reducedMotion ? { duration: 0 } : { delay: 0.25 }}
               className="lg:hidden"
             >
               <button
@@ -191,9 +194,9 @@ export default function HeroV2() {
 
           {/* Calculator */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            initial={reducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+            animate={inView ? { opacity: 1, x: 0 } : reducedMotion ? { opacity: 1, x: 0 } : {}}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.15 }}
             className="hidden lg:flex justify-center lg:justify-end items-center"
           >
             <HeroCalculatorV2 />
@@ -206,13 +209,14 @@ export default function HeroV2() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.2 }}
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={() => setIsModalOpen(false)}
           />
           <motion.div
-            initial={{ y: "100%" }}
+            initial={{ y: reducedMotion ? 0 : "100%" }}
             animate={{ y: 0 }}
-            transition={{ type: "tween", duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={reducedMotion ? { duration: 0 } : { type: "tween", duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative flex max-h-[95vh] w-full max-w-md flex-col rounded-t-2xl bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.1)]"
             onClick={(e) => e.stopPropagation()}
           >

@@ -11,13 +11,14 @@ import Container from "./Container";
 
 import "swiper/css";
 
+/* Defer YouTube iframes until section is in view to avoid i.ytimg.com preconnects on initial load */
 const videoShorts = [
-  { id: "C0qW0ldci2E", embedUrl: "https://www.youtube.com/embed/C0qW0ldci2E" },
-  { id: "6nOewFgXIy4", embedUrl: "https://www.youtube.com/embed/6nOewFgXIy4" },
-  { id: "KO0Hpkn4r94", embedUrl: "https://www.youtube.com/embed/KO0Hpkn4r94" },
-  { id: "gfOn6u1I4xs", embedUrl: "https://www.youtube.com/embed/gfOn6u1I4xs" },
-  { id: "vyZxbxuUZ5g", embedUrl: "https://www.youtube.com/embed/vyZxbxuUZ5g" },
-  { id: "1UMiK9nZxfI", embedUrl: "https://www.youtube.com/embed/1UMiK9nZxfI" },
+  { id: "C0qW0ldci2E", embedUrl: "https://www.youtube-nocookie.com/embed/C0qW0ldci2E" },
+  { id: "6nOewFgXIy4", embedUrl: "https://www.youtube-nocookie.com/embed/6nOewFgXIy4" },
+  { id: "KO0Hpkn4r94", embedUrl: "https://www.youtube-nocookie.com/embed/KO0Hpkn4r94" },
+  { id: "gfOn6u1I4xs", embedUrl: "https://www.youtube-nocookie.com/embed/gfOn6u1I4xs" },
+  { id: "vyZxbxuUZ5g", embedUrl: "https://www.youtube-nocookie.com/embed/vyZxbxuUZ5g" },
+  { id: "1UMiK9nZxfI", embedUrl: "https://www.youtube-nocookie.com/embed/1UMiK9nZxfI" },
 ];
 
 const benefits = [
@@ -40,6 +41,11 @@ const benefits = [
 
 export default function VideoReelsSectionV2() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [reelsRef, reelsInView] = useInView({
+    triggerOnce: true,
+    rootMargin: "150px",
+    threshold: 0,
+  });
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const iframeRefs = useRef<(HTMLIFrameElement | null)[]>([]);
@@ -124,13 +130,21 @@ export default function VideoReelsSectionV2() {
               </div>
             </motion.div>
 
-            {/* Right - Reels */}
+            {/* Right - Reels (deferred until in view to avoid YouTube preconnects) */}
             <motion.div
+              ref={reelsRef}
               initial={{ opacity: 0, x: 50 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative w-full max-w-[460px] mx-auto lg:mx-0 lg:ml-auto"
             >
+              {!reelsInView ? (
+                <div
+                  className="h-[480px] md:h-[560px] lg:h-[620px] rounded-2xl bg-neutral-200 animate-pulse"
+                  aria-hidden="true"
+                />
+              ) : (
+                <>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-4">
                 <button
                   onClick={() => handleNavClick("prev")}
@@ -194,6 +208,8 @@ export default function VideoReelsSectionV2() {
                   />
                 ))}
               </div>
+                </>
+              )}
             </motion.div>
           </div>
         </div>

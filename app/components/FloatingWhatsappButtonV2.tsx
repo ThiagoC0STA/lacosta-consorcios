@@ -35,25 +35,17 @@ export default function FloatingWhatsappButtonV2() {
 
       {/* WhatsApp icon button */}
       <motion.span
-        className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white transition-all duration-200 group-hover:bg-[#20BD5A]"
+        className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white transition-transform duration-200 group-hover:bg-[#20BD5A]"
         style={{
           boxShadow: "0 4px 20px -4px rgba(37, 211, 102, 0.4)",
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        {/* Subtle pulse ring - single, refined */}
-        <motion.span
-          className="absolute inset-0 rounded-full border-2 border-[#25D366]"
-          animate={{
-            scale: [1, 1.4, 1.4],
-            opacity: [0.4, 0, 0],
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeOut",
-          }}
+        {/* Pulse ring - CSS animation (cheaper than Framer on loop) */}
+        <span
+          className="absolute inset-0 rounded-full border-2 border-[#25D366] animate-whatsapp-pulse"
+          aria-hidden="true"
         />
         <FaWhatsapp className="text-2xl sm:text-3xl relative z-10" />
       </motion.span>

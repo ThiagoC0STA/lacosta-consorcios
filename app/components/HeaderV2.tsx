@@ -74,13 +74,13 @@ function getHeaderBgStyle(activeSection: SectionTheme, scrolled: boolean) {
     return {
       background:
         "linear-gradient(135deg, rgba(26, 10, 10, 0.98) 0%, rgba(45, 15, 15, 0.98) 50%, rgba(74, 21, 21, 0.98) 100%)",
-      backdropFilter: "blur(12px)",
+      backdropFilter: "blur(8px)",
     };
   }
   return {
     background:
       "linear-gradient(135deg, rgba(2, 29, 64, 0.98) 0%, rgba(2, 40, 89, 0.98) 100%)",
-    backdropFilter: "blur(12px)",
+    backdropFilter: "blur(8px)",
   };
 }
 
@@ -124,7 +124,7 @@ export default function HeaderV2() {
   const defaultGradient = {
     background:
       "linear-gradient(135deg, rgba(2, 29, 64, 0.98) 0%, rgba(2, 40, 89, 0.98) 100%)",
-    backdropFilter: "blur(12px)",
+    backdropFilter: "blur(8px)",
   };
 
   return (
