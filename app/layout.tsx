@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import HeaderV2 from "./components/HeaderV2";
+import JsonLd from "./components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import FloatingWhatsappButtonV2 from "./components/FloatingWhatsappButtonV2";
 import GoogleAnalytics from "./components/GoogleAnalytics";
@@ -9,19 +10,28 @@ import ScrollTracker from "./components/ScrollTracker";
 import Script from "next/script";
 import { Suspense } from "react";
 import { GA4_MEASUREMENT_ID } from "./lib/analytics";
+import { SITE_URL } from "./lib/seo";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lacostaconsorcios.com.br"),
-  title: "Lacosta Consórcios - Realize seus sonhos com segurança e confiança",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Lacosta Consórcios - Consórcio Curitiba | Servopa e Rodobens",
+    template: "%s | Lacosta Consórcios",
+  },
   description:
-    "Consórcios seguros e confiáveis para realizar seus sonhos. Imóveis, veículos e muito mais com as melhores condições do mercado. Simule agora e transforme seus planos em realidade!",
+    "Consórcio em Curitiba com Servopa e Rodobens. Imóvel, veículo, investimento 100% sem juros. +25 anos de mercado, +5.000 clientes. Simule grátis!",
   keywords:
-    "consórcio, imóveis, veículos, investimento, financiamento, sonhos, segurança, confiança, simulação, consórcio imobiliário, consórcio automotivo, financiamento imobiliário",
-  authors: [{ name: "Lacosta Consórcios" }],
+    "consórcio Curitiba, consórcio Servopa, consórcio Rodobens, consórcio imóvel, consórcio veículo, simular consórcio, consórcio sem juros, consórcio Guabirotuba, corretora consórcio Curitiba, consórcio investimento, financiamento imobiliário sem juros, consórcio imobiliário, consórcio automotivo",
+  authors: [{ name: "Lacosta Consórcios", url: SITE_URL }],
   creator: "Lacosta Consórcios",
   publisher: "Lacosta Consórcios",
+  applicationName: "Lacosta Consórcios",
+  referrer: "origin-when-cross-origin",
+  alternates: {
+    canonical: SITE_URL,
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -30,26 +40,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://lacostaconsorcios.com.br",
-    title: "Lacosta Consórcios - Realize seus sonhos com segurança e confiança",
+    url: SITE_URL,
+    title: "Lacosta Consórcios - Consórcio Curitiba | Servopa e Rodobens",
     description:
-      "Consórcios seguros e confiáveis para realizar seus sonhos. Imóveis, veículos e muito mais com as melhores condições do mercado.",
+      "Consórcio em Curitiba com Servopa e Rodobens. Imóvel, veículo, investimento 100% sem juros. Simule grátis!",
     siteName: "Lacosta Consórcios",
     images: [
       {
-        url: "/og-image.png",
+        url: "/lacosta-card.png",
         width: 1200,
         height: 630,
-        alt: "Lacosta Consórcios",
+        alt: "Lacosta Consórcios - Consórcio Curitiba",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lacosta Consórcios - Realize seus sonhos com segurança e confiança",
+    title: "Lacosta Consórcios - Consórcio Curitiba | Servopa e Rodobens",
     description:
-      "Consórcios seguros e confiáveis para realizar seus sonhos. Imóveis, veículos e muito mais com as melhores condições do mercado.",
-    images: ["/og-image.png"],
+      "Consórcio em Curitiba com Servopa e Rodobens. Imóvel, veículo, investimento 100% sem juros. Simule grátis!",
+    images: ["/lacosta-card.png"],
     creator: "@lacostaconsorcios",
   },
   robots: {
@@ -63,6 +73,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    "geo.region": "BR-PR",
+  },
 };
 
 export default function RootLayout({
@@ -73,7 +86,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/lacosta-logo.png" />
+        <link rel="icon" href="/logo-5.png" type="image/png" sizes="any" />
+        <link rel="apple-touch-icon" href="/logo-5.png" />
+        <meta name="theme-color" content="#021D40" />
+        <JsonLd />
         {/* Google Ads */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-17657821079"
