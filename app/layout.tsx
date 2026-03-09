@@ -138,9 +138,9 @@ export default function RootLayout({
           <GoogleAnalytics />
         </Suspense>
         <ScrollTracker />
+        <Analytics />
+        <SpeedInsights />
       </body>
-      <Analytics />
-      <SpeedInsights />
     </html>
   );
 }
