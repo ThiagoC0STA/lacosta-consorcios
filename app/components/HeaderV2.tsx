@@ -120,15 +120,29 @@ export default function HeaderV2() {
   const showSolidBg =
     scrolled || activeSection !== "hero" || LIGHT_SECTIONS.includes(activeSection);
 
+  const hasGradientBg = Object.keys(bgStyle).length > 0;
+  const defaultGradient = {
+    background:
+      "linear-gradient(135deg, rgba(2, 29, 64, 0.98) 0%, rgba(2, 40, 89, 0.98) 100%)",
+    backdropFilter: "blur(12px)",
+  };
+
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full pt-[env(safe-area-inset-top)] transition-all duration-500 ease-out ${
+      className={`fixed top-0 left-0 z-50 w-full pt-[env(safe-area-inset-top)] transition-[box-shadow] duration-500 ease-out ${
         theme.bg === "transparent" ? "bg-transparent shadow-none" : theme.bg
       }`}
-      style={Object.keys(bgStyle).length > 0 ? bgStyle : undefined}
     >
+      {/* Gradient overlay - always in DOM for smooth opacity transition */}
       <div
-        className={`w-full transition-all duration-500 ${
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out"
+        style={{
+          ...(hasGradientBg ? bgStyle : defaultGradient),
+          opacity: hasGradientBg ? 1 : 0,
+        }}
+      />
+      <div
+        className={`relative z-10 w-full transition-all duration-500 ease-out ${
           theme.bg === "transparent" ? "backdrop-blur-sm" : ""
         }`}
       >
@@ -147,12 +161,12 @@ export default function HeaderV2() {
                 <img
                   src="/logo-5.png"
                   alt="Lacosta Consórcios"
-                  className={`h-10 md:h-12 transition-all duration-500 ${theme.logoFilter || ""}`}
+                  className={`h-10 md:h-12 transition-[filter] duration-500 ease-out ${theme.logoFilter || ""}`}
                 />
               </Link>
               <div className="hidden md:flex md:items-center md:gap-4 lg:gap-6">
                 <div
-                  className={`h-10 w-px transition-colors duration-300 ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "bg-neutral-300" : "bg-white/40"}`}
+                  className={`h-10 w-px transition-colors duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "bg-neutral-300" : "bg-white/40"}`}
                 />
                 <Link
                   href="/"
@@ -164,12 +178,12 @@ export default function HeaderV2() {
                     alt="Consórcio Servopa"
                     width={120}
                     height={50}
-                    className={`h-8 md:h-9 w-auto object-contain ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
+                    className={`h-8 md:h-9 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
                     quality={100}
                   />
                 </Link>
                 <div
-                  className={`h-8 w-px transition-colors duration-300 ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "bg-neutral-300" : "bg-white/40"}`}
+                  className={`h-8 w-px transition-colors duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "bg-neutral-300" : "bg-white/40"}`}
                 />
                 <Link
                   href="/"
@@ -181,7 +195,7 @@ export default function HeaderV2() {
                     alt="Rodobens Consórcios"
                     width={140}
                     height={50}
-                    className={`h-8 md:h-9 w-auto object-contain ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
+                    className={`h-8 md:h-9 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
                     quality={100}
                   />
                 </Link>
@@ -194,7 +208,7 @@ export default function HeaderV2() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`text-base font-semibold transition-colors duration-300 ${theme.navColor}`}
+                    className={`text-base font-semibold transition-colors duration-500 ease-out ${theme.navColor}`}
                   >
                     {link.label}
                   </Link>
@@ -205,7 +219,7 @@ export default function HeaderV2() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={onWhatsAppClick}
-                className={`flex shrink-0 items-center gap-2 rounded-xl px-6 py-2.5 text-base font-bold transition-all duration-300 ${theme.ctaClass}`}
+                className={`flex shrink-0 items-center gap-2 rounded-xl px-6 py-2.5 text-base font-bold transition-colors duration-500 ease-out ${theme.ctaClass}`}
               >
                 <FaWhatsapp className="text-2xl" />
                 Simule grátis
@@ -213,7 +227,7 @@ export default function HeaderV2() {
             </div>
 
             <button
-              className={`flex h-11 w-11 shrink-0 items-center justify-center transition-colors md:hidden ${theme.menuButton}`}
+              className={`flex h-11 w-11 shrink-0 items-center justify-center transition-colors duration-500 ease-out md:hidden ${theme.menuButton}`}
               onClick={() => setOpen(true)}
               aria-label="Abrir menu"
             >
@@ -224,7 +238,7 @@ export default function HeaderV2() {
 
         {/* Second Row - Partner Logos Mobile */}
         <div
-          className={`md:hidden border-t transition-all duration-500 ${theme.borderRow}`}
+          className={`md:hidden border-t transition-colors duration-500 ease-out ${theme.borderRow}`}
         >
           <div className="flex items-center justify-between gap-4 px-12 py-2.5">
             <Image
@@ -232,18 +246,18 @@ export default function HeaderV2() {
               alt="Consórcio Servopa"
               width={100}
               height={40}
-              className={`h-8 w-auto object-contain ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
+              className={`h-8 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
               quality={100}
             />
             <div
-              className={`h-8 w-px transition-colors duration-300 ${theme.divider}`}
+              className={`h-8 w-px transition-colors duration-500 ease-out ${theme.divider}`}
             />
             <Image
               src="/rodobensv2.png"
               alt="Rodobens Consórcios"
               width={110}
               height={45}
-              className={`h-8 w-auto object-contain ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
+              className={`h-8 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
               quality={100}
             />
           </div>

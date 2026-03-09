@@ -5,10 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaHome, FaCar, FaChartLine, FaBriefcase, FaChevronLeft, FaChevronRight, FaCheckCircle, FaSeedling, FaGraduationCap, FaStethoscope, FaTools, FaEllipsisH, FaShip } from "react-icons/fa";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
-import "swiper/css/pagination";
 import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
 import { trackCalculatorInteraction } from "../lib/analytics";
 
@@ -45,6 +43,7 @@ export default function HeroCalculatorV2() {
   const [tipo, setTipo] = useState<"parcela" | "credito">("credito");
   const [valor, setValor] = useState(100000);
   const [clicked, setClicked] = useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const swiperRef = useRef<SwiperType | null>(null);
   const touchStart = useRef<number>(0);
   const touchEnd = useRef<number>(0);
@@ -161,14 +160,13 @@ export default function HeroCalculatorV2() {
                 </motion.div>
                 <div className="flex-1 px-3">
                   <Swiper
-                    modules={[Pagination]}
                     spaceBetween={12}
                     slidesPerView={1.9}
                     slidesOffsetBefore={12}
                     slidesOffsetAfter={12}
                     loop
-                    pagination={{ el: ".hero-calculator-pagination", clickable: true }}
                     onSwiper={(swiper) => { swiperRef.current = swiper; }}
+                    onSlideChange={(swiper) => setActiveSlideIndex(swiper.realIndex)}
                     breakpoints={{
                       400: { slidesPerView: 2.1 },
                       480: { slidesPerView: 2.2 },
@@ -233,16 +231,21 @@ export default function HeroCalculatorV2() {
                     >
                       <FaChevronLeft className="text-[10px]" />
                     </button>
-                    <div
-                      className="hero-calculator-pagination swiper-pagination"
-                      style={
-                        {
-                          "--swiper-pagination-bullet-size": "6px",
-                          "--swiper-pagination-bullet-width": "6px",
-                          "--swiper-pagination-bullet-height": "6px",
-                        } as React.CSSProperties
-                      }
-                    />
+                    <div className="flex flex-1 items-center justify-center gap-1.5 min-w-0">
+                      {OBJETIVOS.map((_, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => swiperRef.current?.slideToLoop(i)}
+                          className={`h-2 rounded-full transition-all ${
+                            activeSlideIndex === i
+                              ? "w-6 bg-[var(--primary-1)]"
+                              : "w-2 bg-neutral-300 hover:bg-neutral-400"
+                          }`}
+                          aria-label={`Slide ${i + 1}`}
+                        />
+                      ))}
+                    </div>
                     <button
                       type="button"
                       onClick={() => swiperRef.current?.slideNext()}
