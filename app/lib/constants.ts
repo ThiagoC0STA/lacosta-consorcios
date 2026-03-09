@@ -31,12 +31,13 @@ export const handleWhatsAppClick = (
   }
 
   // Track conversion in Google Ads
-  // @ts-expect-error - gtag_report_conversion is defined globally
-  if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
+  if (typeof window !== "undefined") {
     // @ts-expect-error - gtag_report_conversion is defined globally
-    window.gtag_report_conversion(url);
-  } else {
-    // Fallback if conversion function is not available
+    if (typeof window.gtag_report_conversion === "function") {
+      // @ts-expect-error - gtag_report_conversion is defined globally
+      window.gtag_report_conversion(url);
+    }
+    // Always open WhatsApp (conversion tracks separately, does not navigate)
     window.open(url, "_blank", "noopener,noreferrer");
   }
 };

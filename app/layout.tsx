@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header";
+import HeaderV2 from "./components/HeaderV2";
 import { Analytics } from "@vercel/analytics/next";
-import FloatingWhatsappButton from "./components/FloatingWhatsappButton";
+import FloatingWhatsappButtonV2 from "./components/FloatingWhatsappButtonV2";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import ScrollTracker from "./components/ScrollTracker";
 import Script from "next/script";
@@ -114,9 +114,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={inter.className}>
-        <Header />
+        <HeaderV2 />
         {children}
-        <FloatingWhatsappButton />
+        <FloatingWhatsappButtonV2 />
         <Suspense fallback={null}>
           <GoogleAnalytics />
         </Suspense>

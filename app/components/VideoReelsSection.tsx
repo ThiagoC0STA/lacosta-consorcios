@@ -78,15 +78,12 @@ export default function VideoReelsSection() {
     setActiveIndex(newIndex);
   };
 
-  // Atualizar iframes quando activeIndex mudar
   useEffect(() => {
     iframeRefs.current.forEach((iframe, index) => {
       if (iframe && index === activeIndex) {
-        // Recarregar o iframe com autoplay para o vídeo ativo
         const video = videoShorts[index];
-        iframe.src = `${video.embedUrl}?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1`;
+        iframe.src = `${video.embedUrl}?autoplay=0&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1`;
       } else if (iframe && index !== activeIndex) {
-        // Pausar vídeos não ativos
         iframe.contentWindow?.postMessage(
           '{"event":"command","func":"pauseVideo","args":""}',
           '*'

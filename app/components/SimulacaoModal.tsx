@@ -55,7 +55,13 @@ export default function SimulacaoModal({
           )}
         </div>
       )}
-      <form className="flex flex-col gap-4 mt-2">
+      <form
+        className="flex flex-col gap-4 mt-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleWhatsAppClick(whatsappLink, undefined, "simulacao_modal");
+        }}
+      >
         <div className="flex flex-col gap-1 text-left">
           <label
             htmlFor="nome"

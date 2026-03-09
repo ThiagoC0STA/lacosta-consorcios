@@ -22,13 +22,13 @@ const socialLinks = [
 const navLinks = [
   { label: "Simule agora", href: "#contato" },
   { label: "Vantagens", href: "#vantagens" },
-  { label: "Como funciona", href: "#simulação" },
+  { label: "Como funciona", href: "#como-funciona" },
 ];
 
 function SocialLink({ href, icon: Icon, name }: { href: string; icon: any; name: string }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (name === "WhatsApp") {
-      handleWhatsAppClick(href, e);
+      handleWhatsAppClick(href, e, "footer");
     }
   };
 
@@ -112,8 +112,22 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li>Rua da Capitania, 127</li>
               <li>Guabirotuba - Curitiba</li>
-              <li>luciano@lacostacorretora.com.br</li>
-              <li>(41) 3076-1050</li>
+              <li>
+                <a
+                  href="mailto:luciano@lacostacorretora.com.br"
+                  className="hover:text-[var(--primary-4)] transition-colors"
+                >
+                  luciano@lacostacorretora.com.br
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+554130761050"
+                  className="hover:text-[var(--primary-4)] transition-colors"
+                >
+                  (41) 3076-1050
+                </a>
+              </li>
             </ul>
           </div>
         </motion.div>

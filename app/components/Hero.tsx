@@ -160,7 +160,7 @@ export default function Hero() {
                 O consórcio mais confiável para você realizar seus sonhos com{" "}
                 <span style={{ fontWeight: 700 }}> planejamento,</span>{" "}
                 <span style={{ fontWeight: 700 }}>segurança e </span>{" "}
-                <span style={{ fontWeight: 700 }}> sem juros abusivos</span>
+                <span style={{ fontWeight: 700 }}> sem juros</span>
               </p>
             </div>
 

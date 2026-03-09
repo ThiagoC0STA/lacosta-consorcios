@@ -1,33 +1,33 @@
 "use client";
 
 import { Toaster } from "react-hot-toast";
-import Hero from "./components/Hero";
+import HeroV2 from "./components/HeroV2";
 
-import Benefits from "./components/Benefits";
-import HowItWorks from "./components/HowItWorks";
-import Testimonials from "./components/Testimonials";
-import FAQ from "./components/FAQ";
-import Contact from "./components/Contact";
+import BenefitsV2 from "./components/BenefitsV2";
+import HowItWorksV2 from "./components/HowItWorksV2";
+import TestimonialsV2 from "./components/TestimonialsV2";
+import FAQV2 from "./components/FAQV2";
+import ContactV2 from "./components/ContactV2";
 import Footer from "./components/Footer";
-import UrgencySection from "./components/UrgencySection";
+import UrgencySectionV2 from "./components/UrgencySectionV2";
 // import UrgencyPopup from "./components/UrgencyPopup";
-import PartnersSection from "./components/PartnersSection";
-import VideoReelsSection from "./components/VideoReelsSection";
+import PartnersSectionV2 from "./components/PartnersSectionV2";
+import VideoReelsSectionV2 from "./components/VideoReelsSectionV2";
 
 export default function Home() {
   return (
     <main className="relative">
       <Toaster position="top-right" />
-      <Hero />
-      <VideoReelsSection />
-      <PartnersSection />
+      <HeroV2 />
+      <VideoReelsSectionV2 />
+      <PartnersSectionV2 />
 
-      <Benefits />
-      <UrgencySection />
-      <HowItWorks />
-      <Testimonials />
-      <FAQ />
-      <Contact />
+      <BenefitsV2 />
+      <UrgencySectionV2 />
+      <HowItWorksV2 />
+      <TestimonialsV2 />
+      <FAQV2 />
+      <ContactV2 />
       <Footer />
       {/* <UrgencyPopup /> */}
     </main>

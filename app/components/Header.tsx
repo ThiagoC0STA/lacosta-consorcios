@@ -77,7 +77,7 @@ export default function Header() {
               title="Rodobens Consórcios"
             >
               <Image
-                src="/rodobens.jpg"
+                src="/rodobens.png"
                 alt="Rodobens Consórcios"
                 width={140}
                 height={50}

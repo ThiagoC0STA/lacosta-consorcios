@@ -19,7 +19,7 @@ export default function Contact() {
   });
 
   return (
-    <section className="py-12 sm:py-20 relative overflow-hidden scroll-mt-24 md:scroll-mt-0">
+    <section id="contato" className="py-12 sm:py-20 relative overflow-hidden scroll-mt-24 md:scroll-mt-0">
       {/* Imagem de fundo */}
       <div className="absolute inset-0 z-0">
         <Image

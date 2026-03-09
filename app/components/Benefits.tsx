@@ -21,7 +21,7 @@ const benefits = [
   {
     icon: FaChartLine,
     title: "Taxas reduzidas",
-    description: "Sem juros abusivos e com condições especiais para você.",
+    description: "100% sem juros. Descubra quanto você economiza com a gente.",
     color: "from-[var(--primary-1)] to-[var(--primary-4)]",
     highlight: "Até 70% menos que financiamento",
   },
