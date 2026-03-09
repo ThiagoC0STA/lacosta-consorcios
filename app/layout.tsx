@@ -4,6 +4,7 @@ import "./globals.css";
 import HeaderV2 from "./components/HeaderV2";
 import JsonLd from "./components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import FloatingWhatsappButtonV2 from "./components/FloatingWhatsappButtonV2";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import ScrollTracker from "./components/ScrollTracker";
@@ -139,6 +140,7 @@ export default function RootLayout({
         <ScrollTracker />
       </body>
       <Analytics />
+      <SpeedInsights />
     </html>
   );
 }
