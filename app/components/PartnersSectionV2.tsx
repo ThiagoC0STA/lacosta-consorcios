@@ -149,7 +149,8 @@ export default function PartnersSectionV2() {
                           alt={p.name}
                           width={112}
                           height={48}
-                          quality={100}
+                          sizes="(max-width: 640px) 80px, 112px"
+                          quality={80}
                           className="max-h-6 sm:max-h-8 w-auto object-contain"
                         />
                       </div>

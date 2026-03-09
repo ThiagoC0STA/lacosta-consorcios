@@ -54,6 +54,8 @@ export default function HeroV2() {
           src="/hero-6.jpg"
           alt="Professional consorcio advisory"
           className="object-cover opacity-40"
+          sizes="100vw"
+          quality={75}
         />
         <div
           className="absolute inset-0"

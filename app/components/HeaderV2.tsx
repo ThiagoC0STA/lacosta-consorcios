@@ -158,10 +158,14 @@ export default function HeaderV2() {
                 href="/"
                 className="flex shrink-0 transition-transform hover:scale-[1.02] active:scale-[0.98]"
               >
-                <img
+                <Image
                   src="/logo-5.png"
                   alt="Lacosta Consórcios"
-                  className={`h-10 md:h-12 transition-[filter] duration-500 ease-out ${theme.logoFilter || ""}`}
+                  width={163}
+                  height={48}
+                  sizes="(max-width: 768px) 160px, 200px"
+                  quality={95}
+                  className={`h-10 md:h-12 w-auto transition-[filter] duration-500 ease-out object-contain ${theme.logoFilter || ""}`}
                 />
               </Link>
               <div className="hidden md:flex md:items-center md:gap-4 lg:gap-6">
@@ -178,8 +182,9 @@ export default function HeaderV2() {
                     alt="Consórcio Servopa"
                     width={120}
                     height={50}
+                    sizes="96px"
                     className={`h-8 md:h-9 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
-                    quality={100}
+                    quality={80}
                   />
                 </Link>
                 <div
@@ -195,8 +200,9 @@ export default function HeaderV2() {
                     alt="Rodobens Consórcios"
                     width={140}
                     height={50}
+                    sizes="112px"
                     className={`h-8 md:h-9 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
-                    quality={100}
+                    quality={80}
                   />
                 </Link>
               </div>
@@ -246,8 +252,9 @@ export default function HeaderV2() {
               alt="Consórcio Servopa"
               width={100}
               height={40}
+              sizes="96px"
               className={`h-8 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
-              quality={100}
+              quality={80}
             />
             <div
               className={`h-8 w-px transition-colors duration-500 ease-out ${theme.divider}`}
@@ -257,8 +264,9 @@ export default function HeaderV2() {
               alt="Rodobens Consórcios"
               width={110}
               height={45}
+              sizes="96px"
               className={`h-8 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
-              quality={100}
+              quality={80}
             />
           </div>
         </div>
@@ -267,7 +275,7 @@ export default function HeaderV2() {
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <div className="flex h-full w-72 flex-col bg-white p-6">
           <div className="flex items-center justify-between">
-            <img src="/logo-5.png" alt="Lacosta" className="h-10" />
+            <Image src="/logo-5.png" alt="Lacosta" width={120} height={36} sizes="160px" quality={95} className="h-10 w-auto object-contain" />
             <button
               className="flex h-10 w-10 items-center justify-center text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-700"
               onClick={() => setOpen(false)}
@@ -282,8 +290,9 @@ export default function HeaderV2() {
               alt="Consórcio Servopa"
               width={100}
               height={40}
+              sizes="96px"
               className="h-8 w-auto object-contain"
-              quality={100}
+              quality={80}
             />
             <div className="h-8 w-px bg-neutral-200" />
             <Image
@@ -291,8 +300,9 @@ export default function HeaderV2() {
               alt="Rodobens Consórcios"
               width={110}
               height={45}
+              sizes="96px"
               className="h-8 w-auto object-contain"
-              quality={100}
+              quality={80}
             />
           </div>
           <nav className="mt-6 flex flex-1 flex-col gap-1">

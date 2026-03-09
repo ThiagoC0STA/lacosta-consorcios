@@ -2,9 +2,16 @@
   "name": "lacosta-consorcios",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "chrome >= 91",
+    "firefox >= 89",
+    "safari >= 15",
+    "edge >= 91"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "og:compress": "node scripts/compress-og.js",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap"
@@ -46,6 +53,7 @@
     "@types/swiper": "^6.0.0",
     "eslint": "^9",
     "eslint-config-next": "^16.0.10",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.1.8",
     "typescript": "^5"
   }

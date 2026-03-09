@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: "Lacosta Consórcios",
     images: [
       {
-        url: "/lacosta-card.png",
+        url: `${SITE_URL}/lacosta-card-og.jpg`,
         width: 1200,
         height: 630,
         alt: "Lacosta Consórcios - Consórcio Curitiba",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: "Lacosta Consórcios - Consórcio Curitiba | Servopa e Rodobens",
     description:
       "Consórcio em Curitiba com Servopa e Rodobens. Imóvel, veículo, investimento 100% sem juros. Simule grátis!",
-    images: ["/lacosta-card.png"],
+    images: [`${SITE_URL}/lacosta-card-og.jpg`],
     creator: "@lacostaconsorcios",
   },
   robots: {

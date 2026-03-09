@@ -192,6 +192,8 @@ export default function HeroCalculatorV2() {
                                 alt={obj.label}
                                 width={160}
                                 height={120}
+                                sizes="(max-width: 480px) 140px, 160px"
+                                quality={80}
                                 className={`h-full w-full object-cover transition-all duration-200 ${
                                   objetivo === obj.value ? "brightness-100" : "brightness-90 group-hover:brightness-95"
                                 }`}
