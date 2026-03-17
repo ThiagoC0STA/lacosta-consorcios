@@ -13,9 +13,10 @@ const NAV_LINKS = [
   { href: "#simulacao", label: "Simulação" },
   { href: "#vantagens", label: "Vantagens" },
   { href: "#como-funciona", label: "Como funciona" },
+  { href: "#conteudos", label: "Blog" },
 ];
 
-const LIGHT_SECTIONS: SectionTheme[] = ["conteudos", "parceiros", "como-funciona", "faq"];
+const LIGHT_SECTIONS: SectionTheme[] = ["conteudos", "parceiros", "vantagens", "investimento", "como-funciona", "faq"];
 const AMBER_SECTIONS: SectionTheme[] = ["oferta"];
 
 function getHeaderTheme(activeSection: SectionTheme, scrolled: boolean) {

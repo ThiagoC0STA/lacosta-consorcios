@@ -7,6 +7,7 @@ export type SectionTheme =
   | "conteudos"
   | "parceiros"
   | "vantagens"
+  | "investimento"
   | "oferta"
   | "como-funciona"
   | "depoimentos"
@@ -16,13 +17,15 @@ export type SectionTheme =
 
 const SECTION_ORDER: SectionTheme[] = [
   "hero",
-  "conteudos",
   "parceiros",
   "vantagens",
+  "investimento",
   "oferta",
   "como-funciona",
   "depoimentos",
+  "faq",
   "contato",
+  "conteudos",
 ];
 
 const SECTION_IDS: [SectionTheme, string][] = [
@@ -30,6 +33,7 @@ const SECTION_IDS: [SectionTheme, string][] = [
   ["conteudos", "conteudos"],
   ["parceiros", "parceiros"],
   ["vantagens", "vantagens"],
+  ["investimento", "investimento"],
   ["oferta", "oferta"],
   ["como-funciona", "como-funciona"],
   ["depoimentos", "depoimentos"],

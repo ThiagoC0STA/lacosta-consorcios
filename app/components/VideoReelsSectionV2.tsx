@@ -11,14 +11,16 @@ import Container from "./Container";
 
 import "swiper/css";
 
-/* Defer YouTube iframes until section is in view to avoid i.ytimg.com preconnects on initial load */
+/* Defer YouTube iframes until section is in view to avoid i.ytimg.com preconnects on initial load.
+ * Pablo Marcál video first. */
 const videoShorts = [
-  { id: "C0qW0ldci2E", embedUrl: "https://www.youtube-nocookie.com/embed/C0qW0ldci2E" },
+  { id: "1UMiK9nZxfI", embedUrl: "https://www.youtube-nocookie.com/embed/1UMiK9nZxfI" },
   { id: "6nOewFgXIy4", embedUrl: "https://www.youtube-nocookie.com/embed/6nOewFgXIy4" },
   { id: "KO0Hpkn4r94", embedUrl: "https://www.youtube-nocookie.com/embed/KO0Hpkn4r94" },
   { id: "gfOn6u1I4xs", embedUrl: "https://www.youtube-nocookie.com/embed/gfOn6u1I4xs" },
   { id: "vyZxbxuUZ5g", embedUrl: "https://www.youtube-nocookie.com/embed/vyZxbxuUZ5g" },
-  { id: "1UMiK9nZxfI", embedUrl: "https://www.youtube-nocookie.com/embed/1UMiK9nZxfI" },
+  { id: "C0qW0ldci2E", embedUrl: "https://www.youtube-nocookie.com/embed/C0qW0ldci2E" },
+
 ];
 
 const benefits = [
@@ -36,6 +38,11 @@ const benefits = [
     icon: <FaChartLine className="text-2xl" />,
     title: "Informações Atualizadas",
     description: "Conteúdos sobre as últimas novidades e tendências do mercado.",
+  },
+  {
+    icon: <FaYoutube className="text-2xl" />,
+    title: "Pablo Marcál",
+    description: "Conteúdos exclusivos sobre consórcios do canal Pablo Marcál.",
   },
 ];
 
