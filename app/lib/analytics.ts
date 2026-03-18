@@ -22,7 +22,7 @@ declare global {
 
 // GA4 Measurement ID
 export const GA4_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA4_ID || "G-G7NN9WDRN2";
+  process.env.NEXT_PUBLIC_GA4_ID || "G-DDKE5B2QJ6";
 
 /**
  * Track page views
