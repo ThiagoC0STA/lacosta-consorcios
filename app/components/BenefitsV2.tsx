@@ -286,7 +286,7 @@ export default function BenefitsV2() {
                     Quer saber quanto você pode economizar?
                   </h3>
                   <p className="text-sm sm:text-base text-white/70">
-                    Simule agora em menos de 30 segundos — é grátis!
+                    Simule agora em menos de 30 segundos, é grátis!
                   </p>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-bold text-[var(--primary-1)] transition-all group-hover:bg-[#0487D9] group-hover:text-white shadow-md">

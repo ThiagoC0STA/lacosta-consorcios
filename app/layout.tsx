@@ -22,7 +22,7 @@ const inter = Inter({
 const defaultTitle =
   "Lacosta Consórcios - Consórcio Servopa e Rodobens no Brasil | Parceiros oficiais";
 const defaultDescription =
-  "Parceiros oficiais Servopa e Rodobens. Consórcio de imóvel, veículo e investimento em todo o Brasil — 100% sem juros. +25 anos, +5.000 clientes. Simule grátis!";
+  "Parceiros oficiais Servopa e Rodobens. Consórcio de imóvel, veículo e investimento em todo o Brasil, 100% sem juros. +25 anos, +5.000 clientes. Simule grátis!";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/lacosta-card-og.jpg`,
         width: 1200,
         height: 630,
-        alt: "Lacosta Consórcios — consórcio Servopa e Rodobens em todo o Brasil",
+        alt: "Lacosta Consórcios, consórcio Servopa e Rodobens em todo o Brasil",
       },
     ],
   },

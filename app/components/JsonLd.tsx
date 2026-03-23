@@ -18,7 +18,7 @@ export default function JsonLd() {
     url: SITE_URL,
     logo: `${SITE_URL}/logo-5.png`,
     description:
-      "Lacosta Consórcios — parceiros oficiais Servopa e Rodobens. Consórcio de imóveis, veículos e investimento em todo o Brasil. 100% sem juros. Simulação grátis. Sede em Curitiba (PR).",
+      "Lacosta Consórcios, parceiros oficiais Servopa e Rodobens. Consórcio de imóveis, veículos e investimento em todo o Brasil. 100% sem juros. Simulação grátis. Sede em Curitiba (PR).",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Rua da Capitania, 127",
@@ -46,7 +46,7 @@ export default function JsonLd() {
     "@id": `${SITE_URL}/#financialservice`,
     name: SITE_NAME,
     description:
-      "Corretora parceira Servopa e Rodobens. Consórcio em todo o Brasil — imóvel, veículo e investimento, sem juros. Atendimento com consultoria dedicada.",
+      "Corretora parceira Servopa e Rodobens. Consórcio em todo o Brasil, imóvel, veículo e investimento, sem juros. Atendimento com consultoria dedicada.",
     image: `${SITE_URL}/logo-5.png`,
     url: SITE_URL,
     telephone: "+55-41-3076-1050",
@@ -71,7 +71,7 @@ export default function JsonLd() {
     url: SITE_URL,
     name: SITE_NAME,
     description:
-      "Consórcio Servopa e Rodobens em todo o Brasil. Parceiros oficiais Lacosta — imóvel, veículo, investimento. 100% sem juros. Simule grátis.",
+      "Consórcio Servopa e Rodobens em todo o Brasil. Parceiros oficiais Lacosta, imóvel, veículo, investimento. 100% sem juros. Simule grátis.",
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },

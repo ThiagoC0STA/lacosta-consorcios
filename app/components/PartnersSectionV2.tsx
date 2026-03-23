@@ -76,7 +76,7 @@ export default function PartnersSectionV2() {
                 Administradoras que fazem a diferença
               </h2>
               <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-8 max-w-sm">
-                Lacosta trabalha exclusivamente com Servopa e Rodobens — líderes em consórcios no Brasil.
+                Lacosta trabalha exclusivamente com Servopa e Rodobens, líderes em consórcios no Brasil.
               </p>
               <div className="flex flex-wrap lg:flex-nowrap gap-x-6 sm:gap-x-8 gap-y-3 sm:gap-y-4 lg:gap-y-0">
                 {STATS.map((s, i) => (

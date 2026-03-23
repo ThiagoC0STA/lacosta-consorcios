@@ -284,7 +284,7 @@ export default function UrgencySectionV2() {
                     Quero minha consultoria gratuita!
                   </h3>
                   <p className="text-sm text-white/70">
-                    Simule agora — é grátis e sem compromisso
+                    Simule agora, é grátis e sem compromisso
                   </p>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-bold text-amber-900 transition-all group-hover:bg-amber-500 group-hover:text-white shadow-md">

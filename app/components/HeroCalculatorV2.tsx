@@ -15,7 +15,7 @@ const OBJETIVOS = [
   { label: "Veículos", value: "veiculos", image: "/items/veiculos.png", icon: FaCar, tip: "Seu carro ou moto sem juros", confirmMsg: "Seu carro ou moto zero sem juros. Simule agora!" },
   { label: "Estética", value: "estetica", image: "/items/estetica.jpg", icon: FaSpa, tip: "Harmonização e autocuidado", confirmMsg: "Invista em você: estética e bem-estar com parcelas sem juros" },
   { label: "Investimento", value: "investimento", image: "/items/invest.png", icon: FaChartLine, tip: "Planejamento financeiro", confirmMsg: "Planejamento financeiro com segurança e sem juros" },
-  { label: "Embarcações", value: "embarcacoes", image: "/items/embarcacao.png", icon: FaShip, tip: "Lancha, veleiro, barco e muito mais", confirmMsg: "Lancha, veleiro ou barco — realize seu sonho náutico" },
+  { label: "Embarcações", value: "embarcacoes", image: "/items/embarcacao.png", icon: FaShip, tip: "Lancha, veleiro, barco e muito mais", confirmMsg: "Lancha, veleiro ou barco, realize seu sonho náutico" },
   { label: "Serviços", value: "servicos", image: "/items/servicos.png", icon: FaBriefcase, tip: "Expanda seu negócio", confirmMsg: "Expanda seu negócio sem juros e com parcelas flexíveis" },
   { label: "Agronegócio", value: "agronegocio", image: "/items/agro.png", icon: FaSeedling, tip: "Maquinário e imóvel rural", confirmMsg: "Maquinário e imóvel rural. O campo agradece!" },
   { label: "Educação", value: "educacao", image: "/items/educacao.png", icon: FaGraduationCap, tip: "Cursos e formaturas", confirmMsg: "Investir em educação é investir no futuro" },
