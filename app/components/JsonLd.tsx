@@ -2,8 +2,13 @@ import { FAQ_ITEMS, SITE_URL, SITE_NAME } from "../lib/seo";
 
 /**
  * JSON-LD structured data for SEO
- * Renders Organization, LocalBusiness, WebSite, and FAQPage schemas
+ * Renders Organization, FinancialService, WebSite, and FAQPage schemas
  */
+const areaServedBrazil = {
+  "@type": "Country",
+  name: "Brazil",
+};
+
 export default function JsonLd() {
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -13,7 +18,7 @@ export default function JsonLd() {
     url: SITE_URL,
     logo: `${SITE_URL}/logo-5.png`,
     description:
-      "Corretora de consórcios em Curitiba. Consórcio Servopa e Rodobens. Imóveis, veículos, investimento e mais. 100% sem juros. Simulação grátis.",
+      "Lacosta Consórcios — parceiros oficiais Servopa e Rodobens. Consórcio de imóveis, veículos e investimento em todo o Brasil. 100% sem juros. Simulação grátis. Sede em Curitiba (PR).",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Rua da Capitania, 127",
@@ -21,12 +26,13 @@ export default function JsonLd() {
       addressRegion: "PR",
       addressCountry: "BR",
     },
+    areaServed: areaServedBrazil,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+55-41-3076-1050",
       contactType: "customer service",
       email: "luciano@lacostacorretora.com.br",
-      areaServed: "BR",
+      areaServed: areaServedBrazil,
       availableLanguage: "Portuguese",
     },
     sameAs: [
@@ -39,15 +45,18 @@ export default function JsonLd() {
     "@type": "FinancialService",
     "@id": `${SITE_URL}/#financialservice`,
     name: SITE_NAME,
+    description:
+      "Corretora parceira Servopa e Rodobens. Consórcio em todo o Brasil — imóvel, veículo e investimento, sem juros. Atendimento com consultoria dedicada.",
     image: `${SITE_URL}/logo-5.png`,
     url: SITE_URL,
     telephone: "+55-41-3076-1050",
     email: "luciano@lacostacorretora.com.br",
+    areaServed: areaServedBrazil,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Rua da Capitania, 127",
-      addressLocality: "Guabirotuba",
-      addressRegion: "Curitiba - PR",
+      streetAddress: "Rua da Capitania, 127, Guabirotuba",
+      addressLocality: "Curitiba",
+      addressRegion: "PR",
       addressCountry: "BR",
     },
     parentOrganization: {
@@ -62,7 +71,7 @@ export default function JsonLd() {
     url: SITE_URL,
     name: SITE_NAME,
     description:
-      "Consórcios Servopa e Rodobens em Curitiba. Imóvel, veículo, investimento. Simule grátis. 100% sem juros.",
+      "Consórcio Servopa e Rodobens em todo o Brasil. Parceiros oficiais Lacosta — imóvel, veículo, investimento. 100% sem juros. Simule grátis.",
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },

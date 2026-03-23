@@ -55,7 +55,7 @@ export default function HeroV2() {
           priority
           fetchPriority="high"
           src="/hero-6.jpg"
-          alt="Professional consorcio advisory"
+          alt="Consórcio Servopa e Rodobens em todo o Brasil — assessoria Lacosta Consórcios"
           className="object-cover opacity-40"
           sizes="100vw"
           quality={75}
@@ -64,7 +64,7 @@ export default function HeroV2() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, rgba(2, 29, 64, 0.95) 0%, rgba(2, 40, 89, 0.9) 50%, rgba(3, 90, 166, 0.85) 100%)",
+              "linear-gradient(135deg, rgba(0, 14, 36, 0.82) 0%, rgba(0, 22, 52, 0.76) 50%, rgba(1, 38, 82, 0.70) 100%)",
           }}
         />
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -84,25 +84,26 @@ export default function HeroV2() {
       </div>
 
       <Container className="relative z-10 w-full flex items-center" padding={false}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center w-full px-4 sm:px-6 pt-5 pb-12 md:pt-10 md:pb-16">
+        <div className="flex w-full flex-col gap-8 px-4 pt-5 pb-12 sm:px-6 md:pt-10 md:pb-16 lg:flex-row lg:items-center lg:justify-between lg:gap-0">
           <motion.div
             ref={ref}
             initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : reducedMotion ? { opacity: 1, y: 0 } : {}}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex flex-col gap-4 text-center lg:text-left"
+            className="flex min-w-0 flex-1 flex-col gap-4 text-center lg:max-w-xl lg:flex-none lg:text-left xl:max-w-2xl"
           >
             {/* Headline */}
             <div className="space-y-2">
-              <h1 className="text-4xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
-                Consórcio com{" "}
-                <span className="bg-gradient-to-r from-[#0487D9] to-[#035AA6] bg-clip-text text-transparent">
-                  planejamento e segurança
-                </span>
+              <h1 className="text-4xl sm:text-5xl md:text-[3.05rem] md:leading-[1.12] leading-tight">
+                <span className="font-bold text-white">Consórcio </span>
+                <span className="font-extrabold text-[#B9073C]">Servopa</span>
+                <span className="font-bold text-white"> e </span>
+                <span className="font-extrabold text-[#249AAA]">Rodobens</span>
+                <span className="font-bold text-white"> em todo o Brasil</span>
               </h1>
-              <p className="text-sm md:text-base text-neutral-400 max-w-lg mx-auto lg:mx-0">
-                Imóvel, veículo ou investimento.{" "}
-                <span className="font-semibold text-white">100% sem juros.</span>
+              <p className="text-sm md:text-base text-neutral-400 max-w-xl mx-auto lg:mx-0">
+                Quanto você pagaria de juros no banco sem perceber?{" "}
+                <span className="font-semibold text-white">Consórcio não tem juros.</span>
               </p>
             </div>
 
@@ -142,7 +143,7 @@ export default function HeroV2() {
               {TRUST_ITEMS.map((item, idx) => (
                 <div
                   key={idx}
-                  className="rounded-lg border border-white/10 bg-white/5 p-3 text-center backdrop-blur-sm"
+                  className="isolate overflow-hidden rounded-lg border border-white/10 bg-white/5 p-3 text-center backdrop-blur-sm"
                 >
                   <item.icon
                     className="mx-auto mb-1 text-base"
@@ -159,14 +160,14 @@ export default function HeroV2() {
               initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
               animate={inView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : {}}
               transition={reducedMotion ? { duration: 0 } : { delay: 0.2 }}
-              className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 flex items-center gap-3"
+              className="isolate overflow-hidden rounded-lg border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm flex items-center gap-3"
             >
               <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20">
                 <span className="text-sm font-bold" style={{ color: "var(--primary-5)" }}>
                   {simulationCount}
                 </span>
                 <span className="absolute -right-0.5 -top-0.5 flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                  <span className="absolute inline-flex h-full w-full motion-reduce:animate-none animate-ping rounded-full bg-emerald-400/50" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
                 </span>
               </div>
@@ -197,7 +198,7 @@ export default function HeroV2() {
             initial={reducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : reducedMotion ? { opacity: 1, x: 0 } : {}}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.15 }}
-            className="hidden lg:flex justify-center lg:justify-end items-center"
+            className="hidden shrink-0 justify-center lg:flex lg:justify-end"
           >
             <HeroCalculatorV2 />
           </motion.div>

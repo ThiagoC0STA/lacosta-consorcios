@@ -13,18 +13,26 @@ import { Suspense } from "react";
 import { GA4_MEASUREMENT_ID } from "./lib/analytics";
 import { SITE_URL } from "./lib/seo";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const defaultTitle =
+  "Lacosta Consórcios - Consórcio Servopa e Rodobens no Brasil | Parceiros oficiais";
+const defaultDescription =
+  "Parceiros oficiais Servopa e Rodobens. Consórcio de imóvel, veículo e investimento em todo o Brasil — 100% sem juros. +25 anos, +5.000 clientes. Simule grátis!";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Lacosta Consórcios - Consórcio Curitiba | Servopa e Rodobens",
+    default: defaultTitle,
     template: "%s | Lacosta Consórcios",
   },
-  description:
-    "Consórcio em Curitiba com Servopa e Rodobens. Imóvel, veículo, investimento 100% sem juros. +25 anos de mercado, +5.000 clientes. Simule grátis!",
+  description: defaultDescription,
   keywords:
-    "consórcio Curitiba, consórcio Servopa, consórcio Rodobens, consórcio imóvel, consórcio veículo, simular consórcio, consórcio sem juros, consórcio Guabirotuba, corretora consórcio Curitiba, consórcio investimento, financiamento imobiliário sem juros, consórcio imobiliário, consórcio automotivo",
+    "consórcio Servopa, consórcio Rodobens, consórcio Brasil, parceiro Servopa, parceiro Rodobens, consórcio imóvel, consórcio veículo, simular consórcio, consórcio sem juros, corretora consórcio, consórcio investimento, financiamento imobiliário sem juros, consórcio imobiliário, consórcio automotivo",
   authors: [{ name: "Lacosta Consórcios", url: SITE_URL }],
   creator: "Lacosta Consórcios",
   publisher: "Lacosta Consórcios",
@@ -32,6 +40,9 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      "pt-BR": SITE_URL,
+    },
   },
   formatDetection: {
     email: false,
@@ -42,24 +53,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: SITE_URL,
-    title: "Lacosta Consórcios - Consórcio Curitiba | Servopa e Rodobens",
-    description:
-      "Consórcio em Curitiba com Servopa e Rodobens. Imóvel, veículo, investimento 100% sem juros. Simule grátis!",
+    title: defaultTitle,
+    description: defaultDescription,
     siteName: "Lacosta Consórcios",
     images: [
       {
         url: `${SITE_URL}/lacosta-card-og.jpg`,
         width: 1200,
         height: 630,
-        alt: "Lacosta Consórcios - Consórcio Curitiba",
+        alt: "Lacosta Consórcios — consórcio Servopa e Rodobens em todo o Brasil",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lacosta Consórcios - Consórcio Curitiba | Servopa e Rodobens",
-    description:
-      "Consórcio em Curitiba com Servopa e Rodobens. Imóvel, veículo, investimento 100% sem juros. Simule grátis!",
+    title: defaultTitle,
+    description: defaultDescription,
     images: [`${SITE_URL}/lacosta-card-og.jpg`],
     creator: "@lacostaconsorcios",
   },

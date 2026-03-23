@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaHome, FaCar, FaChartLine, FaBriefcase, FaChevronLeft, FaChevronRight, FaCheckCircle, FaSeedling, FaGraduationCap, FaStethoscope, FaTools, FaEllipsisH, FaShip } from "react-icons/fa";
+import { FaHome, FaCar, FaChartLine, FaBriefcase, FaChevronLeft, FaChevronRight, FaCheckCircle, FaSeedling, FaGraduationCap, FaStethoscope, FaTools, FaEllipsisH, FaShip, FaSpa } from "react-icons/fa";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
@@ -13,6 +13,7 @@ import { trackCalculatorInteraction } from "../lib/analytics";
 const OBJETIVOS = [
   { label: "Imóvel", value: "imoveis", image: "/items/imovel.png", icon: FaHome, tip: "O sonho da casa própria", confirmMsg: "O sonho da casa própria com parcelas que cabem no bolso" },
   { label: "Veículos", value: "veiculos", image: "/items/veiculos.png", icon: FaCar, tip: "Seu carro ou moto sem juros", confirmMsg: "Seu carro ou moto zero sem juros. Simule agora!" },
+  { label: "Estética", value: "estetica", image: "/items/estetica.jpg", icon: FaSpa, tip: "Harmonização e autocuidado", confirmMsg: "Invista em você: estética e bem-estar com parcelas sem juros" },
   { label: "Investimento", value: "investimento", image: "/items/invest.png", icon: FaChartLine, tip: "Planejamento financeiro", confirmMsg: "Planejamento financeiro com segurança e sem juros" },
   { label: "Embarcações", value: "embarcacoes", image: "/items/embarcacao.png", icon: FaShip, tip: "Lancha, veleiro, barco e muito mais", confirmMsg: "Lancha, veleiro ou barco — realize seu sonho náutico" },
   { label: "Serviços", value: "servicos", image: "/items/servicos.png", icon: FaBriefcase, tip: "Expanda seu negócio", confirmMsg: "Expanda seu negócio sem juros e com parcelas flexíveis" },
