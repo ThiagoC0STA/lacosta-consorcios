@@ -7,7 +7,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import Drawer from "@mui/material/Drawer";
 import Image from "next/image";
 import Container from "./Container";
-import { useActiveSection, type SectionTheme } from "../lib/useActiveSection";
 
 const NAV_LINKS = [
   { href: "#simulacao", label: "Simulação" },
@@ -16,80 +15,22 @@ const NAV_LINKS = [
   { href: "#conteudos", label: "Blog" },
 ];
 
-const LIGHT_SECTIONS: SectionTheme[] = ["conteudos", "parceiros", "vantagens", "investimento", "como-funciona", "faq"];
-const AMBER_SECTIONS: SectionTheme[] = ["oferta"];
+const HEADER_BLUE_GRADIENT =
+  "linear-gradient(135deg, rgba(2, 29, 64, 0.98) 0%, rgba(2, 40, 89, 0.98) 100%)";
 
-function getHeaderTheme(activeSection: SectionTheme, scrolled: boolean) {
-  if (!scrolled && activeSection === "hero") {
-    return {
-      bg: "transparent",
-      navColor: "text-white hover:text-white/80",
-      logoFilter: "brightness-0 invert",
-      ctaClass: "bg-white text-[var(--primary-1)] hover:bg-white/90",
-      menuButton: "text-white hover:bg-white/10",
-      borderRow: "border-white/20 bg-transparent",
-      divider: "bg-white/30",
-    };
-  }
-
-  if (LIGHT_SECTIONS.includes(activeSection)) {
-    return {
-      bg: "bg-white shadow-[0_2px_12px_-4px_rgba(0,0,0,0.1)]",
-      navColor: "text-[var(--primary-1)] hover:text-[var(--primary-4)]",
-      logoFilter: "",
-      ctaClass: "bg-[var(--primary-1)] text-white hover:bg-[var(--primary-2)]",
-      menuButton: "text-[var(--primary-1)] hover:bg-neutral-100",
-      borderRow: "border-neutral-200 bg-white",
-      divider: "bg-neutral-200",
-    };
-  }
-
-  if (AMBER_SECTIONS.includes(activeSection)) {
-    return {
-      bg: "shadow-[0_2px_12px_-4px_rgba(0,0,0,0.15)]",
-      navColor: "text-white hover:text-amber-200",
-      logoFilter: "brightness-0 invert",
-      ctaClass: "bg-amber-500 text-white hover:bg-amber-400",
-      menuButton: "text-white hover:bg-white/10",
-      borderRow: "border-white/20 bg-transparent",
-      divider: "bg-white/30",
-    };
-  }
-
-  // Dark blue sections: hero (scrolled), parceiros, vantagens, contato
-  return {
-    bg: "shadow-[0_2px_12px_-4px_rgba(0,0,0,0.15)]",
-    navColor: "text-white hover:text-white/80",
-    logoFilter: "brightness-0 invert",
-    ctaClass: "bg-white text-[var(--primary-1)] hover:bg-white/90",
-    menuButton: "text-white hover:bg-white/10",
-    borderRow: "border-white/20 bg-transparent",
-    divider: "bg-white/30",
-  };
-}
-
-function getHeaderBgStyle(activeSection: SectionTheme, scrolled: boolean) {
-  if (!scrolled && activeSection === "hero") return {};
-  if (LIGHT_SECTIONS.includes(activeSection)) return {};
-  if (AMBER_SECTIONS.includes(activeSection)) {
-    return {
-      background:
-        "linear-gradient(135deg, rgba(26, 10, 10, 0.98) 0%, rgba(45, 15, 15, 0.98) 50%, rgba(74, 21, 21, 0.98) 100%)",
-      backdropFilter: "blur(8px)",
-    };
-  }
-  return {
-    background:
-      "linear-gradient(135deg, rgba(2, 29, 64, 0.98) 0%, rgba(2, 40, 89, 0.98) 100%)",
-    backdropFilter: "blur(8px)",
-  };
-}
+const theme = {
+  navColor: "text-white hover:text-white/80",
+  logoFilter: "brightness-0 invert",
+  ctaClass: "bg-white text-[var(--primary-1)] hover:bg-white/90",
+  menuButton: "text-white hover:bg-white/10",
+  borderRow: "border-white/20 bg-transparent",
+  divider: "bg-white/30",
+};
 
 export default function HeaderV2() {
   const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const activeSection = useActiveSection();
 
   const whatsappLink =
     "https://wa.me/554130761050?text=" +
@@ -115,39 +56,25 @@ export default function HeaderV2() {
     setTimeout(() => setClicked(false), 1000);
   };
 
-  const theme = getHeaderTheme(activeSection, scrolled);
-  const bgStyle = getHeaderBgStyle(activeSection, scrolled);
-
-  const showSolidBg =
-    scrolled || activeSection !== "hero" || LIGHT_SECTIONS.includes(activeSection);
-
-  const hasGradientBg = Object.keys(bgStyle).length > 0;
-  const defaultGradient = {
-    background:
-      "linear-gradient(135deg, rgba(2, 29, 64, 0.98) 0%, rgba(2, 40, 89, 0.98) 100%)",
-    backdropFilter: "blur(8px)",
-  };
-
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full pt-[env(safe-area-inset-top)] transition-[box-shadow] duration-500 ease-out ${
-        theme.bg === "transparent" ? "bg-transparent shadow-none" : theme.bg
+        scrolled ? "shadow-[0_2px_12px_-4px_rgba(0,0,0,0.15)]" : "bg-transparent shadow-none"
       }`}
     >
-      {/* Gradient overlay - always in DOM for smooth opacity transition */}
       <div
         className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out"
         style={{
-          ...(hasGradientBg ? bgStyle : defaultGradient),
-          opacity: hasGradientBg ? 1 : 0,
+          background: HEADER_BLUE_GRADIENT,
+          backdropFilter: "blur(8px)",
+          opacity: scrolled ? 1 : 0,
         }}
       />
       <div
         className={`relative z-10 w-full transition-all duration-500 ease-out ${
-          theme.bg === "transparent" ? "backdrop-blur-sm" : ""
+          !scrolled ? "backdrop-blur-sm" : ""
         }`}
       >
-        {/* First Row - Logo and Menu */}
         <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-2.5">
           <Container
             className="flex flex-1 items-center justify-between gap-6"
@@ -166,13 +93,11 @@ export default function HeaderV2() {
                   height={48}
                   sizes="(max-width: 768px) 160px, 200px"
                   quality={95}
-                  className={`h-10 md:h-12 w-auto transition-[filter] duration-500 ease-out object-contain ${theme.logoFilter || ""}`}
+                  className={`h-10 md:h-12 w-auto transition-[filter] duration-500 ease-out object-contain ${theme.logoFilter}`}
                 />
               </Link>
               <div className="hidden md:flex md:items-center md:gap-4 lg:gap-6">
-                <div
-                  className={`h-10 w-px transition-colors duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "bg-neutral-300" : "bg-white/40"}`}
-                />
+                <div className={`h-10 w-px transition-colors duration-500 ease-out ${theme.divider}`} />
                 <Link
                   href="/"
                   className="transition-opacity hover:opacity-80"
@@ -184,13 +109,11 @@ export default function HeaderV2() {
                     width={120}
                     height={50}
                     sizes="96px"
-                    className={`h-8 md:h-9 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
+                    className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
                     quality={80}
                   />
                 </Link>
-                <div
-                  className={`h-8 w-px transition-colors duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "bg-neutral-300" : "bg-white/40"}`}
-                />
+                <div className={`h-8 w-px transition-colors duration-500 ease-out ${theme.divider}`} />
                 <Link
                   href="/"
                   className="transition-opacity hover:opacity-80"
@@ -202,7 +125,7 @@ export default function HeaderV2() {
                     width={140}
                     height={50}
                     sizes="112px"
-                    className={`h-8 md:h-9 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "" : "brightness-0 invert opacity-90"}`}
+                    className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
                     quality={80}
                   />
                 </Link>
@@ -243,7 +166,6 @@ export default function HeaderV2() {
           </Container>
         </div>
 
-        {/* Second Row - Partner Logos Mobile */}
         <div
           className={`md:hidden border-t transition-colors duration-500 ease-out ${theme.borderRow}`}
         >
@@ -254,19 +176,17 @@ export default function HeaderV2() {
               width={100}
               height={40}
               sizes="96px"
-              className={`h-8 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
+              className="h-8 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
               quality={80}
             />
-            <div
-              className={`h-8 w-px transition-colors duration-500 ease-out ${theme.divider}`}
-            />
+            <div className={`h-8 w-px transition-colors duration-500 ease-out ${theme.divider}`} />
             <Image
               src="/rodobensv2.png"
               alt="Rodobens Consórcios"
               width={110}
               height={45}
               sizes="96px"
-              className={`h-8 w-auto object-contain transition-[filter,opacity] duration-500 ease-out ${showSolidBg && LIGHT_SECTIONS.includes(activeSection) ? "opacity-90" : "brightness-0 invert opacity-90"}`}
+              className="h-8 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
               quality={80}
             />
           </div>
