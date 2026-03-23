@@ -10,7 +10,7 @@ import GoogleAnalytics from "./components/GoogleAnalytics";
 import ScrollTracker from "./components/ScrollTracker";
 import Script from "next/script";
 import { Suspense } from "react";
-import { GA4_MEASUREMENT_ID } from "./lib/analytics";
+import { GA4_MEASUREMENT_ID, GTM_CONTAINER_ID } from "./lib/analytics";
 import { SITE_URL } from "./lib/seo";
 
 const inter = Inter({
@@ -96,6 +96,13 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        <Script id="google-tag-manager" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');`}
+        </Script>
         <link rel="icon" href="/logo-5.png" type="image/png" sizes="any" />
         <link rel="apple-touch-icon" href="/logo-5.png" />
         <meta name="theme-color" content="#021D40" />
@@ -140,6 +147,15 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={inter.className}>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
+            height={0}
+            width={0}
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
         <HeaderV2 />
         {children}
         <FloatingWhatsappButtonV2 />

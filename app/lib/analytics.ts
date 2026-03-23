@@ -24,6 +24,10 @@ declare global {
 export const GA4_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA4_ID || "G-DDKE5B2QJ6";
 
+/** Google Tag Manager container ID */
+export const GTM_CONTAINER_ID =
+  process.env.NEXT_PUBLIC_GTM_ID || "GTM-KG2ZB6M7";
+
 /**
  * Track page views
  */
