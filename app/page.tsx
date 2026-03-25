@@ -14,12 +14,15 @@ import UrgencySectionV2 from "./components/UrgencySectionV2";
 // import UrgencyPopup from "./components/UrgencyPopup";
 import PartnersSectionV2 from "./components/PartnersSectionV2";
 import VideoReelsSectionV2 from "./components/VideoReelsSectionV2";
+import OpportunitiesCarouselV2 from "./components/OpportunitiesCarouselV2";
 
 export default function Home() {
   return (
     <main className="relative">
       <Toaster position="top-right" />
       <HeroV2 />
+      <OpportunitiesCarouselV2 />
+
       <InvestmentMindsetSectionV2 />
       <PartnersSectionV2 />
       <BenefitsV2 />
