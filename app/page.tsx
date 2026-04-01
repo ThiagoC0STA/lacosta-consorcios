@@ -21,7 +21,6 @@ export default function Home() {
     <main className="relative">
       <Toaster position="top-right" />
       <HeroV2 />
-      <OpportunitiesCarouselV2 />
 
       <InvestmentMindsetSectionV2 />
       <PartnersSectionV2 />
