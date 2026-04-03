@@ -1,9 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { WHATSAPP_LINK, handleWhatsAppClick } from "../lib/constants";
+import {
+  COMPANY_CNPJ_RAW,
+  formatCnpj,
+  LEGAL_COMPANY_NAME,
+} from "../lib/legal";
 import Container from "./Container";
 
 const socialLinks = [
@@ -24,7 +30,7 @@ const navLinks = [
   { label: "Vantagens do consórcio", href: "#vantagens" },
   { label: "Como funciona o consórcio", href: "#como-funciona" },
   { label: "Perguntas frequentes", href: "#faq" },
-  { label: "Conteúdos sobre consórcio", href: "#conteudos" },
+  { label: "Vídeos sobre consórcio", href: "#conteudos" },
   { label: "Fale com um especialista", href: "#contato" },
 ];
 
@@ -69,9 +75,9 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 items-start"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12 items-start"
         >
-          <div className="col-span-1 md:col-span-2">
+          <div className="md:col-span-2 lg:col-span-2">
             <p className="text-2xl font-extrabold mb-4 tracking-tight text-white">
               Lacosta Consórcios
             </p>
@@ -109,12 +115,34 @@ export default function Footer() {
             </ul>
           </nav>
 
+          <nav aria-label="Informações legais">
+            <p className="text-lg font-semibold mb-4 text-white">Legal</p>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/privacidade"
+                  className="text-gray-400 hover:text-[var(--primary-5)] font-medium transition-colors duration-200"
+                >
+                  Política de Privacidade
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/termos"
+                  className="text-gray-400 hover:text-[var(--primary-5)] font-medium transition-colors duration-200"
+                >
+                  Termos de Uso
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
           <div>
             <p className="text-lg font-semibold mb-4 text-white">Contato</p>
             <address className="not-italic space-y-2 text-gray-400">
               <p>Rua da Capitania, 127</p>
               <p>Guabirotuba — Curitiba, PR</p>
-              <p>CEP: 82510-080</p>
+              <p>CEP: 81520-590</p>
               <p>
                 <a
                   href="mailto:luciano@lacostacorretora.com.br"
@@ -135,8 +163,24 @@ export default function Footer() {
           </div>
         </motion.div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm">
-          <p>
+        <div className="border-t border-gray-800 mt-12 pt-8 space-y-4 text-gray-400 text-sm">
+          {(LEGAL_COMPANY_NAME || COMPANY_CNPJ_RAW) && (
+            <p className="text-center text-gray-500 leading-relaxed">
+              {LEGAL_COMPANY_NAME ? (
+                <span className="text-gray-300">{LEGAL_COMPANY_NAME}</span>
+              ) : null}
+              {LEGAL_COMPANY_NAME && COMPANY_CNPJ_RAW ? " · " : ""}
+              {COMPANY_CNPJ_RAW ? (
+                <span>
+                  CNPJ:{" "}
+                  {COMPANY_CNPJ_RAW.replace(/\D/g, "").length === 14
+                    ? formatCnpj(COMPANY_CNPJ_RAW)
+                    : COMPANY_CNPJ_RAW}
+                </span>
+              ) : null}
+            </p>
+          )}
+          <p className="text-center">
             © {new Date().getFullYear()}{" "}
             <span className="font-bold text-white">Lacosta Consórcios</span>.
             Todos os direitos reservados. Consórcios regulamentados pelo Banco Central do Brasil.

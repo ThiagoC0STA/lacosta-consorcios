@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import FloatingWhatsappButtonV2 from "./components/FloatingWhatsappButtonV2";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import ScrollTracker from "./components/ScrollTracker";
+import CookieConsentBanner from "./components/CookieConsentBanner";
 import Script from "next/script";
 import { Suspense } from "react";
 import { GA4_MEASUREMENT_ID, GTM_CONTAINER_ID } from "./lib/analytics";
@@ -174,6 +175,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <GoogleAnalytics />
         </Suspense>
         <ScrollTracker />
+        <CookieConsentBanner />
         <Analytics />
         <SpeedInsights />
       </body>

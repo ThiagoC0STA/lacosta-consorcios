@@ -1,3 +1,4 @@
+import { COMPANY_FOUNDING_DATE_ISO, COMPANY_CNPJ_RAW, formatCnpj, LEGAL_COMPANY_NAME } from "../lib/legal";
 import { FAQ_ITEMS, SITE_URL, SITE_NAME } from "../lib/seo";
 
 const areaServedBrazil = {
@@ -10,7 +11,7 @@ const companyAddress = {
   streetAddress: "Rua da Capitania, 127",
   addressLocality: "Curitiba",
   addressRegion: "PR",
-  postalCode: "82510-080",
+  postalCode: "81520-590",
   addressCountry: "BR",
 };
 
@@ -26,6 +27,8 @@ export default function JsonLd() {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: SITE_NAME,
+    legalName: LEGAL_COMPANY_NAME,
+    taxID: formatCnpj(COMPANY_CNPJ_RAW),
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
@@ -48,7 +51,7 @@ export default function JsonLd() {
     sameAs: [
       "https://www.instagram.com/lacosta_corretora",
     ],
-    foundingDate: "2000",
+    foundingDate: COMPANY_FOUNDING_DATE_ISO,
   };
 
   const reviewSchemas = [
