@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, A11y } from "swiper/modules";
@@ -96,11 +95,29 @@ function SwiperNavButton({
       onClick={onClick}
     >
       {dir === "prev" ? (
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M15 19l-7-7 7-7" />
         </svg>
       ) : (
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M9 5l7 7-7 7" />
         </svg>
       )}
@@ -110,7 +127,6 @@ function SwiperNavButton({
 }
 
 export default function TestimonialsV2() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 });
   const swiperRef = useRef<any>(null);
 
   return (
@@ -122,14 +138,33 @@ export default function TestimonialsV2() {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(180deg, #021D40 0%, #022859 35%, #021D40 100%)",
+          background:
+            "linear-gradient(180deg, #021D40 0%, #022859 35%, #021D40 100%)",
         }}
       />
       {/* Radial glow orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-48 -right-48 w-[500px] h-[500px] rounded-full opacity-30" style={{ background: "radial-gradient(circle, rgba(4, 135, 217, 0.45) 0%, transparent 70%)" }} />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-25" style={{ background: "radial-gradient(circle, rgba(3, 90, 166, 0.5) 0%, transparent 70%)" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full opacity-12" style={{ background: "radial-gradient(circle, rgba(4, 135, 217, 0.35) 0%, transparent 65%)" }} />
+        <div
+          className="absolute -top-48 -right-48 w-[500px] h-[500px] rounded-full opacity-30"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(4, 135, 217, 0.45) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-25"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(3, 90, 166, 0.5) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full opacity-12"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(4, 135, 217, 0.35) 0%, transparent 65%)",
+          }}
+        />
       </div>
       {/* Dot grid */}
       <div
@@ -143,35 +178,31 @@ export default function TestimonialsV2() {
         <div className="px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
             className="text-center mb-6 sm:mb-8"
           >
             <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#0487D9] mb-4">
               Depoimentos reais
             </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-[1.1] mb-2 max-w-3xl mx-auto">
-              Histórias de{" "}
+              Clientes{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: "linear-gradient(135deg, #0487D9 0%, #5BB8FF 50%, #0487D9 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, #0487D9 0%, #5BB8FF 50%, #0487D9 100%)",
                 }}
               >
-                sucesso
+                contemplados
               </span>
             </h2>
-            <p className="text-sm sm:text-base text-white/60 max-w-xl mx-auto mb-6">
-              Veja o que nossos clientes têm a dizer
+            <p className="text-sm sm:text-base text-white/60 max-w-xl mx-auto mb-2">
+              Histórias reais de quem economizou milhares com consórcio
             </p>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.2 }}
-              className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-white/50"
-            >
+
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-white/50">
               <span className="inline-flex items-center gap-1">
                 <span className="font-semibold text-white/70">R$ 2.5M+</span>
                 <span>em economia</span>
@@ -186,13 +217,19 @@ export default function TestimonialsV2() {
                 <span className="font-semibold text-white/70">8.2 meses</span>
                 <span>média contemplação</span>
               </span>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Testimonial carousel - 2-3 cards per view */}
           <div className="relative">
-            <SwiperNavButton dir="prev" onClick={() => swiperRef.current?.slidePrev()} />
-            <SwiperNavButton dir="next" onClick={() => swiperRef.current?.slideNext()} />
+            <SwiperNavButton
+              dir="prev"
+              onClick={() => swiperRef.current?.slidePrev()}
+            />
+            <SwiperNavButton
+              dir="next"
+              onClick={() => swiperRef.current?.slideNext()}
+            />
 
             <Swiper
               modules={[Autoplay, Navigation, Pagination, A11y]}
@@ -200,7 +237,10 @@ export default function TestimonialsV2() {
               loop={true}
               onSwiper={(swiper: any) => (swiperRef.current = swiper)}
               autoplay={{ delay: 5000, disableOnInteraction: false }}
-              pagination={{ clickable: true, el: ".testimonials-v2-pagination" }}
+              pagination={{
+                clickable: true,
+                el: ".testimonials-v2-pagination",
+              }}
               breakpoints={{
                 640: { slidesPerView: 1 },
                 768: { slidesPerView: 2 },
@@ -232,21 +272,27 @@ export default function TestimonialsV2() {
                         <div
                           className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
                           style={{
-                            background: "linear-gradient(135deg, #0487D9 0%, #035AA6 100%)",
+                            background:
+                              "linear-gradient(135deg, #0487D9 0%, #035AA6 100%)",
                             boxShadow: "0 0 0 2px rgba(4, 135, 217, 0.3)",
                           }}
                         >
                           {getInitials(t.name)}
                         </div>
                         <div>
-                          <p className="font-bold text-white text-sm">{t.name}</p>
+                          <p className="font-bold text-white text-sm">
+                            {t.name}
+                          </p>
                           <p className="text-white/50 text-xs">{t.role}</p>
                         </div>
                       </div>
 
                       <div className="flex gap-0.5 mb-2">
                         {[...Array(t.rating)].map((_, i) => (
-                          <StarIcon key={i} className="h-4 w-4 text-amber-400" />
+                          <StarIcon
+                            key={i}
+                            className="h-4 w-4 text-amber-400"
+                          />
                         ))}
                       </div>
 
@@ -286,7 +332,6 @@ export default function TestimonialsV2() {
               <div className="testimonials-v2-pagination swiper-pagination testimonials-v2 flex gap-2" />
             </div>
           </div>
-
         </div>
       </Container>
 
@@ -297,13 +342,13 @@ export default function TestimonialsV2() {
         .testimonials-v2 .swiper-pagination-bullet {
           width: 10px;
           height: 10px;
-          background: rgba(255,255,255,0.3) !important;
+          background: rgba(255, 255, 255, 0.3) !important;
           opacity: 1;
           margin: 0 4px !important;
           transition: all 0.3s;
         }
         .testimonials-v2 .swiper-pagination-bullet-active {
-          background: #0487D9 !important;
+          background: #0487d9 !important;
           transform: scale(1.3);
           box-shadow: 0 0 12px rgba(4, 135, 217, 0.6);
         }

@@ -13,8 +13,7 @@
     "build": "next build",
     "og:compress": "node scripts/compress-og.js",
     "start": "next start",
-    "lint": "next lint",
-    "postbuild": "next-sitemap"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -32,7 +31,6 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.0.0",
     "next": "^16.0.10",
-    "next-sitemap": "^4.2.3",
     "postcss": "^8.5.4",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",

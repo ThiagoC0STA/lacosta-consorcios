@@ -11,17 +11,17 @@ import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
 import { trackCalculatorInteraction } from "../lib/analytics";
 
 const OBJETIVOS = [
-  { label: "Imóvel", value: "imoveis", image: "/items/imovel.png", icon: FaHome, tip: "O sonho da casa própria", confirmMsg: "O sonho da casa própria com parcelas que cabem no bolso" },
-  { label: "Veículos", value: "veiculos", image: "/items/veiculos.png", icon: FaCar, tip: "Seu carro ou moto sem juros", confirmMsg: "Seu carro ou moto zero sem juros. Simule agora!" },
-  { label: "Estética", value: "estetica", image: "/items/estetica.jpg", icon: FaSpa, tip: "Harmonização e autocuidado", confirmMsg: "Invista em você: estética e bem-estar com parcelas sem juros" },
-  { label: "Investimento", value: "investimento", image: "/items/invest.png", icon: FaChartLine, tip: "Planejamento financeiro", confirmMsg: "Planejamento financeiro com segurança e sem juros" },
-  { label: "Embarcações", value: "embarcacoes", image: "/items/embarcacao.png", icon: FaShip, tip: "Lancha, veleiro, barco e muito mais", confirmMsg: "Lancha, veleiro ou barco, realize seu sonho náutico" },
-  { label: "Serviços", value: "servicos", image: "/items/servicos.png", icon: FaBriefcase, tip: "Expanda seu negócio", confirmMsg: "Expanda seu negócio sem juros e com parcelas flexíveis" },
-  { label: "Agronegócio", value: "agronegocio", image: "/items/agro.png", icon: FaSeedling, tip: "Maquinário e imóvel rural", confirmMsg: "Maquinário e imóvel rural. O campo agradece!" },
-  { label: "Educação", value: "educacao", image: "/items/educacao.png", icon: FaGraduationCap, tip: "Cursos e formaturas", confirmMsg: "Investir em educação é investir no futuro" },
-  { label: "Saúde", value: "saude", image: "/items/saude.png", icon: FaStethoscope, tip: "Procedimentos médicos", confirmMsg: "Cuide da saúde com parcelas acessíveis e sem juros" },
-  { label: "Reforma", value: "reforma", image: "/items/reforma.png", icon: FaTools, tip: "Reforma ou ampliação", confirmMsg: "Reforma ou ampliação sem apertar o orçamento" },
-  { label: "Outro", value: "outro", image: "/items/outro.png", icon: FaEllipsisH, tip: "Conte-nos o que você precisa", confirmMsg: "Conte-nos o que você precisa e vamos encontrar a melhor solução" },
+  { label: "Imóvel", value: "imoveis", image: "/items/imovel.png", icon: FaHome, tip: "O sonho da casa própria", confirmMsg: "O sonho da casa própria com parcelas que cabem no bolso", alt: "Consórcio de imóvel sem juros — casa própria com parcelas acessíveis" },
+  { label: "Veículos", value: "veiculos", image: "/items/veiculos.png", icon: FaCar, tip: "Seu carro ou moto sem juros", confirmMsg: "Seu carro ou moto zero sem juros. Simule agora!", alt: "Consórcio de veículo — carro ou moto zero sem juros" },
+  { label: "Estética", value: "estetica", image: "/items/estetica.jpg", icon: FaSpa, tip: "Harmonização e autocuidado", confirmMsg: "Invista em você: estética e bem-estar com parcelas sem juros", alt: "Consórcio para estética e harmonização facial sem juros" },
+  { label: "Investimento", value: "investimento", image: "/items/invest.png", icon: FaChartLine, tip: "Planejamento financeiro", confirmMsg: "Planejamento financeiro com segurança e sem juros", alt: "Consórcio para investimento e planejamento financeiro" },
+  { label: "Embarcações", value: "embarcacoes", image: "/items/embarcacao.png", icon: FaShip, tip: "Lancha, veleiro, barco e muito mais", confirmMsg: "Lancha, veleiro ou barco, realize seu sonho náutico", alt: "Consórcio de embarcações — lancha, veleiro e barco sem juros" },
+  { label: "Serviços", value: "servicos", image: "/items/servicos.png", icon: FaBriefcase, tip: "Expanda seu negócio", confirmMsg: "Expanda seu negócio sem juros e com parcelas flexíveis", alt: "Consórcio de serviços para expandir seu negócio" },
+  { label: "Agronegócio", value: "agronegocio", image: "/items/agro.png", icon: FaSeedling, tip: "Maquinário e imóvel rural", confirmMsg: "Maquinário e imóvel rural. O campo agradece!", alt: "Consórcio para agronegócio — maquinário e imóvel rural" },
+  { label: "Educação", value: "educacao", image: "/items/educacao.png", icon: FaGraduationCap, tip: "Cursos e formaturas", confirmMsg: "Investir em educação é investir no futuro", alt: "Consórcio para educação — cursos e formação profissional" },
+  { label: "Saúde", value: "saude", image: "/items/saude.png", icon: FaStethoscope, tip: "Procedimentos médicos", confirmMsg: "Cuide da saúde com parcelas acessíveis e sem juros", alt: "Consórcio para saúde — procedimentos médicos sem juros" },
+  { label: "Reforma", value: "reforma", image: "/items/reforma.png", icon: FaTools, tip: "Reforma ou ampliação", confirmMsg: "Reforma ou ampliação sem apertar o orçamento", alt: "Consórcio para reforma e ampliação residencial" },
+  { label: "Outro", value: "outro", image: "/items/outro.png", icon: FaEllipsisH, tip: "Conte-nos o que você precisa", confirmMsg: "Conte-nos o que você precisa e vamos encontrar a melhor solução", alt: "Outros tipos de consórcio — encontre a melhor solução" },
 ];
 
 const RANGES = {
@@ -190,7 +190,7 @@ export default function HeroCalculatorV2() {
                             {obj.image ? (
                               <Image
                                 src={obj.image}
-                                alt={obj.label}
+                                alt={obj.alt}
                                 width={160}
                                 height={120}
                                 sizes="(max-width: 480px) 140px, 160px"

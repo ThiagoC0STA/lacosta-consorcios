@@ -162,7 +162,7 @@ export default function BenefitsV2() {
               </span>
             </motion.div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-4 max-w-4xl mx-auto">
-              Por que escolher nossos{" "}
+              Vantagens do{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -170,12 +170,11 @@ export default function BenefitsV2() {
                     "linear-gradient(135deg, #0487D9 0%, #5BB8FF 50%, #0487D9 100%)",
                 }}
               >
-                consórcios?
+                consórcio sem juros
               </span>
             </h2>
             <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
-              Condições que fazem a diferença para realizar seus sonhos com
-              segurança
+              Condições exclusivas que fazem a diferença para realizar seus sonhos com segurança e economia
             </p>
           </motion.div>
 

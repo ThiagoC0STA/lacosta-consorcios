@@ -14,13 +14,12 @@ import "swiper/css";
 /* Defer YouTube iframes until section is in view to avoid i.ytimg.com preconnects on initial load.
  * Pablo Marcál video first. */
 const videoShorts = [
-  { id: "1UMiK9nZxfI", embedUrl: "https://www.youtube-nocookie.com/embed/1UMiK9nZxfI" },
-  { id: "6nOewFgXIy4", embedUrl: "https://www.youtube-nocookie.com/embed/6nOewFgXIy4" },
-  { id: "KO0Hpkn4r94", embedUrl: "https://www.youtube-nocookie.com/embed/KO0Hpkn4r94" },
-  { id: "gfOn6u1I4xs", embedUrl: "https://www.youtube-nocookie.com/embed/gfOn6u1I4xs" },
-  { id: "vyZxbxuUZ5g", embedUrl: "https://www.youtube-nocookie.com/embed/vyZxbxuUZ5g" },
-  { id: "C0qW0ldci2E", embedUrl: "https://www.youtube-nocookie.com/embed/C0qW0ldci2E" },
-
+  { id: "1UMiK9nZxfI", embedUrl: "https://www.youtube-nocookie.com/embed/1UMiK9nZxfI", title: "Pablo Marcál fala sobre consórcio como investimento inteligente" },
+  { id: "6nOewFgXIy4", embedUrl: "https://www.youtube-nocookie.com/embed/6nOewFgXIy4", title: "Dicas práticas sobre consórcio de imóvel e veículo" },
+  { id: "KO0Hpkn4r94", embedUrl: "https://www.youtube-nocookie.com/embed/KO0Hpkn4r94", title: "Depoimento de cliente contemplado em consórcio Servopa" },
+  { id: "gfOn6u1I4xs", embedUrl: "https://www.youtube-nocookie.com/embed/gfOn6u1I4xs", title: "Como funciona a contemplação no consórcio" },
+  { id: "vyZxbxuUZ5g", embedUrl: "https://www.youtube-nocookie.com/embed/vyZxbxuUZ5g", title: "Vantagens do consórcio vs financiamento tradicional" },
+  { id: "C0qW0ldci2E", embedUrl: "https://www.youtube-nocookie.com/embed/C0qW0ldci2E", title: "Novidades do mercado de consórcios no Brasil" },
 ];
 
 const benefits = [
@@ -38,11 +37,6 @@ const benefits = [
     icon: <FaChartLine className="text-2xl" />,
     title: "Informações Atualizadas",
     description: "Conteúdos sobre as últimas novidades e tendências do mercado.",
-  },
-  {
-    icon: <FaYoutube className="text-2xl" />,
-    title: "Pablo Marcál",
-    description: "Conteúdos exclusivos sobre consórcios do canal Pablo Marcál.",
   },
 ];
 
@@ -75,11 +69,34 @@ export default function VideoReelsSectionV2() {
     else swiperRef.current?.slideNext();
   };
 
+  const videoSchemas = videoShorts.map((v) => ({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: v.title,
+    description: `Conteúdo sobre consórcio: ${v.title}. Dicas e informações sobre consórcios Servopa e Rodobens.`,
+    thumbnailUrl: `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`,
+    uploadDate: "2025-01-01",
+    contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
+    embedUrl: v.embedUrl,
+    publisher: {
+      "@type": "Organization",
+      name: "Lacosta Consórcios",
+      url: "https://www.lacostaconsorcios.com.br",
+    },
+  }));
+
   return (
     <section
       id="conteudos"
       className="relative py-12 sm:py-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden scroll-mt-20 md:scroll-mt-0"
     >
+      {videoSchemas.map((schema, i) => (
+        <script
+          key={`video-schema-${i}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
@@ -108,11 +125,10 @@ export default function VideoReelsSectionV2() {
                 </span>
               </motion.div>
               <h2 className="text-3xl md:text-4xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
-                Descubra{" "}
+                Conteúdos sobre{" "}
                 <span className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 bg-clip-text text-transparent">
-                  dicas e conteúdos
-                </span>{" "}
-                sobre consórcios
+                  consórcio e investimento
+                </span>
               </h2>
               <p className="text-base md:text-lg text-gray-700 leading-relaxed font-medium">
                 Confira <strong className="text-red-700 font-bold">vídeos selecionados</strong> com dicas,{" "}
@@ -192,7 +208,7 @@ export default function VideoReelsSectionV2() {
                       <iframe
                         ref={(el) => { if (el) iframeRefs.current[index] = el; }}
                         src={`${video.embedUrl}?autoplay=0&controls=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1`}
-                        title={`Vídeo ${index + 1}`}
+                        title={video.title}
                         className="w-full h-full"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen

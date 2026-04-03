@@ -6,8 +6,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: SITE_URL,
       lastModified: new Date(),
-      changeFrequency: "weekly" as const,
+      changeFrequency: "weekly",
       priority: 1,
+      alternates: {
+        languages: {
+          "pt-BR": SITE_URL,
+        },
+      },
     },
   ];
 }

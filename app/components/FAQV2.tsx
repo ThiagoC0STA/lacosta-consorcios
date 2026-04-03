@@ -39,13 +39,13 @@ export default function FAQV2() {
               </span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-900 mb-2">
-              Perguntas{" "}
+              Dúvidas sobre{" "}
               <span className="bg-gradient-to-r from-[#0487D9] to-[#035AA6] bg-clip-text text-transparent">
-                frequentes
+                consórcio
               </span>
             </h2>
             <p className="text-sm sm:text-base text-neutral-600 max-w-xl mx-auto">
-              Respostas para as dúvidas mais comuns sobre consórcios
+              Respostas completas sobre como funciona, taxas, contemplação e mais
             </p>
           </motion.div>
 

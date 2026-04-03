@@ -78,8 +78,8 @@ export default function InvestmentMindsetSectionV2() {
                 Por que consórcio faz sentido
               </div>
               <h2 className="text-balance text-3xl font-bold leading-[1.15] text-white sm:text-4xl md:text-5xl lg:text-[2.75rem]">
-                Financiamento cobra juros que{" "}
-                <span className="text-slate-500">você nem vê na parcela.</span>
+                Consórcio vs financiamento:{" "}
+                <span className="text-slate-500">onde vão seus juros?</span>
                 <br className="hidden sm:block" />
                 <span className="text-[#7eb8ff]">No consórcio, o dinheiro vira crédito na sua mão.</span>
               </h2>

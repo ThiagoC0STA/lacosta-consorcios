@@ -73,10 +73,10 @@ export default function PartnersSectionV2() {
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-[1.15] mb-4 sm:mb-5">
-                Administradoras que fazem a diferença
+                Parceiros oficiais Servopa e Rodobens
               </h2>
               <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-8 max-w-sm">
-                Lacosta trabalha exclusivamente com Servopa e Rodobens, líderes em consórcios no Brasil.
+                A Lacosta Consórcios trabalha exclusivamente com as administradoras Servopa e Rodobens, líderes do mercado de consórcios no Brasil há mais de 25 anos.
               </p>
               <div className="flex flex-wrap lg:flex-nowrap gap-x-6 sm:gap-x-8 gap-y-3 sm:gap-y-4 lg:gap-y-0">
                 {STATS.map((s, i) => (
@@ -97,7 +97,9 @@ export default function PartnersSectionV2() {
                       <s.icon className="text-base sm:text-lg" style={{ color: s.accent }} />
                     </div>
                     <div>
-                      <div className="text-base sm:text-lg font-bold text-white">{s.value}</div>
+                      <div className="text-base sm:text-lg font-bold text-white whitespace-nowrap">
+                        {s.value}
+                      </div>
                       <div className="text-[10px] sm:text-[11px] text-neutral-500">{s.label}</div>
                     </div>
                   </motion.div>
@@ -146,7 +148,7 @@ export default function PartnersSectionV2() {
                       <div className="shrink-0 w-20 sm:w-28 h-10 sm:h-12 flex items-center justify-center bg-white rounded-lg sm:rounded-xl p-2 sm:p-2.5 shadow-sm border border-neutral-100">
                         <Image
                           src={p.logo}
-                          alt={p.name}
+                          alt={`Logo ${p.name} — ${p.badge} Lacosta Consórcios`}
                           width={112}
                           height={48}
                           sizes="(max-width: 640px) 80px, 112px"

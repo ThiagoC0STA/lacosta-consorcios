@@ -88,7 +88,7 @@ export default function HeaderV2() {
               >
                 <Image
                   src="/logo-5.png"
-                  alt="Lacosta Consórcios"
+                  alt="Lacosta Consórcios — parceiro oficial Servopa e Rodobens"
                   width={163}
                   height={48}
                   sizes="(max-width: 768px) 160px, 200px"
@@ -133,7 +133,7 @@ export default function HeaderV2() {
             </div>
 
             <div className="hidden md:flex md:items-center md:gap-6 lg:gap-8">
-              <nav className="flex items-center gap-6 lg:gap-8">
+              <nav aria-label="Navegação principal" className="flex items-center gap-6 lg:gap-8">
                 {NAV_LINKS.map((link) => (
                   <Link
                     key={link.href}
@@ -196,7 +196,7 @@ export default function HeaderV2() {
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <div className="flex h-full w-72 flex-col bg-white p-6">
           <div className="flex items-center justify-between">
-            <Image src="/logo-5.png" alt="Lacosta" width={120} height={36} sizes="160px" quality={95} className="h-10 w-auto object-contain" />
+            <Image src="/logo-5.png" alt="Lacosta Consórcios" width={120} height={36} sizes="160px" quality={95} className="h-10 w-auto object-contain" />
             <button
               className="flex h-10 w-10 items-center justify-center text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-700"
               onClick={() => setOpen(false)}
@@ -226,7 +226,7 @@ export default function HeaderV2() {
               quality={80}
             />
           </div>
-          <nav className="mt-6 flex flex-1 flex-col gap-1">
+          <nav aria-label="Menu mobile" className="mt-6 flex flex-1 flex-col gap-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

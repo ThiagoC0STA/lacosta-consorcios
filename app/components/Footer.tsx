@@ -20,12 +20,15 @@ const socialLinks = [
 ];
 
 const navLinks = [
-  { label: "Simule agora", href: "#contato" },
-  { label: "Vantagens", href: "#vantagens" },
-  { label: "Como funciona", href: "#como-funciona" },
+  { label: "Simular consórcio", href: "#simulacao" },
+  { label: "Vantagens do consórcio", href: "#vantagens" },
+  { label: "Como funciona o consórcio", href: "#como-funciona" },
+  { label: "Perguntas frequentes", href: "#faq" },
+  { label: "Conteúdos sobre consórcio", href: "#conteudos" },
+  { label: "Fale com um especialista", href: "#contato" },
 ];
 
-function SocialLink({ href, icon: Icon, name }: { href: string; icon: any; name: string }) {
+function SocialLink({ href, icon: Icon, name }: { href: string; icon: React.ElementType; name: string }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (name === "WhatsApp") {
       handleWhatsAppClick(href, e, "footer");
@@ -38,7 +41,7 @@ function SocialLink({ href, icon: Icon, name }: { href: string; icon: any; name:
       className="group text-gray-400 hover:text-white transition-colors"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={name}
+      aria-label={`Siga a Lacosta Consórcios no ${name}`}
       onClick={handleClick}
     >
       <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 group-hover:bg-[var(--primary-1)]/20 transition-all shadow-md">
@@ -55,8 +58,7 @@ export default function Footer() {
   });
 
   return (
-    <footer className="bg-gray-900 text-white relative overflow-hidden py-20">
-      {/* Gradiente decorativo */}
+    <footer className="bg-gray-900 text-white relative overflow-hidden py-20" role="contentinfo">
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[var(--primary-1)]/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[var(--primary-4)]/10 rounded-full blur-3xl" />
@@ -70,12 +72,12 @@ export default function Footer() {
           className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 items-start"
         >
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-extrabold mb-4 tracking-tight text-white">
+            <p className="text-2xl font-extrabold mb-4 tracking-tight text-white">
               Lacosta Consórcios
-            </h3>
+            </p>
             <p className="text-gray-400 mb-6 max-w-md">
-              Transformando sonhos em realidade através de consórcios seguros e
-              confiáveis.
+              Assessoria especializada em consórcio Servopa e Rodobens em todo o Brasil.
+              Mais de 25 anos transformando sonhos em realidade com segurança e sem juros.
             </p>
             <div className="flex space-x-4 mt-4">
               {socialLinks.map((social) => (
@@ -89,46 +91,47 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">
-              Links Rápidos
-            </h4>
+          <nav aria-label="Links do rodapé">
+            <p className="text-lg font-semibold mb-4 text-white">
+              Navegação
+            </p>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-[var(--primary-1)] font-medium transition-colors duration-200"
+                    className="text-gray-400 hover:text-[var(--primary-5)] font-medium transition-colors duration-200"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">Contato</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>Rua da Capitania, 127</li>
-              <li>Guabirotuba - Curitiba</li>
-              <li>
+            <p className="text-lg font-semibold mb-4 text-white">Contato</p>
+            <address className="not-italic space-y-2 text-gray-400">
+              <p>Rua da Capitania, 127</p>
+              <p>Guabirotuba — Curitiba, PR</p>
+              <p>CEP: 82510-080</p>
+              <p>
                 <a
                   href="mailto:luciano@lacostacorretora.com.br"
-                  className="hover:text-[var(--primary-4)] transition-colors"
+                  className="hover:text-[var(--primary-5)] transition-colors"
                 >
                   luciano@lacostacorretora.com.br
                 </a>
-              </li>
-              <li>
+              </p>
+              <p>
                 <a
                   href="tel:+554130761050"
-                  className="hover:text-[var(--primary-4)] transition-colors"
+                  className="hover:text-[var(--primary-5)] transition-colors"
                 >
                   (41) 3076-1050
                 </a>
-              </li>
-            </ul>
+              </p>
+            </address>
           </div>
         </motion.div>
 
@@ -136,7 +139,7 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()}{" "}
             <span className="font-bold text-white">Lacosta Consórcios</span>.
-            Todos os direitos reservados.
+            Todos os direitos reservados. Consórcios regulamentados pelo Banco Central do Brasil.
           </p>
         </div>
       </Container>

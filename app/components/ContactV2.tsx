@@ -94,7 +94,7 @@ export default function ContactV2() {
               </span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-[1.1] mb-3 max-w-2xl mx-auto">
-              Simule e{" "}
+              Simule seu{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -102,12 +102,11 @@ export default function ContactV2() {
                     "linear-gradient(135deg, #0487D9 0%, #5BB8FF 50%, #0487D9 100%)",
                 }}
               >
-                realize seu sonho
+                consórcio grátis
               </span>
             </h2>
             <p className="text-sm sm:text-base text-white/60 max-w-xl mx-auto mb-6">
-              Nossa equipe está pronta para ajudar. Simule seu consórcio e tire
-              todas as suas dúvidas.
+              Descubra quanto você economiza em comparação ao financiamento. Simulação rápida, sem compromisso.
             </p>
 
             <motion.div

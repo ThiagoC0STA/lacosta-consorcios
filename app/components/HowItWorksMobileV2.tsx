@@ -19,6 +19,7 @@ const STEPS = [
       "Flexibilidade total de crédito",
     ],
     img: "/plan.jpg",
+    imgAlt: "Simulação de consórcio online — escolha o plano ideal sem juros",
   },
   {
     title: "Análise e Contrato",
@@ -30,6 +31,7 @@ const STEPS = [
       "Consultor dedicado para te auxiliar",
     ],
     img: "/papelada.jpg",
+    imgAlt: "Análise de crédito e contrato digital do consórcio Servopa e Rodobens",
   },
   {
     title: "Participe e Contemple",
@@ -41,6 +43,7 @@ const STEPS = [
       "Acompanhe online seu grupo",
     ],
     img: "/time-is-money.jpg",
+    imgAlt: "Contemplação do consórcio por sorteio ou lance estratégico",
   },
   {
     title: "Realize Seu Sonho",
@@ -52,6 +55,7 @@ const STEPS = [
       "Suporte total na aquisição do bem",
     ],
     img: "/couple.jpg",
+    imgAlt: "Casal realizando o sonho da casa própria com carta de crédito do consórcio",
   },
 ];
 
@@ -152,8 +156,10 @@ export default function HowItWorksMobileV2() {
                     <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100 mb-4">
                       <Image
                         src={step.img}
-                        alt={step.title}
+                        alt={step.imgAlt}
                         fill
+                        sizes="300px"
+                        loading="lazy"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

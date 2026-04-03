@@ -20,9 +20,9 @@ const inter = Inter({
 });
 
 const defaultTitle =
-  "Lacosta Consórcios - Consórcio Servopa e Rodobens no Brasil | Parceiros oficiais";
+  "Consórcio Servopa e Rodobens | Simule Grátis Sem Juros - Lacosta";
 const defaultDescription =
-  "Parceiros oficiais Servopa e Rodobens. Consórcio de imóvel, veículo e investimento em todo o Brasil, 100% sem juros. +25 anos, +5.000 clientes. Simule grátis!";
+  "Simule seu consórcio Servopa e Rodobens 100% sem juros. Imóvel, veículo, investimento e mais em todo o Brasil. +25 anos de mercado, +5.000 clientes satisfeitos. Assessoria especializada Lacosta.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   description: defaultDescription,
   keywords:
-    "consórcio Servopa, consórcio Rodobens, consórcio Brasil, parceiro Servopa, parceiro Rodobens, consórcio imóvel, consórcio veículo, simular consórcio, consórcio sem juros, corretora consórcio, consórcio investimento, financiamento imobiliário sem juros, consórcio imobiliário, consórcio automotivo",
+    "consórcio Servopa, consórcio Rodobens, simular consórcio, consórcio sem juros, consórcio imóvel, consórcio veículo, consórcio investimento, consórcio Brasil, consórcio contemplação, carta de crédito consórcio, consórcio imobiliário Curitiba, consórcio automotivo, lance consórcio, parcela consórcio",
   authors: [{ name: "Lacosta Consórcios", url: SITE_URL }],
   creator: "Lacosta Consórcios",
   publisher: "Lacosta Consórcios",
@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
     languages: {
       "pt-BR": SITE_URL,
+      "x-default": SITE_URL,
     },
   },
   formatDetection: {
@@ -53,22 +54,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: SITE_URL,
-    title: defaultTitle,
-    description: defaultDescription,
+    title: "Consórcio Servopa e Rodobens | Sem Juros - Lacosta Consórcios",
+    description:
+      "Consórcio 100% sem juros com parceiros oficiais Servopa e Rodobens. Imóvel, veículo, investimento e mais. Simule grátis e economize milhares de reais.",
     siteName: "Lacosta Consórcios",
     images: [
       {
         url: `${SITE_URL}/lacosta-card-og.jpg`,
         width: 1200,
         height: 630,
-        alt: "Lacosta Consórcios, consórcio Servopa e Rodobens em todo o Brasil",
+        alt: "Lacosta Consórcios — Simule seu consórcio Servopa e Rodobens sem juros em todo o Brasil",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: defaultTitle,
-    description: defaultDescription,
+    title: "Consórcio Servopa e Rodobens | Sem Juros - Lacosta Consórcios",
+    description:
+      "Consórcio 100% sem juros. Imóvel, veículo, investimento e mais. +25 anos, +5.000 clientes. Simule grátis!",
     images: [`${SITE_URL}/lacosta-card-og.jpg`],
     creator: "@lacostaconsorcios",
   },
@@ -85,6 +88,9 @@ export const metadata: Metadata = {
   },
   other: {
     "geo.region": "BR-PR",
+    "geo.placename": "Curitiba",
+    "geo.position": "-25.4537;-49.2455",
+    "ICBM": "-25.4537, -49.2455",
   },
 };
 
@@ -96,6 +102,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
+        <link rel="dns-prefetch" href="https://wa.me" />
+
         <Script id="google-tag-manager" strategy="beforeInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
