@@ -9,6 +9,10 @@ import FloatingWhatsappButtonV2 from "./components/FloatingWhatsappButtonV2";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import ScrollTracker from "./components/ScrollTracker";
 import CookieConsentBanner from "./components/CookieConsentBanner";
+import ExitIntentPopup from "./components/ExitIntentPopup";
+import StickyCtaBar from "./components/StickyCtaBar";
+import SiteTracker from "./components/SiteTracker";
+import PublicChrome from "./components/PublicChrome";
 import Script from "next/script";
 import { Suspense } from "react";
 import { GA4_MEASUREMENT_ID, GTM_CONTAINER_ID } from "./lib/analytics";
@@ -168,14 +172,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             title="Google Tag Manager"
           />
         </noscript>
-        <HeaderV2 />
+        <PublicChrome>
+          <HeaderV2 />
+        </PublicChrome>
         {children}
-        <FloatingWhatsappButtonV2 />
-        <Suspense fallback={null}>
-          <GoogleAnalytics />
-        </Suspense>
-        <ScrollTracker />
-        <CookieConsentBanner />
+        <PublicChrome>
+          <FloatingWhatsappButtonV2 />
+          <Suspense fallback={null}>
+            <GoogleAnalytics />
+          </Suspense>
+          <ScrollTracker />
+          <CookieConsentBanner />
+          <ExitIntentPopup />
+          <StickyCtaBar />
+        </PublicChrome>
+        <SiteTracker />
         <Analytics />
         <SpeedInsights />
       </body>

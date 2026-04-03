@@ -64,7 +64,7 @@ export default function Footer() {
   });
 
   return (
-    <footer className="bg-gray-900 text-white relative overflow-hidden py-20" role="contentinfo">
+    <footer className="bg-gray-900 text-white relative overflow-hidden py-20 pb-28 md:pb-20" role="contentinfo">
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[var(--primary-1)]/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[var(--primary-4)]/10 rounded-full blur-3xl" />

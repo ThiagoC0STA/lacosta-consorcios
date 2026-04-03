@@ -9,6 +9,7 @@ import ContactV2 from "./components/ContactV2";
 import Footer from "./components/Footer";
 import PartnersSectionV2 from "./components/PartnersSectionV2";
 import VideoReelsSectionV2 from "./components/VideoReelsSectionV2";
+import ComparatorSection from "./components/ComparatorSection";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <InvestmentMindsetSectionV2 />
       <PartnersSectionV2 />
       <BenefitsV2 />
+      <ComparatorSection />
       <HowItWorksV2 />
       <TestimonialsV2 />
       <FAQV2 />

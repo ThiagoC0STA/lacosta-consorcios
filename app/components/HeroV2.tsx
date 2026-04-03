@@ -13,6 +13,7 @@ import {
 import HeroCalculatorV2 from "./HeroCalculatorV2";
 import Image from "next/image";
 import Container from "./Container";
+import { useUtmParams, inferCategoryFromUtm } from "../lib/useUtmParams";
 
 const TRUST_ITEMS = [
   { icon: FaAward, value: "+25 anos", label: "Mercado", accent: "var(--primary-5)" },
@@ -20,12 +21,24 @@ const TRUST_ITEMS = [
   { icon: FaChartLine, value: "4.9/5", label: "Avaliação", accent: "var(--primary-5)" },
 ];
 
+const UTM_HEADLINES: Record<string, { main: string; sub: string }> = {
+  imoveis: { main: "Consórcio de Imóvel", sub: "A casa própria sem juros está mais perto do que você imagina." },
+  veiculos: { main: "Consórcio de Veículo", sub: "Seu carro zero sem juros. Parcelas que cabem no bolso." },
+  investimento: { main: "Consórcio como Investimento", sub: "Planejamento financeiro inteligente, sem juros bancários." },
+  embarcacoes: { main: "Consórcio de Embarcações", sub: "Lancha, veleiro ou barco sem juros. Realize seu sonho náutico." },
+  estetica: { main: "Consórcio para Estética", sub: "Harmonização e autocuidado com parcelas sem juros." },
+};
+
 export default function HeroV2() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const reducedMotion = useReducedMotion();
   const [simulationCount, setSimulationCount] = useState(0);
   const [targetCount, setTargetCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const utm = useUtmParams();
+  const utmCategory = inferCategoryFromUtm(utm);
+  const utmHeadline = utmCategory ? UTM_HEADLINES[utmCategory] : null;
 
   useEffect(() => {
     setTargetCount(Math.floor(Math.random() * 15) + 34);
@@ -94,17 +107,31 @@ export default function HeroV2() {
           >
             {/* Headline */}
             <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl md:text-[3.05rem] md:leading-[1.12] leading-tight">
-                <span className="font-bold text-white">Consórcio </span>
-                <span className="font-extrabold text-[#B9073C]">Servopa</span>
-                <span className="font-bold text-white"> e </span>
-                <span className="font-extrabold text-[#249AAA]">Rodobens</span>
-                <span className="font-bold text-white"> em todo o Brasil</span>
-              </h1>
-              <p className="text-sm md:text-base text-neutral-400 max-w-xl mx-auto lg:mx-0">
-                Quanto você pagaria de juros no banco sem perceber?{" "}
-                <span className="font-semibold text-white">Consórcio não tem juros.</span>
-              </p>
+              {utmHeadline ? (
+                <>
+                  <h1 className="text-4xl sm:text-5xl md:text-[3.05rem] md:leading-[1.12] leading-tight">
+                    <span className="font-extrabold text-white">{utmHeadline.main}</span>
+                    <span className="font-bold text-white"> sem juros em todo o Brasil</span>
+                  </h1>
+                  <p className="text-sm md:text-base text-neutral-400 max-w-xl mx-auto lg:mx-0">
+                    {utmHeadline.sub}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h1 className="text-4xl sm:text-5xl md:text-[3.05rem] md:leading-[1.12] leading-tight">
+                    <span className="font-bold text-white">Consórcio </span>
+                    <span className="font-extrabold text-[#B9073C]">Servopa</span>
+                    <span className="font-bold text-white"> e </span>
+                    <span className="font-extrabold text-[#249AAA]">Rodobens</span>
+                    <span className="font-bold text-white"> em todo o Brasil</span>
+                  </h1>
+                  <p className="text-sm md:text-base text-neutral-400 max-w-xl mx-auto lg:mx-0">
+                    Quanto você pagaria de juros no banco sem perceber?{" "}
+                    <span className="font-semibold text-white">Consórcio não tem juros.</span>
+                  </p>
+                </>
+              )}
             </div>
 
             {/* Benefit pills - compact */}
@@ -200,7 +227,7 @@ export default function HeroV2() {
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.15 }}
             className="hidden shrink-0 justify-center lg:flex lg:justify-end"
           >
-            <HeroCalculatorV2 />
+            <HeroCalculatorV2 initialCategory={utmCategory ?? undefined} />
           </motion.div>
         </div>
       </Container>
@@ -232,7 +259,7 @@ export default function HeroV2() {
               </button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto flex justify-center p-4 pb-6">
-              <HeroCalculatorV2 />
+              <HeroCalculatorV2 initialCategory={utmCategory ?? undefined} />
             </div>
           </motion.div>
         </div>

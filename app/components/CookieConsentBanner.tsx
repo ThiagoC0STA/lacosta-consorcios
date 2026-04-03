@@ -37,6 +37,7 @@ export default function CookieConsentBanner() {
       window.dataLayer.push({ event: "cookie_consent_accepted" });
     }
     setOpen(false);
+    window.dispatchEvent(new Event("cookie-consent-changed"));
   };
 
   if (!open) return null;

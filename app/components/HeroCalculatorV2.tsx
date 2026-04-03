@@ -2,13 +2,19 @@
 
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaHome, FaCar, FaChartLine, FaBriefcase, FaChevronLeft, FaChevronRight, FaCheckCircle, FaSeedling, FaGraduationCap, FaStethoscope, FaTools, FaEllipsisH, FaShip, FaSpa } from "react-icons/fa";
+import {
+  FaHome, FaCar, FaChartLine, FaBriefcase, FaChevronLeft,
+  FaChevronRight, FaCheckCircle, FaSeedling, FaGraduationCap,
+  FaStethoscope, FaTools, FaEllipsisH, FaShip, FaSpa,
+} from "react-icons/fa";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { WHATSAPP_PHONE_NUMBER } from "../lib/constants";
 import { trackCalculatorInteraction } from "../lib/analytics";
+import { useUtmParams } from "../lib/useUtmParams";
+import { trackEvent } from "../lib/trackEvent";
 
 const OBJETIVOS = [
   { label: "Imóvel", value: "imoveis", image: "/items/imovel.png", icon: FaHome, tip: "O sonho da casa própria", confirmMsg: "O sonho da casa própria com parcelas que cabem no bolso", alt: "Consórcio de imóvel sem juros — casa própria com parcelas acessíveis" },
@@ -37,10 +43,25 @@ const slideVariants = {
   exitPrev: { opacity: 0, x: 48, filter: "blur(2px)" },
 };
 
-export default function HeroCalculatorV2() {
+function formatPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+interface CalculatorProps {
+  initialCategory?: string;
+}
+
+export default function HeroCalculatorV2({ initialCategory }: CalculatorProps) {
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState<"next" | "prev">("next");
-  const [objetivo, setObjetivo] = useState("imoveis");
+  const [objetivo, setObjetivo] = useState(
+    initialCategory && OBJETIVOS.some((o) => o.value === initialCategory)
+      ? initialCategory
+      : "imoveis"
+  );
   const [tipo, setTipo] = useState<"parcela" | "credito">("credito");
   const [valor, setValor] = useState(100000);
   const [clicked, setClicked] = useState(false);
@@ -49,39 +70,92 @@ export default function HeroCalculatorV2() {
   const touchStart = useRef<number>(0);
   const touchEnd = useRef<number>(0);
 
+  const [leadName, setLeadName] = useState("");
+  const [leadPhone, setLeadPhone] = useState("");
+  const [saving, setSaving] = useState(false);
+  const utm = useUtmParams();
+
   const r = RANGES[tipo];
-  const progress = step === 1 ? 0.5 : 1;
+  const totalSteps = 3;
+  const progress = step / totalSteps;
 
-  const goNext = useCallback(() => {
-    setDirection("next");
-    setStep(2);
-  }, []);
-
-  const goPrev = useCallback(() => {
-    setDirection("prev");
-    setStep(1);
-  }, []);
+  const goTo = useCallback((target: number) => {
+    setDirection(target > step ? "next" : "prev");
+    setStep(target);
+    if (target === 2) trackEvent("calculator_step2", { objetivo });
+    if (target === 3)
+      trackEvent("calculator_simulate", { objetivo, tipo, valor });
+  }, [step, objetivo, tipo, valor]);
 
   const handleSwipe = useCallback(() => {
     const swipeThreshold = 50;
     const diff = touchStart.current - touchEnd.current;
     if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0 && step === 2) goPrev();
+      if (diff > 0 && step === 2) goTo(1);
     }
-  }, [step, goPrev]);
+  }, [step, goTo]);
 
   const whatsappMsg = `Olá. Vim pelo site e gostaria de simular um consórcio de ${
     OBJETIVOS.find((o) => o.value === objetivo)?.label
-  }. Simulação por ${tipo === "parcela" ? "parcela" : "crédito"}: ${r.prefix}${valor.toLocaleString()}${r.suffix}.`;
+  }. Simulação por ${tipo === "parcela" ? "parcela" : "crédito"}: ${r.prefix}${valor.toLocaleString()}${r.suffix}.${
+    leadName ? ` Meu nome é ${leadName}.` : ""
+  }`;
   const whatsappLink = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
 
-  const handleSubmit = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const saveLead = useCallback(async () => {
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: leadName.trim(),
+          phone: leadPhone.replace(/\D/g, ""),
+          objective: objetivo,
+          simulationType: tipo,
+          value: valor,
+          source: "calculator",
+          ...utm,
+        }),
+      });
+    } catch {
+      /* non-blocking */
+    }
+  }, [leadName, leadPhone, objetivo, tipo, valor, utm]);
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     e.stopPropagation();
     if (clicked) return;
     setClicked(true);
+    setSaving(true);
+
     try {
       trackCalculatorInteraction("submit", { conquista: objetivo, tipo, valor });
+    } catch {}
+
+    await saveLead();
+    trackEvent("lead_submit", { objetivo, tipo, valor });
+
+    if (typeof window !== "undefined" && typeof (window as unknown as { gtag_report_conversion?: (u: string) => void }).gtag_report_conversion === "function") {
+      try {
+        (window as unknown as { gtag_report_conversion: (u: string) => void }).gtag_report_conversion(whatsappLink);
+      } catch {}
+    }
+
+    trackEvent("whatsapp_click", { source: "calculator_lead" });
+    window.open(whatsappLink, "_blank", "noopener,noreferrer");
+    setSaving(false);
+    setTimeout(() => setClicked(false), 1000);
+  };
+
+  const handleSkip = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (clicked) return;
+    setClicked(true);
+    trackEvent("whatsapp_click", { source: "calculator_skip" });
+    try {
+      trackCalculatorInteraction("submit_skip_lead", { conquista: objetivo, tipo, valor });
     } catch {}
     if (typeof window !== "undefined" && typeof (window as unknown as { gtag_report_conversion?: (u: string) => void }).gtag_report_conversion === "function") {
       try {
@@ -92,6 +166,8 @@ export default function HeroCalculatorV2() {
     setTimeout(() => setClicked(false), 1000);
   };
 
+  const isLeadValid = leadName.trim().length >= 2 && leadPhone.replace(/\D/g, "").length >= 10;
+
   return (
     <div
       className="relative min-h-[420px] w-full max-w-[440px] overflow-hidden rounded-2xl border border-neutral-100 bg-white shadow-[0_8px_30px_-12px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.04)]"
@@ -101,7 +177,7 @@ export default function HeroCalculatorV2() {
         handleSwipe();
       }}
     >
-      {/* Animated progress bar - contained inside rounded corners */}
+      {/* Progress bar */}
       <div className="absolute left-0 right-0 top-0 h-1 overflow-hidden rounded-t-2xl bg-neutral-100">
         <motion.div
           className="h-full rounded-full bg-[var(--primary-1)]"
@@ -114,6 +190,7 @@ export default function HeroCalculatorV2() {
       <div className="flex h-full flex-col overflow-hidden rounded-2xl p-6 pt-8">
         <div className="relative overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
+            {/* ── STEP 1: Objective ── */}
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -282,7 +359,7 @@ export default function HeroCalculatorV2() {
                 </AnimatePresence>
                 <motion.button
                   type="button"
-                  onClick={goNext}
+                  onClick={() => goTo(2)}
                   className="mt-4 w-full rounded-xl px-4 py-3.5 text-[14px] font-bold text-white shadow-lg shadow-[var(--primary-1)]/25 transition-all hover:shadow-xl"
                   style={{ background: "linear-gradient(135deg, var(--primary-1) 0%, var(--primary-4) 100%)" }}
                   whileTap={{ scale: 0.98 }}
@@ -293,6 +370,7 @@ export default function HeroCalculatorV2() {
               </motion.div>
             )}
 
+            {/* ── STEP 2: Value ── */}
             {step === 2 && (
               <motion.div
                 key="step2"
@@ -309,7 +387,7 @@ export default function HeroCalculatorV2() {
                   transition={{ delay: 0.03 }}
                   className="mb-1 text-xl font-bold tracking-tight text-neutral-900"
                 >
-                  Quase lá! Defina os detalhes
+                  Defina os detalhes
                 </motion.h3>
                 <motion.p
                   initial={{ opacity: 0, y: -8 }}
@@ -404,7 +482,133 @@ export default function HeroCalculatorV2() {
                   <div className="flex gap-2">
                     <motion.button
                       type="button"
-                      onClick={goPrev}
+                      onClick={() => goTo(1)}
+                      className="flex items-center gap-1.5 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-[13px] font-semibold text-neutral-600 transition-all hover:border-neutral-300 hover:bg-neutral-50"
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FaChevronLeft className="text-[10px]" /> Voltar
+                    </motion.button>
+                    <motion.button
+                      type="button"
+                      onClick={() => goTo(3)}
+                      className="flex-1 rounded-xl py-3.5 text-center text-[14px] font-bold text-white shadow-lg shadow-[var(--primary-1)]/25 transition-all hover:shadow-xl"
+                      style={{ background: "linear-gradient(135deg, var(--primary-1) 0%, var(--primary-4) 100%)" }}
+                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: 1.01 }}
+                    >
+                      Continuar
+                    </motion.button>
+                  </div>
+                  <p className="text-center text-[11px] text-neutral-400">
+                    Falta pouco · 100% grátis
+                  </p>
+                </motion.div>
+              </motion.div>
+            )}
+
+            {/* ── STEP 3: Lead capture ── */}
+            {step === 3 && (
+              <motion.div
+                key="step3"
+                variants={slideVariants}
+                initial={direction === "next" ? "enterNext" : "enterPrev"}
+                animate="center"
+                exit={direction === "next" ? "exitNext" : "exitPrev"}
+                transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                className="flex min-h-[400px] flex-col"
+              >
+                <motion.h3
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.03 }}
+                  className="mb-1 text-xl font-bold tracking-tight text-neutral-900"
+                >
+                  Último passo!
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 }}
+                  className="mb-6 text-[13px] text-neutral-500"
+                >
+                  Para enviarmos sua simulação personalizada
+                </motion.p>
+
+                {/* Summary card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 }}
+                  className="mb-6 flex items-center gap-3 rounded-xl border border-neutral-100 bg-gradient-to-r from-[var(--primary-1)]/5 to-[var(--primary-4)]/5 px-4 py-3"
+                >
+                  <FaCheckCircle className="shrink-0 text-sm text-[var(--primary-1)]" />
+                  <div className="min-w-0 text-[12px] text-neutral-700">
+                    <span className="font-semibold">{OBJETIVOS.find((o) => o.value === objetivo)?.label}</span>
+                    {" · "}
+                    <span className="font-bold text-[var(--primary-1)]">
+                      {r.prefix}{valor.toLocaleString()}{r.suffix}
+                    </span>
+                    {" "}({tipo === "parcela" ? "parcela" : "crédito"})
+                  </div>
+                </motion.div>
+
+                {/* Form fields */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="mb-4 space-y-3"
+                >
+                  <div>
+                    <label htmlFor="lead-name" className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-neutral-400">
+                      Seu nome
+                    </label>
+                    <input
+                      id="lead-name"
+                      type="text"
+                      placeholder="Ex: João Silva"
+                      value={leadName}
+                      onChange={(e) => setLeadName(e.target.value)}
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50/50 px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none transition-all focus:border-[var(--primary-4)] focus:ring-2 focus:ring-[var(--primary-4)]/20"
+                      autoComplete="name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lead-phone" className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-neutral-400">
+                      Celular (WhatsApp)
+                    </label>
+                    <input
+                      id="lead-phone"
+                      type="tel"
+                      placeholder="(41) 99999-9999"
+                      value={leadPhone}
+                      onChange={(e) => setLeadPhone(formatPhone(e.target.value))}
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50/50 px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none transition-all focus:border-[var(--primary-4)] focus:ring-2 focus:ring-[var(--primary-4)]/20"
+                      autoComplete="tel"
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.14 }}
+                  className="mb-5 flex items-start gap-1.5 text-[11px] leading-snug text-neutral-400"
+                >
+                  <FaCheckCircle className="mt-0.5 shrink-0 text-[9px] text-emerald-400" />
+                  Seus dados ficam seguros e são usados apenas para contato sobre o consórcio
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.16 }}
+                  className="mt-auto flex flex-col gap-2 pt-4"
+                >
+                  <div className="flex gap-2">
+                    <motion.button
+                      type="button"
+                      onClick={() => goTo(2)}
                       className="flex items-center gap-1.5 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-[13px] font-semibold text-neutral-600 transition-all hover:border-neutral-300 hover:bg-neutral-50"
                       whileTap={{ scale: 0.98 }}
                     >
@@ -415,17 +619,30 @@ export default function HeroCalculatorV2() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={handleSubmit}
-                      className="flex-1 rounded-xl py-3.5 text-center text-[14px] font-bold text-white shadow-lg shadow-[var(--primary-1)]/25 transition-all hover:shadow-xl"
+                      className={`flex-1 rounded-xl py-3.5 text-center text-[14px] font-bold text-white shadow-lg transition-all ${
+                        isLeadValid
+                          ? "shadow-[var(--primary-1)]/25 hover:shadow-xl"
+                          : "opacity-50 cursor-not-allowed"
+                      }`}
                       style={{ background: "linear-gradient(135deg, var(--primary-1) 0%, var(--primary-4) 100%)" }}
-                      whileTap={{ scale: 0.98 }}
-                      whileHover={{ scale: 1.01 }}
+                      whileTap={isLeadValid ? { scale: 0.98 } : {}}
+                      whileHover={isLeadValid ? { scale: 1.01 } : {}}
+                      {...(!isLeadValid && {
+                        onClick: (e: React.MouseEvent<HTMLAnchorElement>) => { e.preventDefault(); e.stopPropagation(); },
+                      })}
                     >
-                      {clicked ? "Enviando..." : "Falar com especialista"}
+                      {saving ? "Enviando..." : clicked ? "Abrindo WhatsApp..." : "Falar com especialista"}
                     </motion.a>
                   </div>
-                  <p className="text-center text-[11px] text-neutral-400">
-                    Resposta em minutos · 100% grátis
-                  </p>
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleSkip}
+                    className="mt-1 block text-center text-[11px] text-neutral-400 underline underline-offset-2 transition-colors hover:text-neutral-600"
+                  >
+                    Pular e ir direto para o WhatsApp
+                  </a>
                 </motion.div>
               </motion.div>
             )}

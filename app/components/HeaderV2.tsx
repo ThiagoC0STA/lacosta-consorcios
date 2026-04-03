@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { href: "#simulacao", label: "Simulação" },
   { href: "#vantagens", label: "Vantagens" },
   { href: "#como-funciona", label: "Como funciona" },
-  { href: "#conteudos", label: "Vídeos" },
+  { href: "#conteudos", label: "Blog" },
 ];
 
 const HEADER_BLUE_GRADIENT =
