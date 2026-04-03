@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:webpack": "next dev",
     "build": "next build",
     "og:compress": "node scripts/compress-og.js",
     "start": "next start",

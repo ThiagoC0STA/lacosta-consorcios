@@ -1,4 +1,9 @@
 import type { NextConfig } from "next";
+import path from "path";
+import { fileURLToPath } from "url";
+
+/** Absolute path to this project (folder that contains next.config). Fixes Turbopack picking the wrong root when another lockfile exists under the user profile. */
+const PROJECT_DIR = path.dirname(fileURLToPath(import.meta.url));
 
 const securityHeaders = [
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
@@ -11,9 +16,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Pin Turbopack to this repo; avoids stale graphs when Next infers e.g. C:\Users\...\ as the workspace root.
+  turbopack: {
+    root: PROJECT_DIR,
+  },
   experimental: {
     // Smaller per-icon imports; reduces Turbopack HMR issues with react-icons barrel files.
     optimizePackageImports: ["react-icons"],
+    // Avoid stale module factories after HMR when switching branches or editing icon imports.
+    turbopackFileSystemCacheForDev: false,
   },
   images: {
     formats: ["image/avif", "image/webp"],
