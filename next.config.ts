@@ -11,10 +11,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Smaller per-icon imports; reduces Turbopack HMR issues with react-icons barrel files.
+    optimizePackageImports: ["react-icons"],
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [48, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000,
   },
   async headers() {
     return [

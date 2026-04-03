@@ -1,10 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
-import Drawer from "@mui/material/Drawer";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Container from "./Container";
 
@@ -27,6 +24,25 @@ const theme = {
   divider: "bg-white/30",
 };
 
+function MenuIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
 export default function HeaderV2() {
   const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -42,6 +58,17 @@ export default function HeaderV2() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const closeDrawer = useCallback(() => setOpen(false), []);
 
   const onWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -110,7 +137,7 @@ export default function HeaderV2() {
                     height={50}
                     sizes="96px"
                     className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
-                    quality={80}
+                    quality={60}
                   />
                 </Link>
                 <div className={`h-8 w-px transition-colors duration-500 ease-out ${theme.divider}`} />
@@ -126,7 +153,7 @@ export default function HeaderV2() {
                     height={50}
                     sizes="112px"
                     className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
-                    quality={80}
+                    quality={60}
                   />
                 </Link>
               </div>
@@ -149,9 +176,8 @@ export default function HeaderV2() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={onWhatsAppClick}
-                className={`flex shrink-0 items-center gap-2 rounded-xl px-6 py-2.5 text-base font-bold transition-colors duration-500 ease-out ${theme.ctaClass}`}
+                className={`flex shrink-0 items-center justify-center rounded-xl px-6 py-2.5 text-base font-bold transition-colors duration-500 ease-out ${theme.ctaClass}`}
               >
-                <FaWhatsapp className="text-2xl" />
                 Simule grátis
               </a>
             </div>
@@ -161,7 +187,7 @@ export default function HeaderV2() {
               onClick={() => setOpen(true)}
               aria-label="Abrir menu"
             >
-              <FiMenu size={28} />
+              <MenuIcon />
             </button>
           </Container>
         </div>
@@ -177,7 +203,7 @@ export default function HeaderV2() {
               height={40}
               sizes="96px"
               className="h-8 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
-              quality={80}
+              quality={60}
             />
             <div className={`h-8 w-px transition-colors duration-500 ease-out ${theme.divider}`} />
             <Image
@@ -187,79 +213,94 @@ export default function HeaderV2() {
               height={45}
               sizes="96px"
               className="h-8 w-auto object-contain brightness-0 invert opacity-90 transition-[filter,opacity] duration-500 ease-out"
-              quality={80}
+              quality={60}
             />
           </div>
         </div>
       </div>
 
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <div className="flex h-full w-72 flex-col bg-white p-6">
-          <div className="flex items-center justify-between">
-            <Image src="/logo-5.png" alt="Lacosta Consórcios" width={120} height={36} sizes="160px" quality={95} className="h-10 w-auto object-contain" />
-            <button
-              className="flex h-10 w-10 items-center justify-center text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-700"
-              onClick={() => setOpen(false)}
-              aria-label="Fechar"
-            >
-              <FiX size={24} />
-            </button>
-          </div>
-          <div className="mt-6 flex items-center gap-4 border-b border-neutral-200 pb-6">
-            <Image
-              src="/consorcio-servopa0.png"
-              alt="Consórcio Servopa"
-              width={100}
-              height={40}
-              sizes="96px"
-              className="h-8 w-auto object-contain"
-              quality={80}
-            />
-            <div className="h-8 w-px bg-neutral-200" />
-            <Image
-              src="/rodobensv2.png"
-              alt="Rodobens Consórcios"
-              width={110}
-              height={45}
-              sizes="96px"
-              className="h-8 w-auto object-contain"
-              quality={80}
-            />
-          </div>
-          <nav aria-label="Menu mobile" className="mt-6 flex flex-1 flex-col gap-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-3.5 text-[15px] font-semibold text-[var(--primary-1)] transition-colors hover:bg-neutral-50 hover:text-[var(--primary-4)]"
-                onClick={() => setOpen(false)}
+      {/* Mobile drawer — replaces MUI Drawer */}
+      <div
+        className={`fixed inset-0 z-[100] transition-opacity duration-300 ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!open}
+      >
+        <div
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={closeDrawer}
+        />
+        <div
+          className={`absolute right-0 top-0 h-full w-72 bg-white shadow-2xl transition-transform duration-300 ease-out ${
+            open ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex h-full flex-col p-6">
+            <div className="flex items-center justify-between">
+              <Image src="/logo-5.png" alt="Lacosta Consórcios" width={120} height={36} sizes="160px" quality={95} className="h-10 w-auto object-contain" />
+              <button
+                className="flex h-10 w-10 items-center justify-center text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-700 rounded-full"
+                onClick={closeDrawer}
+                aria-label="Fechar menu"
               >
-                {link.label}
+                <CloseIcon />
+              </button>
+            </div>
+            <div className="mt-6 flex items-center gap-4 border-b border-neutral-200 pb-6">
+              <Image
+                src="/consorcio-servopa0.png"
+                alt="Consórcio Servopa"
+                width={100}
+                height={40}
+                sizes="96px"
+                className="h-8 w-auto object-contain"
+                quality={60}
+              />
+              <div className="h-8 w-px bg-neutral-200" />
+              <Image
+                src="/rodobensv2.png"
+                alt="Rodobens Consórcios"
+                width={110}
+                height={45}
+                sizes="96px"
+                className="h-8 w-auto object-contain"
+                quality={60}
+              />
+            </div>
+            <nav aria-label="Menu mobile" className="mt-6 flex flex-1 flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="px-4 py-3.5 text-[15px] font-semibold text-[var(--primary-1)] transition-colors hover:bg-neutral-50 hover:text-[var(--primary-4)] rounded-lg"
+                  onClick={closeDrawer}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="#contato"
+                className="px-4 py-3.5 text-[15px] font-semibold text-[var(--primary-1)] transition-colors hover:bg-neutral-50 hover:text-[var(--primary-4)] rounded-lg"
+                onClick={closeDrawer}
+              >
+                Contato
               </Link>
-            ))}
-            <Link
-              href="#contato"
-              className="px-4 py-3.5 text-[15px] font-semibold text-[var(--primary-1)] transition-colors hover:bg-neutral-50 hover:text-[var(--primary-4)]"
-              onClick={() => setOpen(false)}
+            </nav>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                onWhatsAppClick(e);
+                closeDrawer();
+              }}
+              className="mt-4 flex w-full items-center justify-center rounded-xl bg-[var(--primary-1)] py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[var(--primary-2)]"
             >
-              Contato
-            </Link>
-          </nav>
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              onWhatsAppClick(e);
-              setOpen(false);
-            }}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--primary-1)] py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[var(--primary-2)]"
-          >
-            <FaWhatsapp className="text-xl" />
-            Simule grátis
-          </a>
+              Simule grátis
+            </a>
+          </div>
         </div>
-      </Drawer>
+      </div>
     </header>
   );
 }

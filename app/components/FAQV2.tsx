@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { WHATSAPP_LINK, handleWhatsAppClick } from "../lib/constants";
 import { trackButtonClick } from "../lib/analytics";
@@ -57,29 +57,22 @@ export default function FAQV2() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: Math.min(index * 0.03, 0.4) }}
               >
-                <Disclosure>
-                  {({ open }) => (
-                    <div
-                      className="rounded-xl border border-neutral-200 bg-white transition-all duration-200 hover:border-[var(--primary-1)]/25"
-                      style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
-                    >
-                      <Disclosure.Button className="flex w-full items-center justify-between gap-4 px-4 sm:px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-1)]/30 focus-visible:ring-offset-2 rounded-xl">
-                        <span className="text-sm sm:text-base font-semibold text-neutral-900">
-                          {faq.question}
-                        </span>
-                        <ChevronDownIcon
-                          className={`h-5 w-5 shrink-0 text-[var(--primary-1)] transition-transform duration-200 ${
-                            open ? "rotate-180" : ""
-                          }`}
-                        />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="px-4 sm:px-5 pb-4 pt-0">
-                        <p className="text-sm text-neutral-600 leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </Disclosure.Panel>
-                    </div>
-                  )}
+                <Disclosure
+                  as="div"
+                  className="rounded-xl border border-neutral-200 bg-white transition-all duration-200 hover:border-[var(--primary-1)]/25"
+                  style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+                >
+                  <DisclosureButton className="group flex w-full items-center justify-between gap-4 px-4 sm:px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-1)]/30 focus-visible:ring-offset-2 rounded-xl">
+                    <span className="text-sm sm:text-base font-semibold text-neutral-900">
+                      {faq.question}
+                    </span>
+                    <ChevronDownIcon className="h-5 w-5 shrink-0 text-[var(--primary-1)] transition-transform duration-200 group-data-[open]:rotate-180" />
+                  </DisclosureButton>
+                  <DisclosurePanel className="px-4 sm:px-5 pb-4 pt-0">
+                    <p className="text-sm text-neutral-600 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </DisclosurePanel>
                 </Disclosure>
               </motion.div>
             ))}
