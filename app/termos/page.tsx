@@ -70,8 +70,8 @@ export default function TermsPage() {
 
           <LegalSection title="3. Propriedade intelectual">
             <p>
-              Marcas, logotipos, textos, imagens, layout e demais elementos do site — salvo quando
-              indicado de outra forma — pertencem à {LEGAL_COMPANY_NAME} ou a licenciantes. É proibida
+              Marcas, logotipos, textos, imagens, layout e demais elementos do site, salvo quando
+              indicado de outra forma, pertencem à {LEGAL_COMPANY_NAME} ou a licenciantes. É proibida
               reprodução ou uso comercial sem autorização prévia por escrito.
             </p>
           </LegalSection>

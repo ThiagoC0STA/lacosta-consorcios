@@ -17,17 +17,17 @@ import { useUtmParams } from "../lib/useUtmParams";
 import { trackEvent } from "../lib/trackEvent";
 
 const OBJETIVOS = [
-  { label: "Imóvel", value: "imoveis", image: "/items/imovel.png", icon: FaHome, tip: "O sonho da casa própria", confirmMsg: "O sonho da casa própria com parcelas que cabem no bolso", alt: "Consórcio de imóvel sem juros — casa própria com parcelas acessíveis" },
-  { label: "Veículos", value: "veiculos", image: "/items/veiculos.png", icon: FaCar, tip: "Seu carro ou moto sem juros", confirmMsg: "Seu carro ou moto zero sem juros. Simule agora!", alt: "Consórcio de veículo — carro ou moto zero sem juros" },
+  { label: "Imóvel", value: "imoveis", image: "/items/imovel.png", icon: FaHome, tip: "O sonho da casa própria", confirmMsg: "O sonho da casa própria com parcelas que cabem no bolso", alt: "Consórcio de imóvel sem juros | casa própria com parcelas acessíveis" },
+  { label: "Veículos", value: "veiculos", image: "/items/veiculos.png", icon: FaCar, tip: "Seu carro ou moto sem juros", confirmMsg: "Seu carro ou moto zero sem juros. Simule agora!", alt: "Consórcio de veículo | carro ou moto zero sem juros" },
   { label: "Estética", value: "estetica", image: "/items/estetica.jpg", icon: FaSpa, tip: "Harmonização e autocuidado", confirmMsg: "Invista em você: estética e bem-estar com parcelas sem juros", alt: "Consórcio para estética e harmonização facial sem juros" },
   { label: "Investimento", value: "investimento", image: "/items/invest.png", icon: FaChartLine, tip: "Planejamento financeiro", confirmMsg: "Planejamento financeiro com segurança e sem juros", alt: "Consórcio para investimento e planejamento financeiro" },
-  { label: "Embarcações", value: "embarcacoes", image: "/items/embarcacao.png", icon: FaShip, tip: "Lancha, veleiro, barco e muito mais", confirmMsg: "Lancha, veleiro ou barco, realize seu sonho náutico", alt: "Consórcio de embarcações — lancha, veleiro e barco sem juros" },
+  { label: "Embarcações", value: "embarcacoes", image: "/items/embarcacao.png", icon: FaShip, tip: "Lancha, veleiro, barco e muito mais", confirmMsg: "Lancha, veleiro ou barco, realize seu sonho náutico", alt: "Consórcio de embarcações | lancha, veleiro e barco sem juros" },
   { label: "Serviços", value: "servicos", image: "/items/servicos.png", icon: FaBriefcase, tip: "Expanda seu negócio", confirmMsg: "Expanda seu negócio sem juros e com parcelas flexíveis", alt: "Consórcio de serviços para expandir seu negócio" },
-  { label: "Agronegócio", value: "agronegocio", image: "/items/agro.png", icon: FaSeedling, tip: "Maquinário e imóvel rural", confirmMsg: "Maquinário e imóvel rural. O campo agradece!", alt: "Consórcio para agronegócio — maquinário e imóvel rural" },
-  { label: "Educação", value: "educacao", image: "/items/educacao.png", icon: FaGraduationCap, tip: "Cursos e formaturas", confirmMsg: "Investir em educação é investir no futuro", alt: "Consórcio para educação — cursos e formação profissional" },
-  { label: "Saúde", value: "saude", image: "/items/saude.png", icon: FaStethoscope, tip: "Procedimentos médicos", confirmMsg: "Cuide da saúde com parcelas acessíveis e sem juros", alt: "Consórcio para saúde — procedimentos médicos sem juros" },
+  { label: "Agronegócio", value: "agronegocio", image: "/items/agro.png", icon: FaSeedling, tip: "Maquinário e imóvel rural", confirmMsg: "Maquinário e imóvel rural. O campo agradece!", alt: "Consórcio para agronegócio | maquinário e imóvel rural" },
+  { label: "Educação", value: "educacao", image: "/items/educacao.png", icon: FaGraduationCap, tip: "Cursos e formaturas", confirmMsg: "Investir em educação é investir no futuro", alt: "Consórcio para educação | cursos e formação profissional" },
+  { label: "Saúde", value: "saude", image: "/items/saude.png", icon: FaStethoscope, tip: "Procedimentos médicos", confirmMsg: "Cuide da saúde com parcelas acessíveis e sem juros", alt: "Consórcio para saúde | procedimentos médicos sem juros" },
   { label: "Reforma", value: "reforma", image: "/items/reforma.png", icon: FaTools, tip: "Reforma ou ampliação", confirmMsg: "Reforma ou ampliação sem apertar o orçamento", alt: "Consórcio para reforma e ampliação residencial" },
-  { label: "Outro", value: "outro", image: "/items/outro.png", icon: FaEllipsisH, tip: "Conte-nos o que você precisa", confirmMsg: "Conte-nos o que você precisa e vamos encontrar a melhor solução", alt: "Outros tipos de consórcio — encontre a melhor solução" },
+  { label: "Outro", value: "outro", image: "/items/outro.png", icon: FaEllipsisH, tip: "Conte-nos o que você precisa", confirmMsg: "Conte-nos o que você precisa e vamos encontrar a melhor solução", alt: "Outros tipos de consórcio | encontre a melhor solução" },
 ];
 
 const RANGES = {
@@ -55,13 +55,10 @@ interface CalculatorProps {
 }
 
 export default function HeroCalculatorV2({ initialCategory }: CalculatorProps) {
-  const [step, setStep] = useState(1);
+  const hasPreselected = !!(initialCategory && OBJETIVOS.some((o) => o.value === initialCategory));
+  const [step, setStep] = useState(hasPreselected ? 2 : 1);
   const [direction, setDirection] = useState<"next" | "prev">("next");
-  const [objetivo, setObjetivo] = useState(
-    initialCategory && OBJETIVOS.some((o) => o.value === initialCategory)
-      ? initialCategory
-      : "imoveis"
-  );
+  const [objetivo, setObjetivo] = useState(hasPreselected ? initialCategory : "imoveis");
   const [tipo, setTipo] = useState<"parcela" | "credito">("credito");
   const [valor, setValor] = useState(100000);
   const [clicked, setClicked] = useState(false);

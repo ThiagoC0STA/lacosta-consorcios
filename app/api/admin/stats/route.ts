@@ -30,6 +30,8 @@ export async function GET(req: NextRequest) {
   const rangeStart = rangeMs ? new Date(now.getTime() - rangeMs).toISOString() : "2000-01-01T00:00:00Z";
   const prevRangeStart = rangeMs ? new Date(now.getTime() - rangeMs * 2).toISOString() : "2000-01-01T00:00:00Z";
 
+  const noBots = { column: "is_bot" as const, value: false };
+
   const [
     { count: totalLeads },
     { count: leadsToday },
@@ -52,28 +54,32 @@ export async function GET(req: NextRequest) {
     { count: prevPvCount },
     { data: browsersRaw },
     { data: leadsStatusRaw },
+    { data: countryRaw },
+    { count: botCount },
   ] = await Promise.all([
     db.from("leads").select("*", { count: "exact", head: true }),
     db.from("leads").select("*", { count: "exact", head: true }).gte("created_at", todayStart),
     db.from("leads").select("*", { count: "exact", head: true }).gte("created_at", weekAgo),
-    db.from("page_views").select("*", { count: "exact", head: true }).gte("created_at", todayStart),
-    db.from("page_views").select("duration_seconds").gte("created_at", rangeStart).gt("duration_seconds", 0),
+    db.from("page_views").select("*", { count: "exact", head: true }).eq(noBots.column, noBots.value).gte("created_at", todayStart),
+    db.from("page_views").select("duration_seconds").eq(noBots.column, noBots.value).gte("created_at", rangeStart).gt("duration_seconds", 0),
     db.from("leads").select("created_at").gte("created_at", rangeStart).order("created_at", { ascending: true }),
-    db.from("page_views").select("created_at, session_id").gte("created_at", rangeStart).order("created_at", { ascending: true }),
-    db.from("page_views").select("traffic_source").gte("created_at", rangeStart),
-    db.from("page_views").select("page").gte("created_at", rangeStart),
-    db.from("page_views").select("device").gte("created_at", rangeStart),
+    db.from("page_views").select("created_at, session_id").eq(noBots.column, noBots.value).gte("created_at", rangeStart).order("created_at", { ascending: true }),
+    db.from("page_views").select("traffic_source").eq(noBots.column, noBots.value).gte("created_at", rangeStart),
+    db.from("page_views").select("page").eq(noBots.column, noBots.value).gte("created_at", rangeStart),
+    db.from("page_views").select("device").eq(noBots.column, noBots.value).gte("created_at", rangeStart),
     db.from("leads").select("id, name, phone, objective, status, value, created_at").order("created_at", { ascending: false }).limit(5),
     db.from("leads").select("objective").gte("created_at", rangeStart),
-    db.from("page_views").select("session_id").gte("created_at", rangeStart),
+    db.from("page_views").select("session_id").eq(noBots.column, noBots.value).gte("created_at", rangeStart),
     db.from("events").select("event_name, session_id").gte("created_at", rangeStart),
-    db.from("page_views").select("utm_campaign, session_id").gte("created_at", rangeStart).not("utm_campaign", "is", null),
+    db.from("page_views").select("utm_campaign, session_id").eq(noBots.column, noBots.value).gte("created_at", rangeStart).not("utm_campaign", "is", null),
     db.from("leads").select("utm_campaign").gte("created_at", rangeStart).not("utm_campaign", "is", null),
-    db.from("page_views").select("session_id").gte("created_at", fiveMinAgo),
+    db.from("page_views").select("session_id").eq(noBots.column, noBots.value).gte("created_at", fiveMinAgo),
     db.from("leads").select("*", { count: "exact", head: true }).gte("created_at", prevRangeStart).lt("created_at", rangeStart),
-    db.from("page_views").select("*", { count: "exact", head: true }).gte("created_at", prevRangeStart).lt("created_at", rangeStart),
-    db.from("page_views").select("browser").gte("created_at", rangeStart),
+    db.from("page_views").select("*", { count: "exact", head: true }).eq(noBots.column, noBots.value).gte("created_at", prevRangeStart).lt("created_at", rangeStart),
+    db.from("page_views").select("browser").eq(noBots.column, noBots.value).gte("created_at", rangeStart),
     db.from("leads").select("status"),
+    db.from("page_views").select("country").eq(noBots.column, noBots.value).gte("created_at", rangeStart).not("country", "is", null),
+    db.from("page_views").select("*", { count: "exact", head: true }).eq("is_bot", true).gte("created_at", rangeStart),
   ]);
 
   const avgDuration =
@@ -189,6 +195,12 @@ export async function GET(req: NextRequest) {
     durationHist[idx]++;
   });
 
+  const countries: Record<string, number> = {};
+  (countryRaw ?? []).forEach((r) => {
+    const c = r.country || "??";
+    countries[c] = (countries[c] || 0) + 1;
+  });
+
   return NextResponse.json({
     range,
     overview: {
@@ -224,6 +236,8 @@ export async function GET(req: NextRequest) {
       return { day, hour, count };
     }),
     utmCampaigns,
+    countries: Object.entries(countries).sort((a, b) => b[1] - a[1]).map(([country, count]) => ({ country, count })),
+    botsFiltered: botCount ?? 0,
   });
 }
 

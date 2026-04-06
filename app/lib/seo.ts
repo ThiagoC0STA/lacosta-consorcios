@@ -6,7 +6,7 @@ export const FAQ_ITEMS = [
   {
     question: "Como funciona o processo de contemplação?",
     answer:
-      "A contemplação pode acontecer de duas formas: por sorteio mensal ou por lance. Nos sorteios, todos os participantes do grupo concorrem com igual chance. Já o lance funciona como uma antecipação de parcelas — quanto maior o lance oferecido, maiores as chances de ser contemplado naquela assembleia. Na Lacosta Consórcios, nossos grupos Servopa e Rodobens apresentam uma média de contemplação de 8,2 meses, e nossa equipe orienta cada cliente sobre a melhor estratégia de lance para o seu perfil.",
+      "A contemplação pode acontecer de duas formas: por sorteio mensal ou por lance. Nos sorteios, todos os participantes do grupo concorrem com igual chance. Já o lance funciona como uma antecipação de parcelas. Quanto maior o lance oferecido, maiores as chances de ser contemplado naquela assembleia. Na Lacosta Consórcios, nossos grupos Servopa e Rodobens apresentam uma média de contemplação de 8,2 meses, e nossa equipe orienta cada cliente sobre a melhor estratégia de lance para o seu perfil.",
   },
   {
     question: "Quais são as taxas envolvidas no consórcio?",
@@ -26,7 +26,7 @@ export const FAQ_ITEMS = [
   {
     question: "Quem pode participar de um consórcio?",
     answer:
-      "Qualquer pessoa física maior de 18 anos ou pessoa jurídica pode participar de um consórcio, desde que apresente a documentação exigida pela administradora (RG, CPF, comprovante de renda e residência). O processo é muito mais simples do que abrir um financiamento bancário — não exige score mínimo de crédito para entrar no grupo, apenas para a liberação da carta de crédito após contemplação.",
+      "Qualquer pessoa física maior de 18 anos ou pessoa jurídica pode participar de um consórcio, desde que apresente a documentação exigida pela administradora (RG, CPF, comprovante de renda e residência). O processo é muito mais simples do que abrir um financiamento bancário. Não exige score mínimo de crédito para entrar no grupo, apenas para a liberação da carta de crédito após contemplação.",
   },
   {
     question: "Posso usar meu FGTS para ofertar lance ou quitar o consórcio?",
@@ -36,7 +36,7 @@ export const FAQ_ITEMS = [
   {
     question: "O que é lance e como funciona?",
     answer:
-      "Lance é um valor adicional que o consorciado oferece voluntariamente em uma assembleia para tentar antecipar a contemplação. Existem dois tipos principais: o lance livre (valor definido pelo participante) e o lance fixo (percentual definido pela administradora). Na prática, funciona como um leilão — quem oferece o maior lance em relação ao crédito total tem prioridade na contemplação. Nossa equipe analisa o grupo e orienta sobre o lance ideal para maximizar suas chances.",
+      "Lance é um valor adicional que o consorciado oferece voluntariamente em uma assembleia para tentar antecipar a contemplação. Existem dois tipos principais: o lance livre (valor definido pelo participante) e o lance fixo (percentual definido pela administradora). Na prática, funciona como um leilão. Quem oferece o maior lance em relação ao crédito total tem prioridade na contemplação. Nossa equipe analisa o grupo e orienta sobre o lance ideal para maximizar suas chances.",
   },
   {
     question: "Após ser contemplado, em quanto tempo recebo o crédito?",
@@ -56,7 +56,7 @@ export const FAQ_ITEMS = [
   {
     question: "Qual a diferença entre consórcio e financiamento?",
     answer:
-      "A diferença fundamental é que no consórcio você não paga juros — apenas a taxa de administração, que é muito menor. No financiamento, os juros compostos podem praticamente dobrar o valor final do bem. Além disso, no consórcio o consorciado contemplado recebe uma carta de crédito com poder de compra à vista, o que permite negociar descontos significativos. Em média, nossos clientes economizam entre R$ 30.000 e R$ 75.000 em comparação com financiamentos bancários tradicionais.",
+      "A diferença fundamental é que no consórcio você não paga juros, apenas a taxa de administração, que é muito menor. No financiamento, os juros compostos podem praticamente dobrar o valor final do bem. Além disso, no consórcio o consorciado contemplado recebe uma carta de crédito com poder de compra à vista, o que permite negociar descontos significativos. Em média, nossos clientes economizam entre R$ 30.000 e R$ 75.000 em comparação com financiamentos bancários tradicionais.",
   },
   {
     question: "Quanto tempo leva para ser contemplado no consórcio?",
@@ -66,7 +66,7 @@ export const FAQ_ITEMS = [
   {
     question: "Posso cancelar o consórcio se mudar de ideia?",
     answer:
-      "Sim, o cancelamento é permitido a qualquer momento. O consorciado desistente tem direito à devolução dos valores pagos, descontadas as penalidades previstas em contrato (geralmente a taxa de administração proporcional e multa contratual). A devolução ocorre conforme as regras da administradora — podendo ser ao final do grupo ou em assembleia específica para desistentes. Recomendamos sempre conversar com nossa equipe antes de tomar essa decisão.",
+      "Sim, o cancelamento é permitido a qualquer momento. O consorciado desistente tem direito à devolução dos valores pagos, descontadas as penalidades previstas em contrato (geralmente a taxa de administração proporcional e multa contratual). A devolução ocorre conforme as regras da administradora, podendo ser ao final do grupo ou em assembleia específica para desistentes. Recomendamos sempre conversar com nossa equipe antes de tomar essa decisão.",
   },
   {
     question: "O consórcio é seguro?",

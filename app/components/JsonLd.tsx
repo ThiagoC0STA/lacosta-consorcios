@@ -1,5 +1,7 @@
 import { COMPANY_FOUNDING_DATE_ISO, COMPANY_CNPJ_RAW, formatCnpj, LEGAL_COMPANY_NAME } from "../lib/legal";
 import { FAQ_ITEMS, SITE_URL, SITE_NAME } from "../lib/seo";
+import { CATEGORIES } from "../lib/categories";
+import { CATEGORY_KEYS_IN_ORDER } from "../lib/categoryNavLinks";
 
 const areaServedBrazil = {
   "@type": "Country",
@@ -127,28 +129,15 @@ export default function JsonLd() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Consórcios disponíveis",
-      itemListElement: [
-        {
+      itemListElement: CATEGORY_KEYS_IN_ORDER.map((key) => {
+        const c = CATEGORIES[key];
+        return {
           "@type": "OfferCatalog",
-          name: "Consórcio de Imóvel",
-          description: "Carta de crédito para compra de imóveis residenciais e comerciais sem juros.",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Consórcio de Veículo",
-          description: "Carta de crédito para compra de carros, motos e veículos novos ou usados.",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Consórcio de Investimento",
-          description: "Carta de crédito para investimentos, planejamento financeiro e expansão de negócios.",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Consórcio de Serviços",
-          description: "Carta de crédito para serviços diversos: estética, educação, saúde, reformas e mais.",
-        },
-      ],
+          name: c.name,
+          description: c.metaDescription,
+          url: `${SITE_URL}/${c.slug}`,
+        };
+      }),
     },
     parentOrganization: {
       "@id": `${SITE_URL}/#organization`,

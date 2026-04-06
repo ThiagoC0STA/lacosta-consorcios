@@ -17,6 +17,8 @@ import {
   Smartphone,
   Tablet,
   Globe,
+  ShieldCheck,
+  MapPin,
 } from "lucide-react";
 import { useMultiTableRealtime } from "../lib/useRealtime";
 import {
@@ -78,6 +80,8 @@ interface Stats {
   funnel: { stage: string; count: number }[];
   heatmap: { day: number; hour: number; count: number }[];
   utmCampaigns: { campaign: string; visits: number; leads: number; rate: number }[];
+  countries: { country: string; count: number }[];
+  botsFiltered: number;
 }
 
 /* ------------------------------------------------------------------ */
@@ -138,6 +142,23 @@ const FUNNEL_GRADIENTS = [
   { from: "#22c55e", to: "#16a34a" },
 ];
 const DAY_LABELS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+const COUNTRY_NAMES: Record<string, string> = {
+  BR: "Brasil", US: "Estados Unidos", DE: "Alemanha", IN: "Índia", PT: "Portugal",
+  AR: "Argentina", CL: "Chile", CO: "Colômbia", MX: "México", GB: "Reino Unido",
+  FR: "França", ES: "Espanha", IT: "Itália", CA: "Canadá", JP: "Japão",
+  CN: "China", RU: "Rússia", AU: "Austrália", KR: "Coreia do Sul", NL: "Países Baixos",
+  UY: "Uruguai", PY: "Paraguai", PE: "Peru", BO: "Bolívia", EC: "Equador",
+};
+
+function countryFlag(code: string): string {
+  if (!code || code.length !== 2) return "🌐";
+  const base = 0x1f1e6;
+  return String.fromCodePoint(
+    base + code.charCodeAt(0) - 65,
+    base + code.charCodeAt(1) - 65,
+  );
+}
 const DEVICE_ICONS: Record<string, typeof Monitor> = { desktop: Monitor, mobile: Smartphone, tablet: Tablet };
 
 const container = {
@@ -173,7 +194,7 @@ function initials(name: string) {
 }
 
 function deltaInfo(curr: number, prev: number) {
-  if (prev === 0 && curr === 0) return { label: "—", direction: "neutral" as const };
+  if (prev === 0 && curr === 0) return { label: "-", direction: "neutral" as const };
   if (prev === 0) return { label: "+100%", direction: "up" as const };
   const pct = Math.round(((curr - prev) / prev) * 100);
   if (pct > 0) return { label: `+${pct}%`, direction: "up" as const };
@@ -295,6 +316,15 @@ export default function AdminDashboard() {
               <span className="tabular-nums font-mono text-zinc-600">
                 {clock.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
               </span>
+              {stats.botsFiltered > 0 && (
+                <>
+                  <span className="text-zinc-700">·</span>
+                  <span className="inline-flex items-center gap-1 text-zinc-600" title="Page views de bots filtrados neste período">
+                    <ShieldCheck className="h-3 w-3 text-emerald-600" />
+                    {stats.botsFiltered} bots filtrados
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -371,7 +401,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
         <motion.div variants={fadeUp} className="lg:col-span-3">
           <Card glass>
-            <SectionTitle>Evolução — {rangeLabel}</SectionTitle>
+            <SectionTitle>Evolução · {rangeLabel}</SectionTitle>
             <div className="h-[280px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={combinedChart} margin={{ top: 4, right: 4, bottom: 0, left: -10 }}>
@@ -573,8 +603,8 @@ export default function AdminDashboard() {
         <Heatmap data={stats.heatmap} />
       </motion.div>
 
-      {/* ---- OBJECTIVES + TOP PAGES + BROWSERS ---- */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      {/* ---- OBJECTIVES + TOP PAGES + BROWSERS + COUNTRIES ---- */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <AnimatedCard glass className="h-full">
           <SectionTitle>Leads por objetivo</SectionTitle>
           {stats.objectives.length > 0 ? (
@@ -672,6 +702,45 @@ export default function AdminDashboard() {
             </div>
           ) : (
             <p className="py-8 text-center text-xs text-zinc-600">Sem dados</p>
+          )}
+        </AnimatedCard>
+
+        <AnimatedCard glass className="h-full">
+          <SectionTitle icon={<MapPin className="h-3.5 w-3.5 text-rose-400" />}>
+            Países
+          </SectionTitle>
+          {stats.countries.length > 0 ? (
+            <div className="space-y-2.5">
+              {stats.countries.slice(0, 8).map((c) => {
+                const totalCountry = stats.countries.reduce((s, x) => s + x.count, 0);
+                const pct = totalCountry ? Math.round((c.count / totalCountry) * 100) : 0;
+                return (
+                  <div key={c.country}>
+                    <div className="mb-1 flex items-center justify-between text-[11px]">
+                      <span className="flex items-center gap-2 text-zinc-400">
+                        <span className="text-sm">{countryFlag(c.country)}</span>
+                        {COUNTRY_NAMES[c.country] || c.country}
+                      </span>
+                      <span className="font-bold tabular-nums text-zinc-200">
+                        {pct}%
+                      </span>
+                    </div>
+                    <div className="h-1 overflow-hidden rounded-full bg-white/[0.04]">
+                      <motion.div
+                        className="h-full rounded-full bg-gradient-to-r from-rose-500 to-pink-500"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${Math.max(pct, 1)}%` }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="py-8 text-center text-xs text-zinc-600">
+              Dados de país aparecerão após o deploy na Vercel
+            </p>
           )}
         </AnimatedCard>
       </div>
@@ -832,7 +901,7 @@ function StatCard({
             <div className={`inline-flex rounded-xl p-2 ${iconBg} ${iconColor}`}>
               {icon}
             </div>
-            {delta && delta.label !== "—" && (
+            {delta && delta.label !== "-" && (
               <span
                 className={`inline-flex items-center gap-0.5 rounded-lg px-1.5 py-0.5 text-[10px] font-bold ${
                   delta.direction === "up"
@@ -967,7 +1036,7 @@ function Heatmap({ data }: { data: Stats["heatmap"] }) {
 
   return (
     <Card glass>
-      <SectionTitle>Mapa de calor — visitas por dia e hora</SectionTitle>
+      <SectionTitle>Mapa de calor · visitas por dia e hora</SectionTitle>
       <div className="overflow-x-auto">
         <div className="min-w-[640px]">
           <div className="mb-1 flex items-center gap-[2px] pl-10">
@@ -990,7 +1059,7 @@ function Heatmap({ data }: { data: Stats["heatmap"] }) {
                     key={hour}
                     className="h-5 flex-1 rounded-[4px] transition-all duration-200 hover:ring-1 hover:ring-white/20 hover:scale-110"
                     style={cellStyle(count)}
-                    title={`${DAY_LABELS[day]} ${String(hour).padStart(2, "0")}h — ${count} visitas`}
+                    title={`${DAY_LABELS[day]} ${String(hour).padStart(2, "0")}h · ${count} visitas`}
                   />
                 );
               })}

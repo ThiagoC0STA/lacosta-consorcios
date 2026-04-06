@@ -63,7 +63,7 @@ export default function PrivacyPage() {
               mercado, inclusive neste site.
             </p>
             <p>
-              Para exercer direitos previstos na Lei Geral de Proteção de Dados (Lei nº 13.709/2018 —
+              Para exercer direitos previstos na Lei Geral de Proteção de Dados (Lei nº 13.709/2018,
               “LGPD”) ou esclarecer dúvidas sobre privacidade, fale conosco:{" "}
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
@@ -111,7 +111,7 @@ export default function PrivacyPage() {
                 consentimento quando exigido).
               </li>
               <li>
-                <strong>Medição de audiência e campanhas</strong> (cookies e tags de parceiros —
+                <strong>Medição de audiência e campanhas</strong> (cookies e tags de parceiros:
                 consentimento quando aplicável, e legítimo interesse para medições estritamente
                 necessárias, conforme a configuração das ferramentas).
               </li>

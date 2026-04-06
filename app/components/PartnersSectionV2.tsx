@@ -148,7 +148,7 @@ export default function PartnersSectionV2() {
                       <div className="shrink-0 w-20 sm:w-28 h-10 sm:h-12 flex items-center justify-center bg-white rounded-lg sm:rounded-xl p-2 sm:p-2.5 shadow-sm border border-neutral-100">
                         <Image
                           src={p.logo}
-                          alt={`Logo ${p.name} — ${p.badge} Lacosta Consórcios`}
+                          alt={`Logo ${p.name} | ${p.badge} Lacosta Consórcios`}
                           width={112}
                           height={48}
                           sizes="(max-width: 640px) 80px, 112px"

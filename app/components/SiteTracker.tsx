@@ -39,6 +39,8 @@ export default function SiteTracker() {
         utm_campaign: params.get("utm_campaign"),
         utm_content: params.get("utm_content"),
         utm_term: params.get("utm_term"),
+        gclid: params.get("gclid"),
+        fbclid: params.get("fbclid"),
         user_agent: navigator.userAgent,
       }),
       keepalive: true,

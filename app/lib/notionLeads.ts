@@ -61,7 +61,7 @@ function buildUtmSummary(lead: LeadForNotion): string {
   if (lead.utm_campaign) parts.push(`campaign=${lead.utm_campaign}`);
   if (lead.utm_content) parts.push(`content=${lead.utm_content}`);
   if (lead.utm_term) parts.push(`term=${lead.utm_term}`);
-  return parts.join(" | ") || "—";
+  return parts.join(" | ") || "-";
 }
 
 function richText(content: string) {

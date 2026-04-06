@@ -141,7 +141,7 @@ export default function Footer() {
             <p className="text-lg font-semibold mb-4 text-white">Contato</p>
             <address className="not-italic space-y-2 text-gray-400">
               <p>Rua da Capitania, 127</p>
-              <p>Guabirotuba — Curitiba, PR</p>
+              <p>Guabirotuba, Curitiba, PR</p>
               <p>CEP: 81520-590</p>
               <p>
                 <a

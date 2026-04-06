@@ -27,7 +27,7 @@ const STEPS = [
     ],
     image: "/plan.jpg",
     imageAlt:
-      "Simulação de consórcio online — escolha o plano ideal sem juros",
+      "Simulação de consórcio online | escolha o plano ideal sem juros",
   },
   {
     icon: DocumentTextIcon,

@@ -68,7 +68,7 @@ export default function HeroV2() {
           priority
           fetchPriority="high"
           src="/hero-6.jpg"
-          alt="Consórcio Servopa e Rodobens sem juros em todo o Brasil — assessoria especializada Lacosta Consórcios"
+          alt="Consórcio Servopa e Rodobens sem juros em todo o Brasil | assessoria especializada Lacosta Consórcios"
           className="object-cover opacity-40"
           sizes="100vw"
           quality={75}

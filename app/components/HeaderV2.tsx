@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Container from "./Container";
+import { CATEGORY_HEADER_LINKS } from "../lib/categoryNavLinks";
 
 const NAV_LINKS = [
   { href: "#simulacao", label: "Simulação" },
   { href: "#vantagens", label: "Vantagens" },
   { href: "#como-funciona", label: "Como funciona" },
-  { href: "#conteudos", label: "Blog" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 const HEADER_BLUE_GRADIENT =
@@ -43,10 +44,21 @@ function CloseIcon() {
   );
 }
 
+function ChevronDown({ className }: { className?: string }) {
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M3 4.5L6 7.5L9 4.5" />
+    </svg>
+  );
+}
+
 export default function HeaderV2() {
   const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileSimExpanded, setMobileSimExpanded] = useState(false);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const whatsappLink =
     "https://wa.me/554130761050?text=" +
@@ -83,6 +95,15 @@ export default function HeaderV2() {
     setTimeout(() => setClicked(false), 1000);
   };
 
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 150);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full pt-[env(safe-area-inset-top)] transition-[box-shadow] duration-500 ease-out ${
@@ -115,7 +136,7 @@ export default function HeaderV2() {
               >
                 <Image
                   src="/logo-5.png"
-                  alt="Lacosta Consórcios — parceiro oficial Servopa e Rodobens"
+                  alt="Lacosta Consórcios | parceiro oficial Servopa e Rodobens"
                   width={163}
                   height={48}
                   sizes="(max-width: 768px) 160px, 200px"
@@ -161,15 +182,58 @@ export default function HeaderV2() {
 
             <div className="hidden md:flex md:items-center md:gap-6 lg:gap-8">
               <nav aria-label="Navegação principal" className="flex items-center gap-6 lg:gap-8">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`text-base font-semibold transition-colors duration-500 ease-out ${theme.navColor}`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {NAV_LINKS.map((link) =>
+                  link.label === "Simulação" ? (
+                    <div
+                      key={link.href}
+                      className="relative"
+                      onMouseEnter={handleDropdownEnter}
+                      onMouseLeave={handleDropdownLeave}
+                    >
+                      <Link
+                        href={link.href}
+                        className={`inline-flex items-center gap-1 text-base font-semibold transition-colors duration-500 ease-out ${theme.navColor}`}
+                      >
+                        {link.label}
+                        <ChevronDown className={`transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`} />
+                      </Link>
+
+                      <div
+                        className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 ${
+                          dropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-1"
+                        }`}
+                      >
+                        <div
+                          className="w-56 max-h-[min(70vh,22rem)] overflow-y-auto rounded-xl overflow-x-hidden py-2"
+                          style={{
+                            background: "rgba(2, 29, 64, 0.97)",
+                            border: "1px solid rgba(255,255,255,0.12)",
+                            backdropFilter: "blur(16px)",
+                          }}
+                        >
+                          {CATEGORY_HEADER_LINKS.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              className="flex flex-col px-4 py-2.5 transition-colors hover:bg-white/[0.08]"
+                            >
+                              <span className="text-sm font-semibold text-white">{item.label}</span>
+                              <span className="text-[11px] text-white/50">{item.desc}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`text-base font-semibold transition-colors duration-500 ease-out ${theme.navColor}`}
+                    >
+                      {link.label}
+                    </Link>
+                  ),
+                )}
               </nav>
               <a
                 href={whatsappLink}
@@ -219,7 +283,7 @@ export default function HeaderV2() {
         </div>
       </div>
 
-      {/* Mobile drawer — replaces MUI Drawer */}
+      {/* Mobile drawer */}
       <div
         className={`fixed inset-0 z-[100] transition-opacity duration-300 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -268,7 +332,29 @@ export default function HeaderV2() {
               />
             </div>
             <nav aria-label="Menu mobile" className="mt-6 flex flex-1 flex-col gap-1">
-              {NAV_LINKS.map((link) => (
+              {/* Simulação with expandable sub-items */}
+              <button
+                onClick={() => setMobileSimExpanded((v) => !v)}
+                className="flex w-full items-center justify-between px-4 py-3.5 text-[15px] font-semibold text-[var(--primary-1)] transition-colors hover:bg-neutral-50 rounded-lg"
+              >
+                <span>Simulação</span>
+                <ChevronDown className={`transition-transform duration-200 ${mobileSimExpanded ? "rotate-180" : ""}`} />
+              </button>
+              <div className={`overflow-hidden transition-[max-height] duration-300 ease-out ${mobileSimExpanded ? "max-h-[min(70vh,28rem)] overflow-y-auto" : "max-h-0"}`}>
+                {CATEGORY_HEADER_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="flex flex-col pl-8 pr-4 py-2.5 transition-colors hover:bg-neutral-50 rounded-lg"
+                    onClick={closeDrawer}
+                  >
+                    <span className="text-sm font-semibold text-[var(--primary-1)]">{item.label}</span>
+                    <span className="text-[11px] text-neutral-400">{item.desc}</span>
+                  </Link>
+                ))}
+              </div>
+
+              {NAV_LINKS.filter((l) => l.label !== "Simulação").map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}

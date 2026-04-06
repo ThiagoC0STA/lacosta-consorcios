@@ -6,13 +6,13 @@ export const CONTACT_PHONE_TEL = "+554130761050";
 
 export const ADDRESS_LINES = [
   "Rua da Capitania, 127",
-  "Guabirotuba — Curitiba, PR",
+  "Guabirotuba, Curitiba, PR",
   "CEP: 81520-590",
 ] as const;
 
 /**
  * Legal name (razão social). Override with `NEXT_PUBLIC_COMPANY_LEGAL_NAME` in `.env.local` if needed.
- * Registry: La Costa Corretora de Seguros Ltda — Curitiba/PR.
+ * Registry: La Costa Corretora de Seguros Ltda, Curitiba/PR.
  */
 export const LEGAL_COMPANY_NAME =
   process.env.NEXT_PUBLIC_COMPANY_LEGAL_NAME?.trim() ??

@@ -19,7 +19,7 @@ const STEPS = [
       "Flexibilidade total de crédito",
     ],
     img: "/plan.jpg",
-    imgAlt: "Simulação de consórcio online — escolha o plano ideal sem juros",
+    imgAlt: "Simulação de consórcio online | escolha o plano ideal sem juros",
   },
   {
     title: "Análise e Contrato",

@@ -245,7 +245,7 @@ export default function ExitIntentPopup() {
                   whileTap={{ scale: 0.98 }}
                   className="group flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-[15px] font-bold text-[var(--primary-1)] shadow-lg transition-all hover:bg-[#0487D9] hover:text-white"
                 >
-                  <span>Simular agora — é grátis</span>
+                  <span>Simular agora · é grátis</span>
                   <FaArrowRight className="text-sm transition-transform group-hover:translate-x-1" />
                 </motion.button>
 

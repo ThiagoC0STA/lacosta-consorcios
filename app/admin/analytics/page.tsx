@@ -11,6 +11,8 @@ import {
   Layers,
   Timer,
   MousePointerClick,
+  ShieldCheck,
+  MapPin,
 } from "lucide-react";
 import {
   AreaChart,
@@ -50,6 +52,8 @@ interface AnalyticsData {
   durationHistogram: { label: string; count: number }[];
   heatmap: { day: number; hour: number; count: number }[];
   funnel: { stage: string; count: number }[];
+  countries: { country: string; count: number }[];
+  botsFiltered: number;
 }
 
 /* ------------------------------------------------------------------ */
@@ -93,6 +97,20 @@ const BROWSER_COLORS = ["#3b82f6", "#8b5cf6", "#f59e0b", "#ef4444", "#10b981", "
 const DEVICE_ICONS: Record<string, typeof Monitor> = { desktop: Monitor, mobile: Smartphone, tablet: Tablet };
 const DAY_LABELS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
+const COUNTRY_NAMES: Record<string, string> = {
+  BR: "Brasil", US: "Estados Unidos", DE: "Alemanha", IN: "Índia", PT: "Portugal",
+  AR: "Argentina", CL: "Chile", CO: "Colômbia", MX: "México", GB: "Reino Unido",
+  FR: "França", ES: "Espanha", IT: "Itália", CA: "Canadá", JP: "Japão",
+  CN: "China", RU: "Rússia", AU: "Austrália", KR: "Coreia do Sul", NL: "Países Baixos",
+  UY: "Uruguai", PY: "Paraguai", PE: "Peru", BO: "Bolívia", EC: "Equador",
+};
+
+function countryFlag(code: string): string {
+  if (!code || code.length !== 2) return "🌐";
+  const base = 0x1f1e6;
+  return String.fromCodePoint(base + code.charCodeAt(0) - 65, base + code.charCodeAt(1) - 65);
+}
+
 function fmtDuration(s: number) {
   if (s < 60) return `${s}s`;
   return `${Math.floor(s / 60)}m ${s % 60}s`;
@@ -134,6 +152,8 @@ export default function AnalyticsPage() {
           durationHistogram: raw.durationHistogram,
           heatmap: raw.heatmap,
           funnel: raw.funnel,
+          countries: raw.countries ?? [],
+          botsFiltered: raw.botsFiltered ?? 0,
         });
       })
       .catch(console.error)
@@ -222,6 +242,15 @@ export default function AnalyticsPage() {
             <span className="tabular-nums font-mono text-zinc-600">
               {clock.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
             </span>
+            {data.botsFiltered > 0 && (
+              <>
+                <span className="text-zinc-700">·</span>
+                <span className="inline-flex items-center gap-1 text-zinc-600" title="Page views de bots filtrados neste período">
+                  <ShieldCheck className="h-3 w-3 text-emerald-600" />
+                  {data.botsFiltered} bots filtrados
+                </span>
+              </>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-1.5 rounded-xl border border-white/[0.05] bg-[#0f0f12] p-1">
@@ -262,7 +291,7 @@ export default function AnalyticsPage() {
 
       {/* ---- TRAFFIC OVER TIME ---- */}
       <AnimatedCard glass>
-        <SectionTitle>Tráfego — {rangeLabel}</SectionTitle>
+        <SectionTitle>Tráfego · {rangeLabel}</SectionTitle>
         <div className="h-[280px]">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={data.pvOverTime} margin={{ top: 4, right: 4, bottom: 0, left: -10 }}>
@@ -401,6 +430,43 @@ export default function AnalyticsPage() {
         </AnimatedCard>
       </div>
 
+      {/* ---- COUNTRIES ---- */}
+      {data.countries.length > 0 && (
+        <AnimatedCard glass>
+          <SectionTitle icon={<MapPin className="h-3.5 w-3.5 text-rose-400" />}>
+            Tráfego por país
+          </SectionTitle>
+          <div className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+            {data.countries.slice(0, 12).map((c, i) => {
+              const total = data.countries.reduce((s, x) => s + x.count, 0);
+              const pct = total ? Math.round((c.count / total) * 100) : 0;
+              return (
+                <div key={c.country}>
+                  <div className="mb-1 flex items-center justify-between text-[11px]">
+                    <span className="flex items-center gap-2 text-zinc-400">
+                      <span className="text-sm">{countryFlag(c.country)}</span>
+                      {COUNTRY_NAMES[c.country] || c.country}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="tabular-nums text-zinc-500">{c.count.toLocaleString("pt-BR")}</span>
+                      <span className="font-bold tabular-nums text-zinc-200">{pct}%</span>
+                    </div>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.04]">
+                    <motion.div
+                      className="h-full rounded-full bg-gradient-to-r from-rose-500 to-pink-400"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${Math.max(pct, 1)}%` }}
+                      transition={{ duration: 0.7, delay: i * 0.04, ease: "easeOut" }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </AnimatedCard>
+      )}
+
       {/* ---- DEVICES + DURATION HISTOGRAM ---- */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <AnimatedCard glass>
@@ -475,7 +541,7 @@ export default function AnalyticsPage() {
 
       {/* ---- HEATMAP ---- */}
       <AnimatedCard glass>
-        <SectionTitle>Mapa de calor — tráfego por hora e dia</SectionTitle>
+        <SectionTitle>Mapa de calor · tráfego por hora e dia</SectionTitle>
         <AnalyticsHeatmap data={data.heatmap} />
       </AnimatedCard>
 
@@ -591,7 +657,7 @@ function AnalyticsHeatmap({ data }: { data: { day: number; hour: number; count: 
                   key={hour}
                   className="h-5 flex-1 rounded-[4px] transition-all duration-200 hover:ring-1 hover:ring-white/20"
                   style={cellStyle(count)}
-                  title={`${DAY_LABELS[day]} ${String(hour).padStart(2, "0")}h — ${count} visitas`}
+                  title={`${DAY_LABELS[day]} ${String(hour).padStart(2, "0")}h · ${count} visitas`}
                 />
               );
             })}

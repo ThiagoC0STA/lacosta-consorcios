@@ -1,8 +1,17 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "./lib/seo";
+import { CATEGORY_PAGE_SLUGS } from "./lib/categories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastMod = new Date();
+
+  const categoryEntries: MetadataRoute.Sitemap = CATEGORY_PAGE_SLUGS.map((slug) => ({
+    url: `${SITE_URL}/${slug}`,
+    lastModified: lastMod,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   return [
     {
       url: SITE_URL,
@@ -15,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    ...categoryEntries,
     {
       url: `${SITE_URL}/privacidade`,
       lastModified: lastMod,

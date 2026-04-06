@@ -68,7 +68,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/lacosta-card-og.jpg`,
         width: 1200,
         height: 630,
-        alt: "Lacosta Consórcios — Simule seu consórcio Servopa e Rodobens sem juros em todo o Brasil",
+        alt: "Lacosta Consórcios | Simule seu consórcio Servopa e Rodobens sem juros em todo o Brasil",
       },
     ],
   },
