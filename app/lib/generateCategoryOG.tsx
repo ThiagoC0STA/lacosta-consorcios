@@ -13,7 +13,7 @@ export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
 
 export function generateCategoryOG(params: OGParams) {
-  const { name, shortName, heroAccent, avgSaving, accent, accentLight } = params;
+  const { name, heroAccent, avgSaving, accent, accentLight } = params;
 
   return new ImageResponse(
     (
@@ -26,38 +26,12 @@ export function generateCategoryOG(params: OGParams) {
           justifyContent: "center",
           padding: "60px 70px",
           fontFamily: "sans-serif",
-          background: `linear-gradient(135deg, #021D40 0%, #0A2E5C 40%, ${accent}22 100%)`,
+          backgroundColor: "#021D40",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Accent glow */}
-        <div
-          style={{
-            position: "absolute",
-            top: -120,
-            right: -120,
-            width: 500,
-            height: 500,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, ${accent}40 0%, transparent 70%)`,
-            display: "flex",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -80,
-            left: -80,
-            width: 300,
-            height: 300,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, ${accent}20 0%, transparent 70%)`,
-            display: "flex",
-          }}
-        />
-
-        {/* Top bar with accent */}
+        {/* Top bar */}
         <div
           style={{
             position: "absolute",
@@ -83,9 +57,8 @@ export function generateCategoryOG(params: OGParams) {
             style={{
               fontSize: 22,
               fontWeight: 700,
-              color: "white",
+              color: "#ffffffB3",
               letterSpacing: "-0.02em",
-              opacity: 0.7,
               display: "flex",
             }}
           >
@@ -98,8 +71,8 @@ export function generateCategoryOG(params: OGParams) {
               justifyContent: "center",
               padding: "4px 14px",
               borderRadius: 20,
-              background: `${accent}30`,
-              border: `1px solid ${accent}50`,
+              backgroundColor: "#0A2E5C",
+              border: `1px solid ${accent}`,
             }}
           >
             <span style={{ fontSize: 14, color: accentLight, fontWeight: 600 }}>
@@ -156,14 +129,14 @@ export function generateCategoryOG(params: OGParams) {
               flexDirection: "column",
               padding: "16px 28px",
               borderRadius: 16,
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              backgroundColor: "#0A2E5C",
+              border: "1px solid #1A3E6C",
             }}
           >
             <span style={{ fontSize: 28, fontWeight: 800, color: accent }}>
               {avgSaving}
             </span>
-            <span style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", marginTop: 2 }}>
+            <span style={{ fontSize: 15, color: "#ffffff99", marginTop: 2 }}>
               economia média
             </span>
           </div>
@@ -173,14 +146,14 @@ export function generateCategoryOG(params: OGParams) {
               flexDirection: "column",
               padding: "16px 28px",
               borderRadius: 16,
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              backgroundColor: "#0A2E5C",
+              border: "1px solid #1A3E6C",
             }}
           >
             <span style={{ fontSize: 28, fontWeight: 800, color: "white" }}>
               100%
             </span>
-            <span style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", marginTop: 2 }}>
+            <span style={{ fontSize: 15, color: "#ffffff99", marginTop: 2 }}>
               sem juros
             </span>
           </div>
@@ -190,14 +163,14 @@ export function generateCategoryOG(params: OGParams) {
               flexDirection: "column",
               padding: "16px 28px",
               borderRadius: 16,
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              backgroundColor: "#0A2E5C",
+              border: "1px solid #1A3E6C",
             }}
           >
             <span style={{ fontSize: 28, fontWeight: 800, color: "white" }}>
               +5.000
             </span>
-            <span style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", marginTop: 2 }}>
+            <span style={{ fontSize: 15, color: "#ffffff99", marginTop: 2 }}>
               clientes satisfeitos
             </span>
           </div>
@@ -219,7 +192,7 @@ export function generateCategoryOG(params: OGParams) {
               justifyContent: "center",
               padding: "12px 32px",
               borderRadius: 40,
-              background: accent,
+              backgroundColor: accent,
               fontSize: 18,
               fontWeight: 700,
               color: "white",
@@ -227,7 +200,7 @@ export function generateCategoryOG(params: OGParams) {
           >
             Simule Grátis
           </div>
-          <span style={{ fontSize: 16, color: "rgba(255,255,255,0.5)" }}>
+          <span style={{ fontSize: 16, color: "#ffffff80" }}>
             lacostaconsorcios.com.br
           </span>
         </div>
