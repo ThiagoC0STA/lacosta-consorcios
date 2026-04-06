@@ -204,7 +204,7 @@ export default function HeaderV2() {
                         }`}
                       >
                         <div
-                          className="w-56 max-h-[min(70vh,22rem)] overflow-y-auto rounded-xl overflow-x-hidden py-2"
+                          className="w-56 sm:w-60 lg:w-64 max-h-[min(72vh,22rem)] md:max-h-[min(78vh,30rem)] lg:max-h-[min(82vh,38rem)] xl:max-h-[min(85vh,44rem)] overflow-y-auto rounded-xl overflow-x-hidden py-2"
                           style={{
                             background: "rgba(2, 29, 64, 0.97)",
                             border: "1px solid rgba(255,255,255,0.12)",
