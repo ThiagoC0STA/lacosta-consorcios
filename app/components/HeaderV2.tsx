@@ -7,10 +7,10 @@ import Container from "./Container";
 import { CATEGORY_HEADER_LINKS } from "../lib/categoryNavLinks";
 
 const NAV_LINKS = [
-  { href: "#simulacao", label: "Simulação" },
-  { href: "#vantagens", label: "Vantagens" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#simulacao", label: "Simulação" },
+  { href: "/#vantagens", label: "Vantagens" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 const HEADER_BLUE_GRADIENT =
@@ -392,7 +392,7 @@ export default function HeaderV2() {
                 </Link>
               ))}
               <Link
-                href="#contato"
+                href="/#contato"
                 className="px-4 py-3.5 text-[15px] font-semibold text-[var(--primary-1)] transition-colors hover:bg-neutral-50 hover:text-[var(--primary-4)] rounded-lg"
                 onClick={closeDrawer}
               >
