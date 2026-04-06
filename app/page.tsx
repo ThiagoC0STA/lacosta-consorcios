@@ -10,10 +10,12 @@ import Footer from "./components/Footer";
 import PartnersSectionV2 from "./components/PartnersSectionV2";
 import VideoReelsSectionV2 from "./components/VideoReelsSectionV2";
 import ComparatorSection from "./components/ComparatorSection";
+import HomeJsonLd from "./components/HomeJsonLd";
 
 export default function Home() {
   return (
     <main className="relative">
+      <HomeJsonLd />
       <ToasterProvider />
       <HeroV2 />
 

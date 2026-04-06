@@ -211,16 +211,29 @@ export default function HeaderV2() {
                             backdropFilter: "blur(16px)",
                           }}
                         >
-                          {CATEGORY_HEADER_LINKS.map((item) => (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              className="flex flex-col px-4 py-2.5 transition-colors hover:bg-white/[0.08]"
-                            >
-                              <span className="text-sm font-semibold text-white">{item.label}</span>
-                              <span className="text-[11px] text-white/50">{item.desc}</span>
-                            </Link>
-                          ))}
+                          {CATEGORY_HEADER_LINKS.map((item) =>
+                            "external" in item && item.external ? (
+                              <a
+                                key={item.href}
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex flex-col px-4 py-2.5 transition-colors hover:bg-white/[0.08] border-t border-white/10 mt-1 pt-3"
+                              >
+                                <span className="text-sm font-semibold text-white">{item.label}</span>
+                                <span className="text-[11px] text-white/50">{item.desc}</span>
+                              </a>
+                            ) : (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                className="flex flex-col px-4 py-2.5 transition-colors hover:bg-white/[0.08]"
+                              >
+                                <span className="text-sm font-semibold text-white">{item.label}</span>
+                                <span className="text-[11px] text-white/50">{item.desc}</span>
+                              </Link>
+                            ),
+                          )}
                         </div>
                       </div>
                     </div>
@@ -341,17 +354,31 @@ export default function HeaderV2() {
                 <ChevronDown className={`transition-transform duration-200 ${mobileSimExpanded ? "rotate-180" : ""}`} />
               </button>
               <div className={`overflow-hidden transition-[max-height] duration-300 ease-out ${mobileSimExpanded ? "max-h-[min(70vh,28rem)] overflow-y-auto" : "max-h-0"}`}>
-                {CATEGORY_HEADER_LINKS.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex flex-col pl-8 pr-4 py-2.5 transition-colors hover:bg-neutral-50 rounded-lg"
-                    onClick={closeDrawer}
-                  >
-                    <span className="text-sm font-semibold text-[var(--primary-1)]">{item.label}</span>
-                    <span className="text-[11px] text-neutral-400">{item.desc}</span>
-                  </Link>
-                ))}
+                {CATEGORY_HEADER_LINKS.map((item) =>
+                  "external" in item && item.external ? (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex flex-col pl-8 pr-4 py-2.5 transition-colors hover:bg-neutral-50 rounded-lg border-t border-neutral-100 mt-1 pt-3"
+                      onClick={closeDrawer}
+                    >
+                      <span className="text-sm font-semibold text-[var(--primary-1)]">{item.label}</span>
+                      <span className="text-[11px] text-neutral-400">{item.desc}</span>
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex flex-col pl-8 pr-4 py-2.5 transition-colors hover:bg-neutral-50 rounded-lg"
+                      onClick={closeDrawer}
+                    >
+                      <span className="text-sm font-semibold text-[var(--primary-1)]">{item.label}</span>
+                      <span className="text-[11px] text-neutral-400">{item.desc}</span>
+                    </Link>
+                  ),
+                )}
               </div>
 
               {NAV_LINKS.filter((l) => l.label !== "Simulação").map((link) => (

@@ -1,3 +1,5 @@
+import { WHATSAPP_LINK } from "./constants";
+
 /**
  * Order and short labels for header simulation dropdown and related UI.
  */
@@ -12,7 +14,7 @@ export const CATEGORY_HEADER_LINKS = [
   { href: "/consorcio-servicos", label: "Serviços", desc: "Negócio e equipamentos" },
   { href: "/consorcio-agronegocio", label: "Agronegócio", desc: "Máquinas e campo" },
   { href: "/consorcio-embarcacoes", label: "Embarcações", desc: "Lancha, barco, jet" },
-  { href: "/consorcio-personalizado", label: "Personalizado", desc: "Outro objetivo" },
+  { href: WHATSAPP_LINK, label: "Outro objetivo?", desc: "Fale com a gente", external: true },
 ] as const;
 
 /** Alias for navigation code that used this name previously */
@@ -29,5 +31,4 @@ export const CATEGORY_KEYS_IN_ORDER = [
   "reforma",
   "agronegocio",
   "embarcacoes",
-  "personalizado",
 ] as const;

@@ -10,6 +10,7 @@ import {
   formatCnpj,
   LEGAL_COMPANY_NAME,
 } from "../lib/legal";
+import { CATEGORY_HEADER_LINKS } from "../lib/categoryNavLinks";
 import Container from "./Container";
 
 const socialLinks = [
@@ -26,12 +27,12 @@ const socialLinks = [
 ];
 
 const navLinks = [
-  { label: "Simular consórcio", href: "#simulacao" },
-  { label: "Vantagens do consórcio", href: "#vantagens" },
-  { label: "Como funciona o consórcio", href: "#como-funciona" },
-  { label: "Perguntas frequentes", href: "#faq" },
-  { label: "Vídeos sobre consórcio", href: "#conteudos" },
-  { label: "Fale com um especialista", href: "#contato" },
+  { label: "Simular consórcio", href: "/#simulacao" },
+  { label: "Vantagens do consórcio", href: "/#vantagens" },
+  { label: "Como funciona o consórcio", href: "/#como-funciona" },
+  { label: "Perguntas frequentes", href: "/#faq" },
+  { label: "Vídeos sobre consórcio", href: "/#conteudos" },
+  { label: "Fale com um especialista", href: "/#contato" },
 ];
 
 function SocialLink({ href, icon: Icon, name }: { href: string; icon: React.ElementType; name: string }) {
@@ -75,7 +76,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12 items-start"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 md:gap-12 items-start"
         >
           <div className="md:col-span-2 lg:col-span-2">
             <p className="text-2xl font-extrabold mb-4 tracking-tight text-white">
@@ -97,6 +98,22 @@ export default function Footer() {
             </div>
           </div>
 
+          <nav aria-label="Consórcios disponíveis">
+            <p className="text-lg font-semibold mb-4 text-white">Consórcios</p>
+            <ul className="space-y-2">
+              {CATEGORY_HEADER_LINKS.filter((l) => !("external" in l)).map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-[var(--primary-5)] font-medium transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
           <nav aria-label="Links do rodapé">
             <p className="text-lg font-semibold mb-4 text-white">
               Navegação
@@ -104,26 +121,20 @@ export default function Footer() {
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-gray-400 hover:text-[var(--primary-5)] font-medium transition-colors duration-200"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Informações legais">
-            <p className="text-lg font-semibold mb-4 text-white">Legal</p>
-            <ul className="space-y-2">
               <li>
                 <Link
                   href="/privacidade"
                   className="text-gray-400 hover:text-[var(--primary-5)] font-medium transition-colors duration-200"
                 >
-                  Política de Privacidade
+                  Privacidade
                 </Link>
               </li>
               <li>
