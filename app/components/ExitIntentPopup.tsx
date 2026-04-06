@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { buildWhatsAppLink, handleWhatsAppClick } from "../lib/constants";
 import { trackButtonClick } from "../lib/analytics";
@@ -13,8 +14,11 @@ import { trackEvent } from "../lib/trackEvent";
 
 const STORAGE_KEY = "lacosta_exit_popup_dismissed";
 const DISMISS_HOURS = 24;
-const MIN_TIME_ON_PAGE_MS = 5_000;
-const SCROLL_UP_RATIO = 0.3;
+const MIN_TIME_DESKTOP_MS = 8_000;
+const MIN_TIME_MOBILE_MS = 20_000;
+const SCROLL_UP_RATIO_DESKTOP = 0.3;
+const SCROLL_UP_RATIO_MOBILE = 0.5;
+const MIN_SCROLL_MOBILE = 800;
 
 function wasDismissedRecently(): boolean {
   if (typeof window === "undefined") return true;
@@ -35,6 +39,11 @@ function markDismissed() {
   }
 }
 
+function isMobile(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+}
+
 const HIGHLIGHTS = [
   { text: "100% sem juros", accent: "#0487D9" },
   { text: "Economia média de R$ 45 mil", accent: "#10B981" },
@@ -46,11 +55,24 @@ export default function ExitIntentPopup() {
   const shown = useRef(false);
   const loaded = useRef(Date.now());
   const maxScroll = useRef(0);
+  const navigating = useRef(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    navigating.current = true;
+    const timer = setTimeout(() => { navigating.current = false; }, 2000);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   const show = useCallback(() => {
     if (shown.current) return;
-    if (Date.now() - loaded.current < MIN_TIME_ON_PAGE_MS) return;
+    if (navigating.current) return;
     if (wasDismissedRecently()) return;
+
+    const mobile = isMobile();
+    const minTime = mobile ? MIN_TIME_MOBILE_MS : MIN_TIME_DESKTOP_MS;
+    if (Date.now() - loaded.current < minTime) return;
+
     shown.current = true;
     setOpen(true);
     trackButtonClick("exit_intent_popup", "shown");
@@ -63,7 +85,10 @@ export default function ExitIntentPopup() {
   }, []);
 
   useEffect(() => {
+    const mobile = isMobile();
+
     const onMouseOut = (e: MouseEvent) => {
+      if (mobile) return;
       if (
         !e.relatedTarget &&
         (e.clientY <= 0 ||
@@ -74,15 +99,19 @@ export default function ExitIntentPopup() {
     };
 
     const onVisibilityChange = () => {
+      if (mobile) return;
       if (document.visibilityState === "hidden") show();
     };
+
+    const scrollRatio = mobile ? SCROLL_UP_RATIO_MOBILE : SCROLL_UP_RATIO_DESKTOP;
+    const minScroll = mobile ? MIN_SCROLL_MOBILE : 400;
 
     const onScroll = () => {
       const y = window.scrollY;
       if (y > maxScroll.current) maxScroll.current = y;
       if (
-        maxScroll.current > 400 &&
-        y < maxScroll.current * (1 - SCROLL_UP_RATIO)
+        maxScroll.current > minScroll &&
+        y < maxScroll.current * (1 - scrollRatio)
       ) {
         show();
       }

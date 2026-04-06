@@ -16,20 +16,11 @@ export function buildCategoryMetadata(cat: CategoryData): Metadata {
       title: cat.ogTitle,
       description: cat.ogDescription,
       siteName: "Lacosta Consórcios",
-      images: [
-        {
-          url: `${SITE_URL}/lacosta-card-og.jpg`,
-          width: 1200,
-          height: 630,
-          alt: `${cat.name} sem juros | Lacosta Consórcios`,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: cat.ogTitle,
       description: cat.ogDescription,
-      images: [`${SITE_URL}/lacosta-card-og.jpg`],
     },
     robots: {
       index: true,
